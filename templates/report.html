@@ -298,7 +298,7 @@
         <div class="title-number">Nº {{numero_reporte}}</div>
         {% if not vehicle['compliance'] or accident['siniestro'] != 'N/A' %}
           {% if not vehicle['compliance'] %}
-            <img src="https://storage.googleapis.com/course-gcp-2024-images/2024/horizontal.png" alt="Vehiculo fuera de estandar" style="width: 100px; height: 36px;">
+            <img src="{{image_not_compliance}}" alt="Vehiculo fuera de estandar" style="width:150px; height: 36px;">
           {% else %}
             <span style="color: #EC671B; font-size: 14px; font-weight: bold;">accident['siniestro']</span>
           {% endif %}

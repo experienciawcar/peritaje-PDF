@@ -4,6 +4,7 @@ import os
 from datetime import datetime
 
 app = Flask(__name__)
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # Configuración de pdfkit con opciones adicionales
 options = {
@@ -141,8 +142,6 @@ def generate_pdf():
         if not data:
             print(f"No se proporcionaron datos: {data}")
             return jsonify({'error': 'No se proporcionaron datos'}), 400
-        
-        print(f"Extrae los datos")
             
         # Extraer los datos necesarios del payload
         numero_reporte = data.get('numero_reporte')
@@ -201,7 +200,8 @@ def generate_pdf():
                              rin=rin,
                              observations=observations,
                              total_budget=total_budget,
-                             inspection_status=inspection_status)
+                             inspection_status=inspection_status,
+                             image_not_compliance=os.path.join(BASE_DIR, 'static/images/standar_not_compliance.png'))
         
         print(f"HTML generado")
         
