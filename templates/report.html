@@ -3,17 +3,19 @@
   <head>
     <meta charset="UTF-8" />
     <title>Inspección general de vehículos</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <style>
-
       * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
-        font-family: "Poppins", sans-serif;
+        font-family: "Urbanist", sans-serif;
       }
 
       body {
-        font-family: "Poppins", sans-serif;
+        font-family: "Urbanist", sans-serif;
         font-size: 16px;
         color: #1d1d1d;
         margin: 0;
@@ -48,12 +50,22 @@
 
       .title {
         font-size: 28px;
-        font-weight: 600;
+        font-weight: 700;
       }
 
       .title-number {
         font-size: 24px;
+      }
+
+      .title-number-prefix {
+        color: #000;
+        font-weight: 700;
+      }
+
+      .title-number-value {
         color: #ff5f00;
+        font-weight: 600;
+        font-style: italic;
       }
 
       .section-title {
@@ -68,28 +80,29 @@
 
       .section-number {
         color: black;
-        border: 1px solid black;
+        border: 0.5px solid black;
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
         padding: 8px;
-        min-width: 32px;
-        min-height: 32px;
-        max-width: 32px;
-        max-height: 32px;
+        min-width: 28px;
+        min-height: 28px;
+        max-width: 28px;
+        max-height: 28px;
         margin-right: 8px;
       }
 
       .section-title-text {
         font-size: 26px;
-        font-weight: 500;
+        font-weight: 600;
       }
 
       .subtitle {
-        font-size: 14px;
+        font-size: 16px;
         color: #ec671b;
-        font-weight: 600;
+        font-weight: 700;
+        font-style: italic;
         margin-bottom: 10px;
       }
 
@@ -211,7 +224,6 @@
 
       th,
       td {
-        border: 1px #666c89;
         text-align: left;
         vertical-align: top;
       }
@@ -649,7 +661,6 @@
       /* Estilos para tablas de secciones (accesorios, tapizado, etc.) */
       .tabla-seccion-container {
           width: 100%;
-          border: 1px solid #000;
           border-radius: 24px;
           overflow: hidden;
           display: flex;
@@ -660,7 +671,7 @@
       .tabla-seccion-sidebar {
           background-color: #E84D1C;
           color: white;
-          font-weight: bold;
+          font-weight: 900;
           font-size: 14px; /* antes 24px */
           width: 40px;     /* antes 70px */
           min-width: 40px; /* antes 70px */
@@ -678,8 +689,9 @@
           transform: rotate(-90deg);
           white-space: nowrap;
           letter-spacing: 1px;
-          font-size: 12px; /* antes heredaba 24px */
-      }
+          font-size: 24px; /* antes heredaba 24px */
+          font-weight: 900;
+        }
 
       .tabla-seccion-content {
           flex: 1;
@@ -696,17 +708,23 @@
 
       .tabla-seccion-table th,
       .tabla-seccion-table td {
-          border: 1px solid #000;
+          border: 0.5px solid #909090;
+          border-left: none;
           padding: 8px 10px;
           vertical-align: middle;
-          font-size: 13px;
+          font-size: 14px;
+      }
+
+      .tabla-seccion-table td:nth-child(1) {
+        color: #000;
+        font-weight: 700;
       }
 
       .tabla-seccion-table th {
           font-weight: bold;
           text-align: center;
           background-color: #fff;
-          color: #000; /* Color negro para los encabezados */
+          color: #000;
       }
 
       .tabla-seccion-col-parte {
@@ -727,13 +745,13 @@
           text-align: right;
           word-break: break-word;
           overflow-wrap: break-word;
-          font-weight: bold;
+          font-weight: 900;
+          font-size: 18px;
           color: #E84D1C;
       }
       
       /* Ancho fijo para columna de presupuesto */
       th.tabla-seccion-col-presupuesto {
-          color: #000; /* Color negro para el encabezado */
           width: 120px;
           min-width: 120px;
           font-weight: bold;
@@ -772,14 +790,13 @@
       .tabla-seccion-footer {
           display: flex;
           width: 100%;
-          border-top: 1px solid #000;
+          border-bottom: 0.5px solid #909090;
       }
 
       .tabla-seccion-observaciones {
           padding: 10px 15px;
           font-size: 14px;
           width: 65%;
-          border-right: 1px solid #000;
       }
 
       .tabla-seccion-total {
@@ -998,6 +1015,148 @@
   color: white;
 }
 
+/* Estilos para el lado inferior */
+
+.center-section {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+.underbody-table {
+  width: 100%;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 64px;
+}
+
+.underbody-table-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 8px;
+}
+
+.underbody-table-row-item {
+  flex: 1;
+  border-bottom: 1px solid #909090;
+  padding-bottom: 12px;
+  /* border-right: 1px solid #909090; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.underbody-table-row-item:nth-child(2) {
+  flex: 2;
+}
+
+.underbody-table-row-item:nth-child(1) span {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.underbody-table-row-item:nth-child(1) p {
+  color: #ec671b;
+  font-size: 16px;
+  font-weight: 600;
+  margin-top: 6px;
+}
+
+.underbody-table-observations {
+  font-size: 16px;
+  font-weight: 500;
+  padding: 4px 8px;
+}
+
+.underbody-table-price {
+  font-size: 20px;
+  text-align: center;
+  font-weight: 900;
+  color: #ec671b;
+}
+
+/* Estilos para observaciones finales y presupuestos */
+.presupuesto-total-observaciones {
+  border: 1px solid #909090;
+  padding-left: 16px;
+  border-radius: 4px;
+  border-bottom-right-radius: 32px;
+  padding-top: 8px;
+}
+
+.presupuesto-sugerido-observaciones {
+  margin-top: 24px;
+  border: 1px solid #909090;
+  padding-left: 16px;
+  border-radius: 4px;
+  border-bottom-right-radius: 32px;
+  padding-top: 8px;
+}
+
+.presupuesto-total-observaciones p {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.presupuesto-sugerido-observaciones p {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.right-box {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.presupuesto-total-badge {
+  padding: 12px 42px;
+  background-color: #ec671b;
+  border-top-left-radius: 32px;
+  border-bottom-right-radius: 32px;
+  display: flex;
+  align-items: center;
+}
+
+.presupuesto-total-badge p {
+  color: white;
+  font-size: 16px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+}
+
+.presupuesto-total-badge p span {
+  font-size: 24px;
+  font-weight: 900;
+  margin-left: 8px;
+}
+
+.presupuesto-sugerido-badge {
+  padding: 12px 42px;
+  background-color: #fff;
+  border: 1px solid #ec671b;
+  border-top-left-radius: 32px;
+  border-bottom-right-radius: 32px;
+  display: flex;
+  align-items: center;
+}
+
+.presupuesto-sugerido-badge p {
+  color: #ec671b;
+  font-size: 16px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+}
+
+.presupuesto-sugerido-badge p span {
+  font-size: 24px;
+  font-weight: 900;
+  margin-left: 8px;
+}
     </style>
   </head>
   <body>
@@ -1005,13 +1164,10 @@
       <div class="page">
         <div class="header">
           <div class="logo">
-            <img
-              src="https://storage.googleapis.com/course-gcp-2024-images/2024/horizontal.png"
-              alt="Logo WCAR"
-            />
+            <img src="https://wcar.co/assets/logos/horizontal.svg" alt="Logo WCAR" />
           </div>
           <div class="title">Inspección general de vehículos</div>
-          <div class="title-number">Nº {{numero_reporte}}</div>
+          <div class="title-number"><span class="title-number-prefix">Nº</span> <span class="title-number-value">{{numero_reporte}}</span></div>
           {% if not vehicle['compliance'] or accident['siniestro'] != 'N/A' %}
           {% if not vehicle['compliance'] %}
           <!-- <img
@@ -1190,18 +1346,15 @@
       <div class="page">
         <div class="header">
           <div class="logo">
-            <img
-              src="https://storage.googleapis.com/course-gcp-2024-images/2024/horizontal.png"
-              alt="Logo WCAR"
-            />
+            <img src="https://wcar.co/assets/logos/horizontal.svg" alt="Logo WCAR" />
           </div>
           <div class="title">Inspección general de vehículos</div>
-          <div class="title-number">Nº {{numero_reporte}}</div>
+          <div class="title-number"><span class="title-number-prefix">Nº</span> <span class="title-number-value">{{numero_reporte}}</span></div>
         </div>
         <div class="section">
           <div class="section-title">
             <span class="section-number">2</span>
-            <span>Exterior del vehiculo</span>
+            <span class="section-title-text">Exterior del vehiculo</span>
           </div>
           <div class="subtitle">
             Por medio del presente documento, confirmamos que estamos
@@ -1534,18 +1687,15 @@
       <div class="page">
         <div class="header">
           <div class="logo">
-            <img
-              src="https://storage.googleapis.com/course-gcp-2024-images/2024/horizontal.png"
-              alt="Logo WCAR"
-            />
+            <img src="https://wcar.co/assets/logos/horizontal.svg" alt="Logo WCAR" />
           </div>
           <div class="title">Inspección general de vehículos</div>
-          <div class="title-number">Nº {{numero_reporte}}</div>
+          <div class="title-number"><span class="title-number-prefix">Nº</span> <span class="title-number-value">{{numero_reporte}}</span></div>
         </div>
         <div class="section">
           <div class="section-title">
             <span class="section-number">3</span>
-            <span>Inferior del vehiculo</span>
+            <span class="section-title-text">Inferior del vehiculo</span>
           </div>
           <div class="subtitle">
             Por medio del presente documento, confirmamos que estamos
@@ -1554,65 +1704,144 @@
 
           <div class="underbody-section">
             <!-- Lado inferior -->
-            <div class="side-container">
-              <div class="side-container-top-label">
-                <p>LADO INFERIOR</p>
+            <div class="center-section">
+              <div class="side-container">
+                <div class="side-container-top-label">
+                  <p>LADO INFERIOR</p>
+                </div>
+                <div class="side-imperfection-list">
+                  <div class="side-imperfection">
+                    <div class="side-imperfection-item-number">
+                      <p>1</p>
+                    </div>
+                    <div class="side-imperfection-item-box">
+                      <div class="side-imperfection-item-name">
+                        <p>Golpe</p>
+                      </div>
+                      <div class="side-imperfection-item-level">
+                        <p>Gravedad 1</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="side-imperfection">
+                    <div class="side-imperfection-item-number">
+                      <p>2</p>
+                    </div>
+                    <div class="side-imperfection-item-box">
+                      <div class="side-imperfection-item-name">
+                        <p>Golpe</p>
+                      </div>
+                      <div class="side-imperfection-item-level">
+                        <p>Gravedad 1</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="side-imperfection">
+                    <div class="side-imperfection-item-number">
+                      <p>3</p>
+                    </div>
+                    <div class="side-imperfection-item-box">
+                      <div class="side-imperfection-item-name">
+                        <p>Golpe</p>
+                      </div>
+                      <div class="side-imperfection-item-level">
+                        <p>Gravedad 1</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="side-body">
+                  <div class="side-image-box">
+                    <img
+                      src="https://storage.googleapis.com/wcar-images/cars-43715702-1IMG_6530.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=githubactions%40web-wcar-co.iam.gserviceaccount.com%2F20250514%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20250514T035926Z&X-Goog-Expires=86400&X-Goog-SignedHeaders=host&X-Goog-Signature=33141619bc537014c409efcd09f50473e113b0dd5d54bdd8633d670ac61af60fe950582cb17d989d9601280cde06682d7a14c86239a24ebc5d8d2c764bc010a1247c7e5a67c982e12b868f110bc95e89a2cbfecf31054b1384010b0568ee4e57a0522e2cedc6b147a0c963a91cb04f9647f53c7bc54dde9115e788c7719c92bc32c9bc46c345ddb7636b3d5d0ed79080284760c09c88cd55ff6aa204837fa47c79d6fd148c910e6e2180f67973e8f4bc08d2190956454f91bbd41fe8ee6df23e0f4da69d38ad795f77a52bfef9e617fb23a53ee47a801747f6c77f4213deb02d7f2dde6ed0264437a20c6b8b4b0f385e088e49e42245356de87088bc57b7e0f6"
+                      alt=""
+                    />
+                    <p class="side-observations">
+                      El vehículo presenta severos y preocupantes problemas en la parte
+                      izquierda que requieren atención inmediata.
+                    </p>
+                  </div>
+                  <div class="side-total-price-box">
+                    <p class="side-total-price-box-label">Presupuesto estimado</p>
+                    <p class="side-total-price-box-price">$ 100.000</p>
+                  </div>
+                </div>
               </div>
-              <div class="side-imperfection-list">
-                <div class="side-imperfection">
-                  <div class="side-imperfection-item-number">
-                    <p>1</p>
-                  </div>
-                  <div class="side-imperfection-item-box">
-                    <div class="side-imperfection-item-name">
-                      <p>Golpe</p>
-                    </div>
-                    <div class="side-imperfection-item-level">
-                      <p>Gravedad 1</p>
-                    </div>
-                  </div>
+            </div>
+            <div class="underbody-table">
+              <div class="underbody-table-row">
+                <div class="underbody-table-row-item">
+                  <span>Estructura de chasis</span>
+                  <p>En mal estado</p>
                 </div>
-                <div class="side-imperfection">
-                  <div class="side-imperfection-item-number">
-                    <p>2</p>
-                  </div>
-                  <div class="side-imperfection-item-box">
-                    <div class="side-imperfection-item-name">
-                      <p>Golpe</p>
-                    </div>
-                    <div class="side-imperfection-item-level">
-                      <p>Gravedad 1</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="side-imperfection">
-                  <div class="side-imperfection-item-number">
-                    <p>3</p>
-                  </div>
-                  <div class="side-imperfection-item-box">
-                    <div class="side-imperfection-item-name">
-                      <p>Golpe</p>
-                    </div>
-                    <div class="side-imperfection-item-level">
-                      <p>Gravedad 1</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="side-body">
-                <div class="side-image-box">
-                  <img
-                    src="https://storage.googleapis.com/wcar-images/cars-43715702-1IMG_6530.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=githubactions%40web-wcar-co.iam.gserviceaccount.com%2F20250514%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20250514T035926Z&X-Goog-Expires=86400&X-Goog-SignedHeaders=host&X-Goog-Signature=33141619bc537014c409efcd09f50473e113b0dd5d54bdd8633d670ac61af60fe950582cb17d989d9601280cde06682d7a14c86239a24ebc5d8d2c764bc010a1247c7e5a67c982e12b868f110bc95e89a2cbfecf31054b1384010b0568ee4e57a0522e2cedc6b147a0c963a91cb04f9647f53c7bc54dde9115e788c7719c92bc32c9bc46c345ddb7636b3d5d0ed79080284760c09c88cd55ff6aa204837fa47c79d6fd148c910e6e2180f67973e8f4bc08d2190956454f91bbd41fe8ee6df23e0f4da69d38ad795f77a52bfef9e617fb23a53ee47a801747f6c77f4213deb02d7f2dde6ed0264437a20c6b8b4b0f385e088e49e42245356de87088bc57b7e0f6"
-                    alt=""
-                  />
-                  <p class="side-observations">
-                    El vehículo presenta severos y preocupantes problemas en la parte
-                    izquierda que requieren atención inmediata.
+                <div class="underbody-table-row-item">
+                  <p class="underbody-table-observations">
+                    El vehículo presenta  severos y preocupantes  problemas
+                    preocupantes problemas El vehículo presenta severosel vehículo
+                    presenta  severos y
                   </p>
                 </div>
-                <div class="side-total-price-box">
-                  <p class="side-total-price-box-label">Presupuesto estimado</p>
-                  <p class="side-total-price-box-price">$ 100.000</p>
+                <div class="underbody-table-row-item">
+                  <p class="underbody-table-price">$ 100.000</p>
+                </div>
+              </div>
+              <div class="underbody-table-row">
+                <div class="underbody-table-row-item">
+                  <span>Puntas chasis</span>
+                  <p>En buen estado</p>
+                </div>
+                <div class="underbody-table-row-item">
+                  <p class="underbody-table-observations">
+                    El vehículo presenta severos y preocupantes problemas preocupantes
+                    problemas El vehículo presenta
+                  </p>
+                </div>
+                <div class="underbody-table-row-item">
+                  <p class="underbody-table-price">1350,00 $</p>
+                </div>
+              </div>
+              <div class="underbody-table-row">
+                <div class="underbody-table-row-item">
+                  <span>Piso General</span>
+                  <p>En buen estado</p>
+                </div>
+                <div class="underbody-table-row-item">
+                  <p class="underbody-table-observations">
+                    El vehículo presenta severos y preocupantes problemas
+                  </p>
+                </div>
+                <div class="underbody-table-row-item">
+                  <p class="underbody-table-price">350,00 $</p>
+                </div>
+              </div>
+              <div class="underbody-table-row">
+                <div class="underbody-table-row-item">
+                  <span>Estribos</span>
+                  <p>En buen estado</p>
+                </div>
+                <div class="underbody-table-row-item">
+                  <p class="underbody-table-observations">
+                    El vehículo presenta severos y preocupantes problemas preocupantes
+                    problemas El vehículo presenta severosel vehículo presenta severos
+                    y
+                  </p>
+                </div>
+                <div class="underbody-table-row-item">
+                  <p class="underbody-table-price">480,00 $</p>
+                </div>
+              </div>
+              <div class="underbody-table-row">
+                <div class="underbody-table-row-item">
+                  <span>Traviesas</span>
+                  <p>En buen estado</p>
+                </div>
+                <div class="underbody-table-row-item">
+                  <p class="underbody-table-observations">
+                    El vehículo presenta severos y preocupantes problemas
+                  </p>
+                </div>
+                <div class="underbody-table-row-item">
+                  <p class="underbody-table-price">620,00 $</p>
                 </div>
               </div>
             </div>
@@ -1623,13 +1852,10 @@
       <div class="page">
         <div class="header">
           <div class="logo">
-            <img
-              src="https://storage.googleapis.com/course-gcp-2024-images/2024/horizontal.png"
-              alt="Logo WCAR"
-            />
+            <img src="https://wcar.co/assets/logos/horizontal.svg" alt="Logo WCAR" />
           </div>
           <div class="title">Inspección general de vehículos</div>
-          <div class="title-number">Nº {{numero_reporte}}</div>
+          <div class="title-number"><span class="title-number-prefix">Nº</span> <span class="title-number-value">{{numero_reporte}}</span></div>
         </div>
         <!-- ------------------------------------------ Interior del vehiculo ------------------------------------------ -->
         <div class="section">
@@ -1915,18 +2141,15 @@
       <div class="page">
         <div class="header">
           <div class="logo">
-            <img
-              src="https://storage.googleapis.com/course-gcp-2024-images/2024/horizontal.png"
-              alt="Logo WCAR"
-            />
+            <img src="https://wcar.co/assets/logos/horizontal.svg" alt="Logo WCAR" />
           </div>
           <div class="title">Inspección general de vehículos</div>
-          <div class="title-number">Nº {{numero_reporte}}</div>
+          <div class="title-number"><span class="title-number-prefix">Nº</span> <span class="title-number-value">{{numero_reporte}}</span></div>
         </div>
         <div class="section">
           <div class="section-title">
             <span class="section-number">5</span>
-            <span>Ventilación, Motor y Transmisión</span>
+            <span class="section-title-text">Ventilación, Motor y Transmisión</span>
           </div>
           <div class="subtitle">
             Por medio del presente documento, confirmamos que estamos
@@ -2208,18 +2431,15 @@
       <div class="page">
         <div class="header">
           <div class="logo">
-            <img
-              src="https://storage.googleapis.com/course-gcp-2024-images/2024/horizontal.png"
-              alt="Logo WCAR"
-            />
+            <img src="https://wcar.co/assets/logos/horizontal.svg" alt="Logo WCAR" />
           </div>
           <div class="title">Inspección general de vehículos</div>
-          <div class="title-number">Nº {{numero_reporte}}</div>
+          <div class="title-number"><span class="title-number-prefix">Nº</span> <span class="title-number-value">{{numero_reporte}}</span></div>
         </div>
         <div class="section">
           <div class="section-title">
             <span class="section-number">6</span>
-            <span>Frenos y dirección</span>
+            <span class="section-title-text">Frenos y dirección</span>
           </div>
           <div class="subtitle">
             Por medio del presente documento, confirmamos que estamos
@@ -2416,18 +2636,15 @@
       <div class="page">
         <div class="header">
           <div class="logo">
-            <img
-              src="https://storage.googleapis.com/course-gcp-2024-images/2024/horizontal.png"
-              alt="Logo WCAR"
-            />
+            <img src="https://wcar.co/assets/logos/horizontal.svg" alt="Logo WCAR" />
           </div>
           <div class="title">Inspección general de vehículos</div>
-          <div class="title-number">Nº {{numero_reporte}}</div>
+          <div class="title-number"><span class="title-number-prefix">Nº</span> <span class="title-number-value">{{numero_reporte}}</span></div>
         </div>
         <div class="section">
           <div class="section-title">
             <span class="section-number">7</span>
-            <span>Suspensión, llantas y frenos</span>
+            <span class="section-title-text">Suspensión, llantas y frenos</span>
           </div>
           <div class="subtitle">
             Por medio del presente documento, confirmamos que estamos
@@ -2659,6 +2876,43 @@
                               <div class="tabla-seccion-total-label">Presupuesto Total</div>
                               <div class="tabla-seccion-total-valor">{{ rin['total_price'] }}</div>
                 </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="observations-box">
+                <div class="presupuesto-total-observaciones">
+                  <p>
+                    <b>Observaciones:</b> fermentum netus nulla cras portgutitor euismod
+                    nulla. Orci, dictumst  neci  aliquet  id a ullamcorper venenatis.
+                    Fermentum sulla craspor ttitore ismod nulla Nibh fermentum netus nulla
+                    cras portgutitor euismod nulla. Orci, dictumst  neci  aliquet  id a
+                    ullamcorper venenatis , venetis fermentum netus nulla cras portgutitor
+                    euismod nulla. Orci fermentum netus nulla cras portgutitor euismod
+                    euismojp dictumst  neci  aliquet  id a ullamcorper venenati Fermentum
+                    sulla craspor. fermentum netus nulla cras portgutitor
+                  </p>
+                  <div class="right-box">
+                    <div class="presupuesto-total-badge">
+                      <p>Presupuesto Total: <span>3.208,00 $</span></p>
+                    </div>
+                  </div>
+                </div>
+                <div class="presupuesto-sugerido-observaciones">
+                  <p>
+                    <b>Observaciones:</b> fermentum netus nulla cras portgutitor euismod
+                    nulla. Orci, dictumst  neci  aliquet  id a ullamcorper venenatis.
+                    Fermentum sulla craspor ttitore ismod nulla Nibh fermentum netus nulla
+                    cras portgutitor euismod nulla. Orci, dictumst  neci  aliquet  id a
+                    ullamcorper venenatis , venetis fermentum netus nulla cras portgutitor
+                    euismod nulla. Orci fermentum netus nulla cras portgutitor euismod
+                    euismojp dictumst  neci  aliquet  id a ullamcorper venenati Fermentum
+                    sulla craspor. fermentum netus nulla cras portgutitor
+                  </p>
+                  <div class="right-box">
+                    <div class="presupuesto-sugerido-badge">
+                      <p>Presupuesto Sugerido: <span>3.208,00 $</span></p>
+                    </div>
                   </div>
                 </div>
               </div>
