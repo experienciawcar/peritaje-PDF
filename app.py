@@ -4,7 +4,6 @@ import os
 from datetime import datetime
 
 app = Flask(__name__)
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 print("Flask app initialized")
 
 @app.route('/test')
@@ -205,9 +204,7 @@ def generate_pdf():
                              rin=rin,
                              observations=observations,
                              total_budget=total_budget,
-                             inspection_status=inspection_status,
-                             image_not_compliance=os.path.join(BASE_DIR, 'static/images/standar_not_compliance.png'),
-                             styles_css=os.path.join(BASE_DIR, 'static/styles/styles.css'))
+                             inspection_status=inspection_status)
         
         print(f"HTML generado")
         

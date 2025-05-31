@@ -6,7 +6,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{styles_css}}">
+    <link rel="stylesheet" href="https://storage.googleapis.com/course-gcp-2024-images/2025/styles.css">
   </head>
   <body>
     <div class="container">
@@ -17,16 +17,16 @@
           </div>
           <div class="title">Inspección general de vehículos</div>
           <div class="title-number"><span class="title-number-prefix">Nº</span> <span class="title-number-value">{{numero_reporte}}</span></div>
-          {% if not vehicle['compliance'] or accident['siniestro'] != 'N/A' %}
-          {% if not vehicle['compliance'] %}
+          {% if not accident['compliance'] or accident['siniestro'] != 'N/A' %}
+          {% if not accident['compliance'] %}
           <img
-            src="{{image_not_compliance}}"
+            src="https://storage.googleapis.com/course-gcp-2024-images/2025/standar_not_compliance.png"
             alt="Vehiculo fuera de estandar"
             style="width: 150px; height: 36px"
           />
           {% else %}
           <span style="color: #ec671b; font-size: 14px; font-weight: bold"
-            >accident['siniestro']</span
+            >{{accident['siniestro']}}</span
           >
           {% endif %} {% endif %}
         </div>
