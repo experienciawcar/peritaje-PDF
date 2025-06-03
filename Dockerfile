@@ -1,25 +1,37 @@
-FROM python:3.10-slim
+FROM debian:bullseye-slim
 
-# Instala dependencias del sistema necesarias para wkhtmltopdf
-RUN apt-get update && apt-get install -y \
+# Install system dependencies with retry logic
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    ca-certificates \
+    gnupg \
+    && rm -rf /var/lib/apt/lists/* \
+    && apt-get update && \
+    apt-get install -y --no-install-recommends \
     wkhtmltopdf \
     xfonts-75dpi \
     xfonts-base \
-    && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-# Establece el directorio de trabajo
+# Install Python
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    python3 \
+    python3-pip \
+    && rm -rf /var/lib/apt/lists/*
+
+# Set working directory
 WORKDIR /
 
-# Copia e instala las dependencias de Python
+# Copy and install Python dependencies
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip3 install --no-cache-dir -r requirements.txt
 
-# Copia el resto del proyecto
+# Copy the rest of the project
 COPY . .
 
-# Expone el puerto si usas Flask o similar
+# Expose port if using Flask or similar
 EXPOSE 8080
 
-# Comando para iniciar la app (ajusta según tu framework)
-CMD ["python", "app.py"]
+# Command to start the app
+CMD ["python3", "app.py"]

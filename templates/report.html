@@ -7,8 +7,612 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://storage.googleapis.com/course-gcp-2024-images/2025/styles.css">
+    <style>
+      * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 1200px;
+  min-height: 100vh;
+  margin: auto;
+  padding: 80px;
+  padding-top: 24px;
+  font-family: "Urbanist", sans-serif;
+}
+
+.separator {
+  width: 100%;
+  border-bottom: 4px solid #ec671b;
+}
+
+.separator-box {
+  background-color: #ec671b;
+  border-top-left-radius: 32px;
+  border-top-right-radius: 32px;
+  display: inline-flex;
+  align-items: center;
+  height: 40px;
+  padding: 0 16px;
+}
+
+.separator-number {
+  width: 28px;
+  height: 28px;
+  background-color: white;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.separator-number p {
+  font-size: 24px;
+  font-weight: 700;
+  color: #ec671b;
+}
+
+.separator-text {
+  font-size: 24px;
+  font-weight: 700;
+  color: white;
+  margin-left: 8px;
+}
+
+.general-data-container {
+  width: 100%;
+  padding-top: 16px;
+  margin: auto;
+}
+
+.general-data-row {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+  border-spacing: 16px 0;
+  margin-bottom: 16px;
+}
+
+.general-data-field {
+  display: table-cell;
+  background-color: #e8eef5;
+  border-radius: 8px;
+  padding: 8px 16px;
+  vertical-align: top;
+}
+
+.gd-field-left {
+  width: 100%;
+  margin-bottom: 4px;
+}
+
+.gd-field-left p {
+  font-size: 16px;
+  font-weight: 600;
+  color: #000000;
+  margin: 0;
+}
+
+.gd-field-right {
+  width: 100%;
+  text-align: right;
+}
+
+.out-standard-container {
+  width: 100%;
+  border: 2px solid #e31826;
+  background-color: #e8edf5;
+  border-radius: 8px;
+  padding: 8px 16px;
+  margin-top: 16px;
+}
+
+.out-standard-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.out-standard-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #000;
+}
+
+.out-standard-type {
+  font-size: 16px;
+  font-weight: 300;
+  font-style: italic;
+  color: #000;
+}
+
+.out-standard-description {
+  font-size: 14px;
+  font-weight: 300;
+  text-align: justify;
+  color: #000;
+  margin-top: 8px;
+}
+
+.budget-chart-container {
+  display: flex;
+  width: 100%;
+  margin-top: 16px;
+  padding: 0 0 24px 0;
+  position: relative;
+  background: #fff;
+}
+
+.budget-chart-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-right: 16px;
+  margin-top: 32px;
+  margin-bottom: 32px;
+}
+
+.budget-chart-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 18px;
+  position: relative;
+}
+
+.budget-chart-number {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 36px;
+  height: 36px;
+  background: #ec671b;
+  color: #fff;
+  font-weight: 700;
+  font-size: 20px;
+  border-radius: 50%;
+  margin-right: 12px;
+}
+
+.budget-chart-label {
+  font-size: 20px;
+  font-weight: 600;
+  color: #000000;
+  min-width: 180px;
+  border-bottom: 1px solid #90a3bf;
+  padding-bottom: 4px;
+  text-align: center;
+}
+
+.budget-chart-row:last-child .budget-chart-label {
+  border: none;
+}
+
+.budget-chart-bars {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
+  margin-top: 32px;
+  margin-bottom: 32px;
+  margin-right: 32px;
+  border: 2px solid #ec671b;
+  border-radius: 0 0 56px 0;
+  padding-top: 24px;
+  padding-bottom: 8px;
+}
+
+.budget-bar {
+  height: 36px;
+  background: #ffa631;
+  border-radius: 0 0 32px 0;
+  margin-bottom: 18px;
+}
+
+.budget-chart-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-top: 16px;
+  margin-bottom: 16px;
+  min-width: 180px;
+}
+
+.budget-chart-header {
+  font-size: 20px;
+  font-weight: 700;
+  color: #222;
+  margin-bottom: 8px;
+  width: 100%;
+  text-align: right;
+  padding-bottom: 4px;
+  border-bottom: 1px solid #90a3bf;
+  text-align: center;
+}
+
+.budget-chart-value {
+  font-size: 20px;
+  font-weight: 800;
+  color: #000000;
+  margin-bottom: 18px;
+  width: 100%;
+  text-align: right;
+  text-align: center;
+  border-bottom: 1px solid #90a3bf;
+  padding-bottom: 4px;
+}
+
+.budget-chart-total {
+  margin-top: 16px;
+  font-size: 32px;
+  font-weight: 700;
+  color: #ec671b;
+  width: 100%;
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.budget-chart-total-label {
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+  color: #ec671b;
+}
+
+.wcar-logo-bg {
+  width: 100%;
+  height: 160px;
+  margin: auto;
+  margin-top: 80px;
+}
+
+.presupuesto-total-observaciones {
+  border: 1px solid #909090;
+  padding-left: 16px;
+  border-radius: 4px;
+  border-bottom-right-radius: 32px;
+  padding-top: 8px;
+}
+
+.presupuesto-sugerido-observaciones {
+  margin-top: 24px;
+  border: 1px solid #909090;
+  padding-left: 16px;
+  border-radius: 4px;
+  border-bottom-right-radius: 32px;
+  padding-top: 8px;
+}
+
+.presupuesto-total-observaciones p {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.presupuesto-sugerido-observaciones p {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.right-box {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.presupuesto-total-badge {
+  padding: 12px 42px;
+  background-color: #ec671b;
+  border-top-left-radius: 32px;
+  border-bottom-right-radius: 32px;
+  display: flex;
+  align-items: center;
+}
+
+.presupuesto-total-badge p {
+  color: white;
+  font-size: 16px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+}
+
+.presupuesto-total-badge p span {
+  font-size: 24px;
+  font-weight: 900;
+  margin-left: 8px;
+}
+
+.presupuesto-sugerido-badge {
+  padding: 12px 42px;
+  background-color: #fff;
+  border: 1px solid #ec671b;
+  border-top-left-radius: 32px;
+  border-bottom-right-radius: 32px;
+  display: flex;
+  align-items: center;
+}
+
+.presupuesto-sugerido-badge p {
+  color: #ec671b;
+  font-size: 16px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+}
+
+.presupuesto-sugerido-badge p span {
+  font-size: 24px;
+  font-weight: 900;
+  margin-left: 8px;
+}
+    </style>
   </head>
   <body>
+    <div>
+      <div class="separator">
+        <div class="separator-box">
+          <div class="separator-number">
+            <p>1</p>
+          </div>
+          <p class="separator-text">Información del vehículo</p>
+        </div>
+      </div>
+      <div class="general-data-container">
+        <!-- First row: 3 columns -->
+        <div class="general-data-row">
+          <div class="general-data-field">
+            <div class="gd-field-left">
+              <p>Clase</p>
+            </div>
+            <div class="gd-field-right">
+              <p>Automóvil sedan</p>
+            </div>
+          </div>
+          <div class="general-data-field">
+            <div class="gd-field-left">
+              <p>Marca</p>
+            </div>
+            <div class="gd-field-right">
+              <p>Ford</p>
+            </div>
+          </div>
+          <div class="general-data-field">
+            <div class="gd-field-left">
+              <p>Referencia</p>
+            </div>
+            <div class="gd-field-right">
+              <p>Fiesta</p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Second row: 3 columns -->
+        <div class="general-data-row">
+          <div class="general-data-field">
+            <div class="gd-field-left">
+              <p>Año de modelo</p>
+            </div>
+            <div class="gd-field-right">
+              <p>2011</p>
+            </div>
+          </div>
+          <div class="general-data-field">
+            <div class="gd-field-left">
+              <p>Versión</p>
+            </div>
+            <div class="gd-field-right">
+              <p>Festiva</p>
+            </div>
+          </div>
+          <div class="general-data-field">
+            <div class="gd-field-left">
+              <p>Kilometraje</p>
+            </div>
+            <div class="gd-field-right">
+              <p>113,201</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Third row: 3 columns -->
+        <div class="general-data-row">
+          <div class="general-data-field">
+            <div class="gd-field-left">
+              <p>Color</p>
+            </div>
+            <div
+              class="gd-field-right"
+              style="display: flex; align-items: center; gap: 8px"
+            >
+              <p>Rojo</p>
+              <span
+                style="
+                  display: inline-block;
+                  width: 18px;
+                  height: 18px;
+                  border-radius: 50%;
+                  background: #ec2323;
+                "
+              ></span>
+            </div>
+          </div>
+          <div class="general-data-field">
+            <div class="gd-field-left">
+              <p>Asegurado</p>
+            </div>
+            <div class="gd-field-right">
+              <p>Sí</p>
+            </div>
+          </div>
+          <div class="general-data-field">
+            <div class="gd-field-left">
+              <p>Fecha</p>
+            </div>
+            <div class="gd-field-right">
+              <p>01/01/2025</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Fourth row: 3 columns -->
+        <div class="general-data-row">
+          <div class="general-data-field">
+            <div class="gd-field-left">
+              <p>Tipo de carrocería</p>
+            </div>
+            <div class="gd-field-right">
+              <p>Ejemplo</p>
+            </div>
+          </div>
+          <div class="general-data-field">
+            <div class="gd-field-left">
+              <p>Tipo de caja</p>
+            </div>
+            <div class="gd-field-right">
+              <p>Ejemplo</p>
+            </div>
+          </div>
+          <div class="general-data-field">
+            <div class="gd-field-left">
+              <p>Placa</p>
+            </div>
+            <div class="gd-field-right">
+              <p>5W5R47</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="out-standard-container">
+        <div class="out-standard-box">
+          <p class="out-standard-title">Vehículo fuera de estándar</p>
+          <!-- Tipo de siniestro -->
+          <p class="out-standard-type">Perdida total</p>
+        </div>
+        <p class="out-standard-description">
+          portgutitor euismod nulla. Orci, dictumst  neci  aliquet  id a
+          ullamcorper venenatis. Fermentum sulla craspor ttitore ismod nulla Nibh
+          Fermentum sulla craspor ttitore ismod nulla Nibh ismod
+        </p>
+      </div>
+      <div class="separator" style="margin-top: 32px">
+        <div class="separator-box">
+          <div class="separator-number">
+            <p>2</p>
+          </div>
+          <p class="separator-text">Presupuestos</p>
+        </div>
+      </div>
+      <div class="budget-chart-container">
+        <div class="budget-chart-left">
+          <div class="budget-chart-row">
+            <span class="budget-chart-number">2</span>
+            <span class="budget-chart-label">Exterior del vehiculo</span>
+          </div>
+          <div class="budget-chart-row">
+            <span class="budget-chart-number">3</span>
+            <span class="budget-chart-label">Inferior del vehiculo</span>
+          </div>
+          <div class="budget-chart-row">
+            <span class="budget-chart-number">4</span>
+            <span class="budget-chart-label">Interior del vehiculo</span>
+          </div>
+          <div class="budget-chart-row">
+            <span class="budget-chart-number">5</span>
+            <span class="budget-chart-label">Ventilación</span>
+          </div>
+          <div class="budget-chart-row">
+            <span class="budget-chart-number">6</span>
+            <span class="budget-chart-label">Motor</span>
+          </div>
+          <div class="budget-chart-row">
+            <span class="budget-chart-number">7</span>
+            <span class="budget-chart-label">Transmisión</span>
+          </div>
+          <div class="budget-chart-row">
+            <span class="budget-chart-number">8</span>
+            <span class="budget-chart-label">Frenos</span>
+          </div>
+          <div class="budget-chart-row">
+            <span class="budget-chart-number">9</span>
+            <span class="budget-chart-label">Dirección</span>
+          </div>
+          <div class="budget-chart-row">
+            <span class="budget-chart-number">10</span>
+            <span class="budget-chart-label">Suspensión</span>
+          </div>
+          <div class="budget-chart-row">
+            <span class="budget-chart-number">11</span>
+            <span class="budget-chart-label">Llantas</span>
+          </div>
+        </div>
+        <div class="budget-chart-bars">
+          <div class="budget-bar" style="width: 60%"></div>
+          <div class="budget-bar" style="width: 50%"></div>
+          <div class="budget-bar" style="width: 80%"></div>
+          <div class="budget-bar" style="width: 30%"></div>
+          <div class="budget-bar" style="width: 20%"></div>
+          <div class="budget-bar" style="width: 35%"></div>
+          <div class="budget-bar" style="width: 32%"></div>
+          <div class="budget-bar" style="width: 18%"></div>
+          <div class="budget-bar" style="width: 25%"></div>
+          <div class="budget-bar" style="width: 55%"></div>
+        </div>
+        <div class="budget-chart-right">
+          <div class="budget-chart-header">Presupuesto</div>
+          <div class="budget-chart-value">1200,00 $</div>
+          <div class="budget-chart-value">1000,00 $</div>
+          <div class="budget-chart-value">3200,00 $</div>
+          <div class="budget-chart-value">300,00 $</div>
+          <div class="budget-chart-value">220,00 $</div>
+          <div class="budget-chart-value">310,00 $</div>
+          <div class="budget-chart-value">280,00 $</div>
+          <div class="budget-chart-value">180,00 $</div>
+          <div class="budget-chart-value">300,00 $</div>
+          <div class="budget-chart-value">800,00 $</div>
+          <div class="budget-chart-total">
+            <span>1.820,00 $</span>
+            <span class="budget-chart-total-label">Presupuesto Total</span>
+          </div>
+        </div>
+      </div>
+  
+      <div class="presupuesto-sugerido-observaciones" style="padding-bottom: 8px">
+        <p>
+          <b>Observaciones generales:</b> fermentum netus nulla cras portgutitor
+          euismod nulla. Orci, dictumst  neci  aliquet  id a ullamcorper
+          venenatis. Fermentum sulla craspor ttitore ismod nulla Nibh fermentum
+          netus nulla cras portgutitor euismod nulla. Orci, dictumst  neci 
+          aliquet  id a ullamcorper venenatis , venetis fermentum netus nulla cras
+          portgutitor euismod nulla. Orci fermentum netus nulla cras portgutitor
+          euismod euismojp dictumst  neci  aliquet  id a ullamcorper venenati
+          Fermentum sulla craspor. fermentum netus nulla cras portgutitor
+        </p>
+      </div>
+  
+      <div class="presupuesto-sugerido-observaciones">
+        <p>
+          <b>Observaciones:</b> fermentum netus nulla cras portgutitor euismod
+          nulla. Orci, dictumst  neci  aliquet  id a ullamcorper venenatis.
+          Fermentum sulla craspor ttitore ismod nulla Nibh fermentum netus nulla
+          cras portgutitor euismod nulla. Orci, dictumst  neci  aliquet  id a
+          ullamcorper venenatis , venetis fermentum netus nulla cras portgutitor
+          euismod nulla. Orci fermentum netus nulla cras portgutitor euismod
+          euismojp dictumst  neci  aliquet  id a ullamcorper venenati Fermentum
+          sulla craspor. fermentum netus nulla cras portgutitor
+        </p>
+        <div class="right-box">
+          <div class="presupuesto-sugerido-badge">
+            <p>Presupuesto Sugerido: <span>3.208,00 $</span></p>
+          </div>
+        </div>
+      </div>
+  
+    </div>
+
+<div style="height: 200px;"></div>
     <div class="container">
       <div class="page">
         <div class="header">
@@ -188,6 +792,9 @@
                 <span class="text">{{accident['inspection_date']}}</span>
               </div>
             </div>
+          </div>
+          <div class="logo-placeholder" style="display: flex; justify-content: center; align-items: center; max-width: 80%; margin: auto; margin-top: 300px; ">
+            <img src="https://storage.googleapis.com/course-gcp-2024-images/publics/wcar.svg" style="width: 90%;" alt="Logo WCAR" />
           </div>
         </div>
       </div>
@@ -446,6 +1053,9 @@
               </div>
               {% endfor %}
             </div>
+            <div class="logo-placeholder" style="display: flex; justify-content: center; align-items: center; max-width: 80%; margin: auto; margin-top: 250px; ">
+              <img src="https://storage.googleapis.com/course-gcp-2024-images/publics/wcar.svg" style="width: 90%;" alt="Logo WCAR" />
+            </div>
           </div>
         </div>
       </div>
@@ -641,6 +1251,7 @@
                   </div>
                 </div>
               </div>
+              <div style="height: 600px;"></div>
          <!-- Tabla para SISTEMA ELÉCTRICO -->
          <div class="tabla-seccion-container">
              <div class="tabla-seccion-sidebar">
@@ -735,6 +1346,9 @@
                 </div>
                   </div>
                 </div>
+        </div>
+        <div class="logo-placeholder" style="display: flex; justify-content: center; align-items: center; max-width: 80%; margin: auto; margin-top: 350px; ">
+          <img src="https://storage.googleapis.com/course-gcp-2024-images/publics/wcar.svg" style="width: 90%;" alt="Logo WCAR" />
         </div>
         <!-- ------------------------------------------ Interior del vehiculo ------------------------------------------ -->
       </div>
@@ -834,6 +1448,7 @@
                   </div>
                 </div>
               </div>
+
 
           <!-- Tabla para MOTOR -->
           <div class="tabla-seccion-container">
@@ -936,6 +1551,7 @@
                   </div>
                 </div>
               </div>
+              <div style="height: 500px;"></div>
 
           <!-- Tabla para TRANSMISIÓN -->
           <div class="tabla-seccion-container">
@@ -1025,6 +1641,9 @@
                 </div>
               </div>
             </div>
+          </div>
+          <div class="logo-placeholder" style="display: flex; justify-content: center; align-items: center; max-width: 80%; margin: auto; margin-top: 350px; ">
+            <img src="https://storage.googleapis.com/course-gcp-2024-images/publics/wcar.svg" style="width: 90%;" alt="Logo WCAR" />
           </div>
         </div>
       </div>
@@ -1361,11 +1980,11 @@
                 </div>
               </div>
 
-              <!-- Tabla para LLANTAS -->
+              <!-- Tabla para LLANTAS Y RINES -->
               <div class="tabla-seccion-container">
                   <div class="tabla-seccion-sidebar">
-                      <div class="tabla-seccion-sidebar-text">LLANTAS</div>
-            </div>
+                      <div class="tabla-seccion-sidebar-text">LLANTAS Y RINES</div>
+                  </div>
                   <div class="tabla-seccion-content">
                       <table class="tabla-seccion-table">
                   <thead>
@@ -1402,64 +2021,22 @@
                                   <td class="tabla-seccion-col-presupuesto">{{ tires['llanta_trasera_derecha']['price'] }}</td>
                     </tr>
                     <tr>
-                      <td>Llanta de repueso</td>
+                      <td>Llanta de repuesto</td>
                                   <td class="estado-bueno">{{ tires['llanta_de_repuesto']['state'] }}</td>
                       <td>{{ tires['llanta_de_repuesto']['description'] }}</td>
                                   <td class="tabla-seccion-col-presupuesto">{{ tires['llanta_de_repuesto']['price'] }}</td>
                     </tr>
-                  </tbody>
-                </table>
-                      <div class="tabla-seccion-footer">
-                          <div class="tabla-seccion-observaciones">
-                              {{ tires['observations']|default('') }}
-              </div>
-                          <div class="tabla-seccion-total">
-                              <div class="tabla-seccion-total-label">Presupuesto Total</div>
-                              <div class="tabla-seccion-total-valor">{{ tires['total_price'] }}</div>
-                </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Tabla para RIN -->
-              <div class="tabla-seccion-container">
-                  <div class="tabla-seccion-sidebar">
-                      <div class="tabla-seccion-sidebar-text">RIN</div>
-            </div>
-                  <div class="tabla-seccion-content">
-                      <table class="tabla-seccion-table">
-                  <thead>
                     <tr>
-                                  <th class="tabla-seccion-col-parte">Parte</th>
-                                  <th class="tabla-seccion-col-estado">Estado</th>
-                                  <th class="tabla-seccion-col-descripcion">Descripción</th>
-                                  <th class="tabla-seccion-col-presupuesto">Presupuesto</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>Rin delantero Iz</td>
+                      <td>Rines delanteros</td>
                                   <td class="estado-bueno">{{ rin['rin_delantero_izquierdo']['state'] }}</td>
                                   <td>{{ rin['rin_delantero_izquierdo']['description'] }}</td>
                                   <td class="tabla-seccion-col-presupuesto">{{ rin['rin_delantero_izquierdo']['price'] }}</td>
                     </tr>
                     <tr>
-                      <td>Rin delantero De</td>
-                                  <td class="estado-bueno">{{ rin['rin_delantero_derecho']['state'] }}</td>
-                      <td>{{ rin['rin_delantero_derecho']['description'] }}</td>
-                                  <td class="tabla-seccion-col-presupuesto">{{ rin['rin_delantero_derecho']['price'] }}</td>
-                    </tr>
-                    <tr>
-                      <td>Rin trasero Iz</td>
+                      <td>Rines traseros</td>
                                   <td class="estado-bueno">{{ rin['rin_trasero_izquierdo']['state'] }}</td>
                       <td>{{ rin['rin_trasero_izquierdo']['description'] }}</td>
                                   <td class="tabla-seccion-col-presupuesto">{{ rin['rin_trasero_izquierdo']['price'] }}</td>
-                    </tr>
-                    <tr>
-                      <td>Rin trasero De</td>
-                                  <td class="estado-bueno">{{ rin['rin_trasero_derecho']['state'] }}</td>
-                      <td>{{ rin['rin_trasero_derecho']['description'] }}</td>
-                                  <td class="tabla-seccion-col-presupuesto">{{ rin['rin_trasero_derecho']['price'] }}</td>
                     </tr>
                     <tr>
                       <td>Rin de repuesto</td>
@@ -1471,15 +2048,18 @@
                 </table>
                       <div class="tabla-seccion-footer">
                           <div class="tabla-seccion-observaciones">
+                              {{ tires['observations']|default('') }}
                               {{ rin['observations']|default('') }}
-              </div>
+                          </div>
                           <div class="tabla-seccion-total">
                               <div class="tabla-seccion-total-label">Presupuesto Total</div>
-                              <div class="tabla-seccion-total-valor">{{ rin['total_price'] }}</div>
-                </div>
+                              <div class="tabla-seccion-total-valor">{{ tires['total_price'] + rin['total_price'] }}</div>
+                          </div>
+                      </div>
                   </div>
-                </div>
               </div>
+
+              <div style="height: 300px;"></div>
 
               <div class="observations-box">
                 <div class="presupuesto-sugerido-observaciones">
