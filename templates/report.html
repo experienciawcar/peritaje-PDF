@@ -376,7 +376,7 @@ body {
               <p>Marca</p>
             </div>
             <div class="gd-field-right">
-              <p>Ford</p>
+              <p>{{resumen['vehicle']['brand']}}</p>
             </div>
           </div>
           <div class="general-data-field">
@@ -396,7 +396,7 @@ body {
               <p>Año de modelo</p>
             </div>
             <div class="gd-field-right">
-              <p>2011</p>
+              <p>{{resumen['vehicle']['year']}}</p>
             </div>
           </div>
           <div class="general-data-field">
@@ -412,7 +412,7 @@ body {
               <p>Kilometraje</p>
             </div>
             <div class="gd-field-right">
-              <p>113,201</p>
+              <p>{{ resumen['vehicle']['kilometers'] }}</p>
             </div>
           </div>
         </div>
@@ -427,16 +427,7 @@ body {
               class="gd-field-right"
               style="display: flex; align-items: center; gap: 8px"
             >
-              <p>Rojo</p>
-              <span
-                style="
-                  display: inline-block;
-                  width: 18px;
-                  height: 18px;
-                  border-radius: 50%;
-                  background: #ec2323;
-                "
-              ></span>
+              <p>{{resumen['vehicle']['color']}}</p>
             </div>
           </div>
           <div class="general-data-field">
@@ -464,7 +455,7 @@ body {
               <p>Tipo de carrocería</p>
             </div>
             <div class="gd-field-right">
-              <p>Ejemplo</p>
+              <p>{{resumen['vehicle']['bodywork']}}</p>
             </div>
           </div>
           <div class="general-data-field">
@@ -472,7 +463,7 @@ body {
               <p>Tipo de caja</p>
             </div>
             <div class="gd-field-right">
-              <p>Ejemplo</p>
+              <p>{{resumen['vehicle']['transmission']}}</p>
             </div>
           </div>
           <div class="general-data-field">
@@ -480,23 +471,23 @@ body {
               <p>Placa</p>
             </div>
             <div class="gd-field-right">
-              <p>5W5R47</p>
+              <p>{{resumen['vehicle']['plate']}}</p>
             </div>
           </div>
         </div>
       </div>
-      <div class="out-standard-container">
-        <div class="out-standard-box">
-          <p class="out-standard-title">Vehículo fuera de estándar</p>
-          <!-- Tipo de siniestro -->
-          <p class="out-standard-type">Perdida total</p>
+      {% if not resumen['vehicle_compliance']['is_compliant'] %}
+        <div class="out-standard-container">
+          <div class="out-standard-box">
+            <p class="out-standard-title">Vehículo fuera de estándar</p>
+            <!-- Tipo de siniestro -->
+            <p class="out-standard-type">{{ resumen['vehicle_compliance']['type'] }}</p>
+          </div>
+          <p class="out-standard-description">
+            {{ resumen['vehicle_compliance']['reason'] }}
+          </p>
         </div>
-        <p class="out-standard-description">
-          portgutitor euismod nulla. Orci, dictumst  neci  aliquet  id a
-          ullamcorper venenatis. Fermentum sulla craspor ttitore ismod nulla Nibh
-          Fermentum sulla craspor ttitore ismod nulla Nibh ismod
-        </p>
-      </div>
+      {% endif %}
       <div class="separator" style="margin-top: 32px">
         <div class="separator-box">
           <div class="separator-number">
@@ -549,31 +540,31 @@ body {
           </div>
         </div>
         <div class="budget-chart-bars">
-          <div class="budget-bar" style="width: 60%"></div>
-          <div class="budget-bar" style="width: 50%"></div>
-          <div class="budget-bar" style="width: 80%"></div>
-          <div class="budget-bar" style="width: 30%"></div>
-          <div class="budget-bar" style="width: 20%"></div>
-          <div class="budget-bar" style="width: 35%"></div>
-          <div class="budget-bar" style="width: 32%"></div>
-          <div class="budget-bar" style="width: 18%"></div>
-          <div class="budget-bar" style="width: 25%"></div>
-          <div class="budget-bar" style="width: 55%"></div>
+          <div class="budget-bar" style="width: {{ resumen['budgets']['vehicle_exterior']['budget_percentage']}}%"></div>
+          <div class="budget-bar" style="width: {{ resumen['budgets']['vehicle_underbody']['budget_percentage'] }}%"></div>
+          <div class="budget-bar" style="width: {{ resumen['budgets']['vehicle_interior']['budget_percentage'] }}%"></div>
+          <div class="budget-bar" style="width: {{ resumen['budgets']['ventilation']['budget_percentage'] }}%"></div>
+          <div class="budget-bar" style="width: {{ resumen['budgets']['engine']['budget_percentage'] }}%"></div>
+          <div class="budget-bar" style="width: {{ resumen['budgets']['transmision']['budget_percentage'] }}%"></div>
+          <div class="budget-bar" style="width: {{ resumen['budgets']['brakes']['budget_percentage'] }}%"></div>
+          <div class="budget-bar" style="width: {{ resumen['budgets']['direction']['budget_percentage'] }}%"></div>
+          <div class="budget-bar" style="width: {{ resumen['budgets']['suspension']['budget_percentage'] }}%"></div>
+          <div class="budget-bar" style="width: {{ resumen['budgets']['tires']['budget_percentage'] }}%"></div>
         </div>
         <div class="budget-chart-right">
           <div class="budget-chart-header">Presupuesto</div>
-          <div class="budget-chart-value">1200,00 $</div>
-          <div class="budget-chart-value">1000,00 $</div>
-          <div class="budget-chart-value">3200,00 $</div>
-          <div class="budget-chart-value">300,00 $</div>
-          <div class="budget-chart-value">220,00 $</div>
-          <div class="budget-chart-value">310,00 $</div>
-          <div class="budget-chart-value">280,00 $</div>
-          <div class="budget-chart-value">180,00 $</div>
-          <div class="budget-chart-value">300,00 $</div>
-          <div class="budget-chart-value">800,00 $</div>
+          <div class="budget-chart-value">{{ resumen['budgets']['vehicle_exterior']['budget_suggested'] }}</div>
+          <div class="budget-chart-value">{{ resumen['budgets']['vehicle_underbody']['budget_suggested'] }}</div>
+          <div class="budget-chart-value">{{ resumen['budgets']['vehicle_interior']['budget_suggested'] }}</div>
+          <div class="budget-chart-value">{{ resumen['budgets']['ventilation']['budget_suggested'] }}</div>
+          <div class="budget-chart-value">{{ resumen['budgets']['engine']['budget_suggested'] }}</div>
+          <div class="budget-chart-value">{{ resumen['budgets']['transmision']['budget_suggested'] }}</div>
+          <div class="budget-chart-value">{{ resumen['budgets']['brakes']['budget_suggested'] }}</div>
+          <div class="budget-chart-value">{{ resumen['budgets']['direction']['budget_suggested'] }}</div>
+          <div class="budget-chart-value">{{ resumen['budgets']['suspension']['budget_suggested'] }}</div>
+          <div class="budget-chart-value">{{ resumen['budgets']['tires']['budget_suggested'] }}</div>
           <div class="budget-chart-total">
-            <span>1.820,00 $</span>
+            <span>{{ resumen['budgets']['total_budget'] }}</span>
             <span class="budget-chart-total-label">Presupuesto Total</span>
           </div>
         </div>
@@ -581,38 +572,24 @@ body {
   
       <div class="presupuesto-sugerido-observaciones" style="padding-bottom: 8px">
         <p>
-          <b>Observaciones generales:</b> fermentum netus nulla cras portgutitor
-          euismod nulla. Orci, dictumst  neci  aliquet  id a ullamcorper
-          venenatis. Fermentum sulla craspor ttitore ismod nulla Nibh fermentum
-          netus nulla cras portgutitor euismod nulla. Orci, dictumst  neci 
-          aliquet  id a ullamcorper venenatis , venetis fermentum netus nulla cras
-          portgutitor euismod nulla. Orci fermentum netus nulla cras portgutitor
-          euismod euismojp dictumst  neci  aliquet  id a ullamcorper venenati
-          Fermentum sulla craspor. fermentum netus nulla cras portgutitor
+          <b>Observaciones generales:</b> {{ resumen['observations']['general_observations'] }}
         </p>
       </div>
   
       <div class="presupuesto-sugerido-observaciones">
         <p>
-          <b>Observaciones:</b> fermentum netus nulla cras portgutitor euismod
-          nulla. Orci, dictumst  neci  aliquet  id a ullamcorper venenatis.
-          Fermentum sulla craspor ttitore ismod nulla Nibh fermentum netus nulla
-          cras portgutitor euismod nulla. Orci, dictumst  neci  aliquet  id a
-          ullamcorper venenatis , venetis fermentum netus nulla cras portgutitor
-          euismod nulla. Orci fermentum netus nulla cras portgutitor euismod
-          euismojp dictumst  neci  aliquet  id a ullamcorper venenati Fermentum
-          sulla craspor. fermentum netus nulla cras portgutitor
+          <b>Observaciones:</b> {{ resumen['observations']['price_observations'] }}
         </p>
         <div class="right-box">
           <div class="presupuesto-sugerido-badge">
-            <p>Presupuesto Sugerido: <span>3.208,00 $</span></p>
+            <p>Presupuesto Sugerido: <span>{{ resumen['observations']['price_suggested'] }}</span></p>
           </div>
         </div>
       </div>
   
     </div>
 
-<div style="height: 200px;"></div>
+<div style="height: 300px;"></div>
     <div class="container">
       <div class="page">
         <div class="header">

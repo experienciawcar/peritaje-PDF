@@ -262,6 +262,72 @@ def generate_pdf_test():
                 "soat_date": "26/11/2024",
                 "vehicle_inspection_date": "12/12/2024"
             },
+            "resumen": {
+                "budgets": {
+                    "vehicle_exterior": {
+                        "budget_suggested": "$ 180.000",
+                        "budget_percentage": "100"
+                    },
+                    "vehicle_interior": {
+                        "budget_suggested": "$ 180.000",
+                        "budget_percentage": "90"
+                    },
+                    "vehicle_underbody": {
+                        "budget_suggested": "$ 180.000",
+                        "budget_percentage": "80"
+                    },
+                    "ventilation": {
+                        "budget_suggested": "$ 180.000",
+                        "budget_percentage": "70"
+                    },
+                    "engine": {
+                        "budget_suggested": "$ 180.000",
+                        "budget_percentage": "60"
+                    },
+                    "transmision": {
+                        "budget_suggested": "$ 180.000",
+                        "budget_percentage": "50"
+                    },
+                    "brakes": {
+                        "budget_suggested": "$ 180.000",
+                        "budget_percentage": "40"
+                    },
+                    "direction": {
+                        "budget_suggested": "$ 180.000",
+                        "budget_percentage": "30"
+                    },
+                    "suspension": {
+                        "budget_suggested": "$ 180.000",
+                        "budget_percentage": "20"
+                    },
+                    "tires": {
+                        "budget_suggested": "$ 180.000",
+                        "budget_percentage": "10"
+                    },
+                    "total_budget": "$ 1.800.000",
+                },
+                "observations": {
+                    "general_observations": "El vehículo presenta un estado general regular, con algunos problemas menores en la carrocería y el sistema de suspensión. Se recomienda realizar las reparaciones sugeridas para mejorar su funcionamiento y seguridad.",
+                    "price_observations": "El precio sugerido para las reparaciones es de $1.800.000, lo cual es razonable considerando el estado del vehículo y las reparaciones necesarias.",
+                    "price_suggested": "$ 120.800.000"
+                },
+                "vehicle": {
+                    "brand": "BAJAJ",
+                    "model": "",
+                    "year": 2016,
+                    "reference": "PULSAR 135 LS",
+                    "plate": "GZK936",
+                    "kilometers": "86074",
+                    "bodywork": "Sedan",
+                    "transmission": "Manual",
+                    "color": "NEGRO NEBULOSA",
+                },
+                "vehicle_compliance": {
+                    "is_compliant": False,
+                    "reason": "El vehículo no cumple con los estándares de seguridad y funcionamiento requeridos debido a las fallas detectadas en el sistema de suspensión y frenos.",
+                    "type": "Perdida total"
+                }
+            },
             "accessories": {
                 "parlantes": {
                     "state": "En buen estado",
