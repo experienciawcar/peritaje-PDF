@@ -341,12 +341,17 @@ body {
   display: flex;
   align-items: center;
 }
-
 .presupuesto-sugerido-badge p span {
   font-size: 24px;
   font-weight: 900;
   margin-left: 8px;
 }
+
+.page {
+    page-break-before: always;
+    /* Para navegadores modernos, puedes agregar: */
+    break-before: page;
+  }
     </style>
   </head>
   <body>
@@ -2051,8 +2056,8 @@ body {
                   </div>
               </div>
 
-              <div style="height: 300px;"></div>
-
+              <div style="height: 100px;"></div>
+            <div class="page">
               <div class="observations-box">
                 <div class="presupuesto-sugerido-observaciones">
                   <p>
@@ -2075,6 +2080,7 @@ body {
                     <div class="signature-line"><img src="https://storage.googleapis.com/course-gcp-2024-images/publics/sing_ivan_correct.png" alt="Firma Gerente" style="max-width: 200px; height: auto;"></div>
                     <div class="signature-title">FIRMA GERENTE COMPRAS</div>
                 </div>
+            </div>
             </div>
             </div>
           </div>

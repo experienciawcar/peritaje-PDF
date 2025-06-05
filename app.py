@@ -172,6 +172,7 @@ def generate_pdf():
         observations = data.get('observations',{})
         total_budget = data.get('total_budget',{})
         inspection_status = data.get('inspection_status',{})
+        resumen = data.get('resumen',{})
         # Validar datos requeridos
         print(f"Validar datos requeridos")
         if not numero_reporte:
@@ -204,7 +205,8 @@ def generate_pdf():
                              rin=rin,
                              observations=observations,
                              total_budget=total_budget,
-                             inspection_status=inspection_status)
+                             inspection_status=inspection_status,
+                             resumen=resumen)
         
         print(f"HTML generado")
         
