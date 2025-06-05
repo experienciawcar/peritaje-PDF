@@ -1,3 +1,5 @@
+version: '3.8'
+
 services:
   pdf-generator:
     build: .
@@ -8,15 +10,4 @@ services:
     environment:
       - FLASK_ENV=development
       - FLASK_DEBUG=1
-    command: python3 app.py
-    develop:
-      watch:
-        - path: ./app.py
-          action: sync
-          target: /app/app.py
-        - path: ./templates
-          action: sync
-          target: /app/templates
-        - path: ./static
-          action: sync
-          target: /app/static 
+    command: python app.py 
