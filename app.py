@@ -897,13 +897,13 @@ def generate_pdf_test():
                 "total_price": "$0.00 COP",
                 "observations": ""
             },
-            "total_budget": "Precio sugerido $26,000,000.00 COP",
-            "observations": "Se aprueba, la verdad la considero buena compra",
+            "total_budget": "$26,000,000.00 COP",
+            "observations": "Después de una inspección exhaustiva del vehículo, se puede concluir que es una excelente opción de compra. El estado general del motor es satisfactorio, con solo algunas reparaciones menores necesarias. La carrocería presenta daños menores que pueden ser reparados sin mayor complicación. El sistema de transmisión funciona correctamente y los sistemas eléctricos están en buen estado. El vehículo ha sido bien mantenido y su kilometraje es consistente con su edad. Se recomienda proceder con la compra, ya que el precio solicitado es razonable considerando el estado general del vehículo y los costos estimados de reparación.",
             "left_side": {
                 "image": "https://storage.googleapis.com/wcar-images/cars-43715702-1IMG_6530.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=githubactions%40web-wcar-co.iam.gserviceaccount.com%2F20250514%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20250514T035926Z&X-Goog-Expires=86400&X-Goog-SignedHeaders=host&X-Goog-Signature=33141619bc537014c409efcd09f50473e113b0dd5d54bdd8633d670ac61af60fe950582cb17d989d9601280cde06682d7a14c86239a24ebc5d8d2c764bc010a1247c7e5a67c982e12b868f110bc95e89a2cbfecf31054b1384010b0568ee4e57a0522e2cedc6b147a0c963a91cb04f9647f53c7bc54dde9115e788c7719c92bc32c9bc46c345ddb7636b3d5d0ed79080284760c09c88cd55ff6aa204837fa47c79d6fd148c910e6e2180f67973e8f4bc08d2190956454f91bbd41fe8ee6df23e0f4da69d38ad795f77a52bfef9e617fb23a53ee47a801747f6c77f4213deb02d7f2dde6ed0264437a20c6b8b4b0f385e088e49e42245356de87088bc57b7e0f6",
                 "gravity_items": [],
                 "description": "latonería dhsksjdj",
-                "budget": "Presupuesto estimado: $300,000.00 COP"
+                "budget": "$300,000.00 COP"
             },
             "back_side": {
                 "image": "https://storage.googleapis.com/wcar-images/cars-43715702-1IMG_6530.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=githubactions%40web-wcar-co.iam.gserviceaccount.com%2F20250514%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20250514T035926Z&X-Goog-Expires=86400&X-Goog-SignedHeaders=host&X-Goog-Signature=33141619bc537014c409efcd09f50473e113b0dd5d54bdd8633d670ac61af60fe950582cb17d989d9601280cde06682d7a14c86239a24ebc5d8d2c764bc010a1247c7e5a67c982e12b868f110bc95e89a2cbfecf31054b1384010b0568ee4e57a0522e2cedc6b147a0c963a91cb04f9647f53c7bc54dde9115e788c7719c92bc32c9bc46c345ddb7636b3d5d0ed79080284760c09c88cd55ff6aa204837fa47c79d6fd148c910e6e2180f67973e8f4bc08d2190956454f91bbd41fe8ee6df23e0f4da69d38ad795f77a52bfef9e617fb23a53ee47a801747f6c77f4213deb02d7f2dde6ed0264437a20c6b8b4b0f385e088e49e42245356de87088bc57b7e0f6",
@@ -915,7 +915,7 @@ def generate_pdf_test():
                 "image": "https://storage.googleapis.com/wcar-images/cars-43715702-1IMG_6530.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=githubactions%40web-wcar-co.iam.gserviceaccount.com%2F20250514%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20250514T035926Z&X-Goog-Expires=86400&X-Goog-SignedHeaders=host&X-Goog-Signature=33141619bc537014c409efcd09f50473e113b0dd5d54bdd8633d670ac61af60fe950582cb17d989d9601280cde06682d7a14c86239a24ebc5d8d2c764bc010a1247c7e5a67c982e12b868f110bc95e89a2cbfecf31054b1384010b0568ee4e57a0522e2cedc6b147a0c963a91cb04f9647f53c7bc54dde9115e788c7719c92bc32c9bc46c345ddb7636b3d5d0ed79080284760c09c88cd55ff6aa204837fa47c79d6fd148c910e6e2180f67973e8f4bc08d2190956454f91bbd41fe8ee6df23e0f4da69d38ad795f77a52bfef9e617fb23a53ee47a801747f6c77f4213deb02d7f2dde6ed0264437a20c6b8b4b0f385e088e49e42245356de87088bc57b7e0f6",
                 "gravity_items": [],
                 "description": "en puerta y trasera",
-                "budget": "Presupuesto estimado: $550,000.00 COP"
+                "budget": "$550,000.00 COP"
             },
             "roof_side": {
                 "image": "https://storage.googleapis.com/wcar-images/cars-43715702-1IMG_6530.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=githubactions%40web-wcar-co.iam.gserviceaccount.com%2F20250514%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20250514T035926Z&X-Goog-Expires=86400&X-Goog-SignedHeaders=host&X-Goog-Signature=33141619bc537014c409efcd09f50473e113b0dd5d54bdd8633d670ac61af60fe950582cb17d989d9601280cde06682d7a14c86239a24ebc5d8d2c764bc010a1247c7e5a67c982e12b868f110bc95e89a2cbfecf31054b1384010b0568ee4e57a0522e2cedc6b147a0c963a91cb04f9647f53c7bc54dde9115e788c7719c92bc32c9bc46c345ddb7636b3d5d0ed79080284760c09c88cd55ff6aa204837fa47c79d6fd148c910e6e2180f67973e8f4bc08d2190956454f91bbd41fe8ee6df23e0f4da69d38ad795f77a52bfef9e617fb23a53ee47a801747f6c77f4213deb02d7f2dde6ed0264437a20c6b8b4b0f385e088e49e42245356de87088bc57b7e0f6",
@@ -927,7 +927,7 @@ def generate_pdf_test():
                 "image": "https://storage.googleapis.com/wcar-images/cars-43715702-1IMG_6530.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=githubactions%40web-wcar-co.iam.gserviceaccount.com%2F20250514%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20250514T035926Z&X-Goog-Expires=86400&X-Goog-SignedHeaders=host&X-Goog-Signature=33141619bc537014c409efcd09f50473e113b0dd5d54bdd8633d670ac61af60fe950582cb17d989d9601280cde06682d7a14c86239a24ebc5d8d2c764bc010a1247c7e5a67c982e12b868f110bc95e89a2cbfecf31054b1384010b0568ee4e57a0522e2cedc6b147a0c963a91cb04f9647f53c7bc54dde9115e788c7719c92bc32c9bc46c345ddb7636b3d5d0ed79080284760c09c88cd55ff6aa204837fa47c79d6fd148c910e6e2180f67973e8f4bc08d2190956454f91bbd41fe8ee6df23e0f4da69d38ad795f77a52bfef9e617fb23a53ee47a801747f6c77f4213deb02d7f2dde6ed0264437a20c6b8b4b0f385e088e49e42245356de87088bc57b7e0f6",
                 "gravity_items": [],
                 "description": "corrosión",
-                "budget": "Presupuesto estimado: $200,000.00 COP"
+                "budget": "$200,000.00 COP"
             },
             "floor_side": {
                 "items": [
