@@ -5,8 +5,15 @@ RUN apt-get update && apt-get install -y \
     wkhtmltopdf \
     xfonts-75dpi \
     xfonts-base \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+    libpango-1.0-0 \
+    libpangoft2-1.0-0 \
+    libcairo2 \
+    libcairo2-dev \
+    libgdk-pixbuf2.0-0 \
+    libffi-dev \
+    shared-mime-info \
+ && apt-get clean \
+ && rm -rf /var/lib/apt/lists/*
 
 # Establece el directorio de trabajo
 WORKDIR /
