@@ -738,25 +738,15 @@ def generate_pdf_test():
                 "observations": "",
             },
             "tires": {
-                "llanta_delantera_izquierda": {
+                "llantas_delanteras": {
                     "state": "En estado regular",
                     "description": "jgfh",
                     "price": "$100,000.00 COP",
                 },
-                "llanta_delantera_derecha": {
+                "llantas_traseras": {
                     "state": "Muy malo",
                     "description": "jhffdd",
                     "price": "$800,000.00 COP",
-                },
-                "llanta_trasera_izquierda": {
-                    "state": "En buen estado",
-                    "description": "ok",
-                    "price": "N/A",
-                },
-                "llanta_trasera_derecha": {
-                    "state": "Malo",
-                    "description": "djjdkdjd",
-                    "price": "$300,000.00 COP",
                 },
                 "llanta_de_repuesto": {
                     "state": "En buen estado",
@@ -767,12 +757,12 @@ def generate_pdf_test():
                 "observations": "",
             },
             "rin": {
-                "rin_delantero_izquierdo": {
+                "rines_delanteros": {
                     "state": "N/A",
                     "description": "N/A",
                     "price": "N/A",
                 },
-                "rin_delantero_derecho": {
+                "rines_traseros": {
                     "state": "N/A",
                     "description": "N/A",
                     "price": "N/A",
@@ -884,57 +874,9 @@ def generate_pdf_test():
         print(f"Error generando PDF: {str(e)}")
         return str(e), 500
 
-@app.route("/generate_actas", methods=["GET"])
+@app.post("/generate_actas")
 def generate_actas_pdf():
-    payload = {
-        "id": "",
-        "operation_type": 2,
-        "operation_date": "2024/05/10",
-        "operation_hour": "12:34",
-        "client": {
-            "full_name": "Luis Jose Torres",
-            "document_number": "1078349538",
-            "email": "ricardo.gonzales@outlook.com",
-            "address": "Cll 154 #91-51",
-            "phone_number": "30232295351"
-        },
-        "vehicle": {
-            "plate": "GPS912",
-            "year": "2024",
-            "brand": "KIA",
-            "reference": "Picanto",
-            "color": "Negro",
-            "mileage": "47957",
-            "soat_date": "2026/03/24",
-            "rtm_date": "2026/01/11",
-            "body_work": "Hatch back"
-        },
-        "inventary": {
-            "property_card": False,
-            "rtm": True,
-            "soat": True,
-            "rugs": False,
-            "compressor": False,
-            "radio": False,
-            "taxes": False,
-            "folders": False,
-            "manuals": False,
-            "lug_wrench_crossbar": False,
-            "jack": False,
-            "lug_wrench": False,
-            "road_kit": False,
-            "key_duplicate": False,
-            "spare_tire": False
-        },
-        "user": {
-            "name": "Luis Jose Torres",
-            "email": "luis.torres@wcar.co",
-            "signature": ""
-        },
-        "observations": "",
-        "gasoil_level": ""
-    }
-
+    payload = request.get_json()
     mapper = ActasMapper(payload).map()
 
     # Renderiza la plantilla usando Flask

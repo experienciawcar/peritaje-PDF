@@ -75,12 +75,12 @@ class ActasMapper:
     def _build_gasoil_level(self, gasoil_level):
         BASE_DIR = Path(__file__).resolve().parent.parent
         if gasoil_level == "good":
-            image_to_use = f'{BASE_DIR}/static/images/Tanque_4_4.png'
+            image_to_use = "https://storage.googleapis.com/course-gcp-2024-images/publics/Tanque_4_4.png"
         elif gasoil_level == "acceptable":
-            image_to_use = f'{BASE_DIR}/static/images/Tanque_3_4.png'
+            image_to_use = "https://storage.googleapis.com/course-gcp-2024-images/publics/Tanque_3_4.png"
         elif gasoil_level == "regular":
-            image_to_use = f'{BASE_DIR}/static/images/Tanque_2_4.png'
+            image_to_use = "https://storage.googleapis.com/course-gcp-2024-images/publics/Tanque_2_4.png"
         else:
-            image_to_use = f'{BASE_DIR}/static/images/Tanque_1_4.png'
+            image_to_use = "https://storage.googleapis.com/course-gcp-2024-images/publics/Tanque_1_4.png"
 
         return image_to_use
