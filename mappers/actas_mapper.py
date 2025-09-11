@@ -19,7 +19,7 @@ class ActasMapper:
         }
         
     def _build_title(self, operation_type):
-        if operation_type == 2:
+        if operation_type == 1:
             return "recepcion"
         return "entrega"
 
