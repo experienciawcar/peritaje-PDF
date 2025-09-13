@@ -1,5 +1,6 @@
 from pathlib import Path
 
+
 class ActasMapper:
     def __init__(self, data: dict):
         self.data = data
@@ -15,9 +16,12 @@ class ActasMapper:
             "inventary": self._build_inventary(self.data.get("inventary", {})),
             "user": self._build_user(self.data.get("user", {})),
             "observations": self.data.get("observations", ""),
-            "gasoil_level": self._build_gasoil_level(self.data.get("gasoil_level", "empty")),
+            "gasoil_level": self._build_gasoil_level(
+                self.data.get("gasoil_level", "empty")
+            ),
+            "text_area": self._build_text_area(self.data.get("operation_type")),
         }
-        
+
     def _build_title(self, operation_type):
         if operation_type == 1:
             return "recepcion"
@@ -35,7 +39,7 @@ class ActasMapper:
             "rtm_date": vehicle_data.get("rtm_date"),
             "body_work": vehicle_data.get("body_work"),
         }
-        
+
     def _build_client(self, client_data):
         return {
             "signature": client_data.get("signature"),
@@ -49,7 +53,9 @@ class ActasMapper:
     def _build_inventary(self, inventary_data):
         return {
             "soat": "check" if inventary_data.get("soat") else "uncheck",
-            "property_card": "check" if inventary_data.get("property_card") else "uncheck",
+            "property_card": (
+                "check" if inventary_data.get("property_card") else "uncheck"
+            ),
             "rtm": "check" if inventary_data.get("rtm") else "uncheck",
             "rugs": "check" if inventary_data.get("rugs") else "uncheck",
             "compressor": "check" if inventary_data.get("compressor") else "uncheck",
@@ -57,14 +63,18 @@ class ActasMapper:
             "taxes": "check" if inventary_data.get("taxes") else "uncheck",
             "folders": "check" if inventary_data.get("folders") else "uncheck",
             "manuals": "check" if inventary_data.get("manuals") else "uncheck",
-            "lug_wrench_crossbar": "check" if inventary_data.get("lug_wrench_crossbar") else "uncheck",
+            "lug_wrench_crossbar": (
+                "check" if inventary_data.get("lug_wrench_crossbar") else "uncheck"
+            ),
             "jack": "check" if inventary_data.get("jack") else "uncheck",
             "lug_wrench": "check" if inventary_data.get("lug_wrench") else "uncheck",
             "road_kit": "check" if inventary_data.get("road_kit") else "uncheck",
-            "key_duplicate": "check" if inventary_data.get("key_duplicate") else "uncheck",
-            "spare_tire": "check" if inventary_data.get("spare_tire") else "uncheck"
+            "key_duplicate": (
+                "check" if inventary_data.get("key_duplicate") else "uncheck"
+            ),
+            "spare_tire": "check" if inventary_data.get("spare_tire") else "uncheck",
         }
-        
+
     def _build_user(self, user_data):
         return {
             "full_name": user_data.get("full_name"),
@@ -84,3 +94,18 @@ class ActasMapper:
             image_to_use = "https://storage.googleapis.com/course-gcp-2024-images/publics/Tanque_1_4.png"
 
         return image_to_use
+
+    def _build_text_area(self, operation_type):
+        if operation_type == 1:
+            return (
+                "Cabe señalar que a partir de la fecha y hora fijada en este documento "
+                "WCAR SAS será responsable por todo concepto frente a comparendos "
+                "uso del vehículo, accidentes de tránsito y demás situaciones que se puedan presentar"
+                "eximiendo explícitamente al vendedor de toda responsabilidad."
+            )
+        return (
+            "Cabe señalar que a partir de la fecha y hora fijada en este documento acepto hacerme responsable por todo "
+            "concepto frente a comparendos, uso del vehículo, accidentes de tránsito y demás situaciones que se puedan "
+            "presentar, eximiendo explícitamente al VENDEDOR y a WCAR SAS de toda responsabilidad. Así mismo acepto el "
+            "estado físico y mecánico en el que se encuentra el vehículo y entiendo que no tiene garantía."
+        )
