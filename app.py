@@ -59,7 +59,9 @@ def generate_pdf():
 
         # Extraer los datos necesarios del payload
         numero_reporte = data.get("numero_reporte")
+        print(f"Numero reporte: {numero_reporte}")
         client = data.get("client", {})
+        print(f"Client data: {client}")
         vehicle = data.get("vehicle", {})
         accident = data.get("accident", {})
         left_side = data.get("left_side", {})
@@ -83,13 +85,14 @@ def generate_pdf():
         total_budget = data.get("total_budget", {})
         inspection_status = data.get("inspection_status", {})
         resumen = data.get("resumen", {})
+        print(f"Data extraction complete")
         # Validar datos requeridos
-        logging.info(f"Validar datos requeridos")
+        print(f"Validar datos requeridos")
         if not numero_reporte:
-            logging.error(f"No se proporcionó el número de reporte: {numero_reporte}")
+            print(f"No se proporcionó el número de reporte: {numero_reporte}")
             return jsonify({"error": "El número de reporte es requerido"}), 400
 
-        logging.info(f"Renderiza la plantilla")
+        print(f"Renderiza la plantilla")
         # Renderizar la plantilla con los datos
         html = render_template(
             "report.html",
@@ -119,18 +122,18 @@ def generate_pdf():
             inspection_status=inspection_status,
             resumen=resumen,
         )
-        logging.info(f"HTML generado")
+        print(f"HTML generado")
 
         # Convertir HTML a PDF con las opciones configuradas
         pdf = pdfkit.from_string(html, False, options=options)
 
-        logging.info(f"PDF generado")
+        print(f"PDF generado")
 
         # Crear respuesta
         response = make_response(pdf)
         response.headers["Content-Type"] = "application/pdf"
         response.headers["Content-Disposition"] = "inline; filename=report.pdf"
-        logging.info(f"Respuesta creada")
+        print(f"Respuesta creada")
         return response
     except Exception as e:
         logging.error(f"Error generando PDF: {str(e)}")
