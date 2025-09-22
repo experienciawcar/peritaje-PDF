@@ -839,7 +839,7 @@ def generate_pdf_test():
 def pdf_check():
     try:
         config = pdfkit.configuration(wkhtmltopdf="/usr/bin/wkhtmltopdf")
-        pdf = pdfkit.from_string("<h1>Hola Cloud Run</h1>", False, configuration=config)
+        pdf = pdfkit.from_string("<h1>Hola Cloud Run</h1>", False, configuration=config, options=options)
         return make_response(pdf, 200, {"Content-Type": "application/pdf"})
     except Exception as e:
         logger.error(f"Error en pdf_check: {str(e)}")
