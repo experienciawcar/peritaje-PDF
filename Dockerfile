@@ -18,6 +18,7 @@ RUN apt-get update && apt-get install -y \
     libssl3 \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
+
 COPY requirements.txt .
 RUN pip3 install -r requirements.txt
 

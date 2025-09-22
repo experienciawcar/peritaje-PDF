@@ -836,6 +836,16 @@ def generate_pdf_test():
         print(f"Error generando PDF: {str(e)}")
         return str(e), 500
 
+@app.route("/pdf_check")
+def pdf_check():
+    try:
+        config = pdfkit.configuration(wkhtmltopdf="/usr/bin/wkhtmltopdf")
+        pdf = pdfkit.from_string("<h1>Hola Cloud Run</h1>", False, configuration=config)
+        return make_response(pdf, 200, {"Content-Type": "application/pdf"})
+    except Exception as e:
+        logger.error(f"Error en pdf_check: {str(e)}")
+        return jsonify({"error": str(e)}), 500
+
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 8080))  # Puerto 8080 por defecto si no se define
