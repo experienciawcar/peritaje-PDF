@@ -56,14 +56,14 @@ def index():
 def generate_pdf():
     try:
         print("Accessing generate_pdf endpoint")
-        logging.info(f"Llego el request")
+        logger.info(f"Llego el request")
         # Obtener los datos del cuerpo de la solicitud
         data = request.get_json()
         # Validar que los datos requeridos estén presentes
-        logging.info(f"Saque los datos")
+        logger.info(f"Saque los datos")
         print(f"Data received")
         if not data:
-            logging.error(f"No se proporcionaron datos: {data}")
+            logger.error(f"No se proporcionaron datos: {data}")
             return jsonify({"error": "No se proporcionaron datos"}), 400
 
         # Extraer los datos necesarios del payload
@@ -94,14 +94,17 @@ def generate_pdf():
         total_budget = data.get("total_budget", {})
         inspection_status = data.get("inspection_status", {})
         resumen = data.get("resumen", {})
+        logger.info(f"Saque todos los datos")
         print(f"Data extraction complete")
         # Validar datos requeridos
         print(f"Validar datos requeridos")
+        logger.info(f"Validando datos requeridos")
         if not numero_reporte:
             print(f"No se proporcionó el número de reporte: {numero_reporte}")
             return jsonify({"error": "El número de reporte es requerido"}), 400
 
         print(f"Renderiza la plantilla")
+        logger.info(f"Renderizando la plantilla")
         # Renderizar la plantilla con los datos
         html = render_template(
             "report.html",
@@ -132,17 +135,20 @@ def generate_pdf():
             resumen=resumen,
         )
         print(f"HTML generado")
+        logger.info(f"HTML generado")
 
         # Convertir HTML a PDF con las opciones configuradas
         pdf = pdfkit.from_string(html, False, options=options)
 
         print(f"PDF generado")
+        logger.info(f"PDF generado")
 
         # Crear respuesta
         response = make_response(pdf)
         response.headers["Content-Type"] = "application/pdf"
         response.headers["Content-Disposition"] = "inline; filename=report.pdf"
         print(f"Respuesta creada")
+        logger.info(f"Respuesta creada")
         return response
     except Exception as e:
         logging.error(f"Error generando PDF: {str(e)}")
