@@ -9,8 +9,11 @@ RUN apt-get update && apt-get install -y \
     wkhtmltopdf \
     xfonts-75dpi \
     xfonts-base \
-    python3 \
-    python3-pip \
+    libjpeg-turbo8 \
+    libxrender1 \
+    libxext6 \
+    libfontconfig1 \
+    libssl3 \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
