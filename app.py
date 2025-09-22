@@ -4,6 +4,15 @@ import os
 import logging
 from datetime import datetime
 
+import sys
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s %(levelname)s %(message)s",
+    handlers=[logging.StreamHandler(sys.stdout)]
+)
+logger = logging.getLogger(__name__)
+
 app = Flask(__name__)
 print("Flask app initialized")
 

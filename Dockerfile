@@ -1,6 +1,7 @@
 FROM ubuntu:22.04
 
-ENV DEBIAN_FRONTEND=noninteractive
+ENV DEBIAN_FRONTEND=noninteractiv
+ENV PYTHONUNBUFFERED=1
 
 # Install wkhtmltopdf and its dependencies
 # Instalar dependencias necesarias en un solo paso
