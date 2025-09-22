@@ -41,8 +41,6 @@ options = {
     "page-width": "210mm",  # Ancho de página A4
     "page-height": "297mm",  # Alto de página A4
     # Mejoras de renderizado
-    "javascript-delay": "1000",
-    "no-stop-slow-scripts": None,
     "zoom": "1.25",  # o '1.3' si quieres un pelín más grande
 }
 
