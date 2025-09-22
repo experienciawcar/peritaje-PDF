@@ -152,7 +152,7 @@ def generate_pdf():
         logger.info(f"Respuesta creada")
         return response
     except Exception as e:
-        logging.error(f"Error generando PDF: {str(e)}")
+        logger.error(f"Error generando PDF: {str(e)}")
         return str(e), 500
 
 
