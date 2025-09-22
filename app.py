@@ -138,7 +138,8 @@ def generate_pdf():
         logger.info(f"HTML generado")
 
         # Convertir HTML a PDF con las opciones configuradas
-        pdf = pdfkit.from_string(html, False, options=options)
+        config = pdfkit.configuration(wkhtmltopdf="/usr/bin/wkhtmltopdf")
+        pdf = pdfkit.from_string(html, False, options=options, configuration=config)
 
         print(f"PDF generado")
         logger.info(f"PDF generado")
