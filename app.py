@@ -42,6 +42,7 @@ options = {
     "page-height": "297mm",  # Alto de página A4
     # Mejoras de renderizado
     "zoom": "1.25",  # o '1.3' si quieres un pelín más grande
+    "debug-javascript": "",
 }
 
 
