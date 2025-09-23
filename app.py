@@ -845,6 +845,21 @@ def pdf_check():
         logger.error(f"Error en pdf_check: {str(e)}")
         return jsonify({"error": str(e)}), 500
 
+import subprocess
+
+@app.route("/pdf_debug")
+def pdf_debug():
+    html = "<h1>Prueba Cloud Run</h1><link rel='stylesheet' href='https://storage.googleapis.com/course-gcp-2024-images/publics/styles.css'>"
+    result = subprocess.run(
+        ["/usr/bin/wkhtmltopdf", "-", "-"],
+        input=html.encode("utf-8"),
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE
+    )
+    return {
+        "stdout": result.stdout[:200].decode(errors="ignore"),
+        "stderr": result.stderr.decode(errors="ignore")
+    }
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 8080))  # Puerto 8080 por defecto si no se define
