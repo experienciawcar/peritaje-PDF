@@ -847,7 +847,7 @@ def pdf_check():
         return jsonify({"error": str(e)}), 500
 
 
-@app.route("/pdf_debug")
+@app.post("/pdf_debug")
 def pdf_debug():
     print("Accessing generate_pdf endpoint")
     logger.info(f"Llego el request")
