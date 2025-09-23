@@ -849,7 +849,85 @@ def pdf_check():
 
 @app.route("/pdf_debug")
 def pdf_debug():
-    html = "<h1>Prueba Cloud Run</h1><link rel='stylesheet' href='https://storage.googleapis.com/course-gcp-2024-images/publics/styles.css'>"
+    print("Accessing generate_pdf endpoint")
+    logger.info(f"Llego el request")
+    # Obtener los datos del cuerpo de la solicitud
+    data = request.get_json()
+    # Validar que los datos requeridos estén presentes
+    logger.info(f"Saque los datos")
+    print(f"Data received")
+    if not data:
+        logger.error(f"No se proporcionaron datos: {data}")
+        return jsonify({"error": "No se proporcionaron datos"}), 400
+    # Extraer los datos necesarios del payload
+    numero_reporte = data.get("numero_reporte")
+    print(f"Numero reporte: {numero_reporte}")
+    client = data.get("client", {})
+    print(f"Client data: {client}")
+    vehicle = data.get("vehicle", {})
+    accident = data.get("accident", {})
+    left_side = data.get("left_side", {})
+    right_side = data.get("right_side", {})
+    front_side = data.get("front_side", {})
+    back_side = data.get("back_side", {})
+    roof_side = data.get("roof_side", {})
+    floor_side = data.get("floor_side", {})
+    accessories = data.get("accessories", {})
+    upholstery = data.get("upholstery", {})
+    electrical_system = data.get("electrical_system", {})
+    ventilation = data.get("ventilation", {})
+    engine = data.get("engine", {})
+    transmission = data.get("transmission", {})
+    brakes = data.get("brakes", {})
+    direction = data.get("direction", {})
+    suspension = data.get("suspension", {})
+    tires = data.get("tires", {})
+    rin = data.get("rin", {})
+    observations = data.get("observations", {})
+    total_budget = data.get("total_budget", {})
+    inspection_status = data.get("inspection_status", {})
+    resumen = data.get("resumen", {})
+    logger.info(f"Saque todos los datos")
+    print(f"Data extraction complete")
+    # Validar datos requeridos
+    print(f"Validar datos requeridos")
+    logger.info(f"Validando datos requeridos")
+    if not numero_reporte:
+        print(f"No se proporcionó el número de reporte: {numero_reporte}")
+        return jsonify({"error": "El número de reporte es requerido"}), 400
+    print(f"Renderiza la plantilla")
+    logger.info(f"Renderizando la plantilla")
+    # Renderizar la plantilla con los datos
+    html = render_template(
+        "report.html",
+        numero_reporte=numero_reporte,
+        client=client,
+        vehicle=vehicle,
+        accident=accident,
+        left_side=left_side,
+        right_side=right_side,
+        front_side=front_side,
+        back_side=back_side,
+        roof_side=roof_side,
+        floor_side=floor_side,
+        accessories=accessories,
+        upholstery=upholstery,
+        electrical_system=electrical_system,
+        ventilation=ventilation,
+        engine=engine,
+        transmission=transmission,
+        brakes=brakes,
+        direction=direction,
+        suspension=suspension,
+        tires=tires,
+        rin=rin,
+        observations=observations,
+        total_budget=total_budget,
+        inspection_status=inspection_status,
+        resumen=resumen,
+    )
+    print(f"HTML generado")
+    logger.info(f"HTML generado")
     result = subprocess.run(
         ["/usr/bin/wkhtmltopdf", "-", "-"],
         input=html.encode("utf-8"),
