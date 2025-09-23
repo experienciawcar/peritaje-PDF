@@ -3,7 +3,7 @@ import pdfkit
 import os
 import logging
 from datetime import datetime
-
+import subprocess
 import sys
 
 logging.basicConfig(
@@ -845,7 +845,6 @@ def pdf_check():
         logger.error(f"Error en pdf_check: {str(e)}")
         return jsonify({"error": str(e)}), 500
 
-import subprocess
 
 @app.route("/pdf_debug")
 def pdf_debug():
