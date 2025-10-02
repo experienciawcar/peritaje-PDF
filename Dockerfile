@@ -1,25 +1,36 @@
-FROM python:3.10-slim
+FROM python:3.10-slim-bullseye
 
-# Instala dependencias del sistema necesarias para wkhtmltopdf
+# Instalar dependencias necesarias
 RUN apt-get update && apt-get install -y \
-    wkhtmltopdf \
+    wget \
     xfonts-75dpi \
     xfonts-base \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+    libpango-1.0-0 \
+    libpangoft2-1.0-0 \
+    libcairo2 \
+    libcairo2-dev \
+    libgdk-pixbuf-2.0-0 \
+    libffi-dev \
+    shared-mime-info \
+ && rm -rf /var/lib/apt/lists/*
 
-# Establece el directorio de trabajo
+# Instalar wkhtmltopdf desde .deb oficial (buster, compatible con bullseye)
+RUN wget https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox_0.12.6-1.buster_amd64.deb \
+ && apt-get install -y ./wkhtmltox_0.12.6-1.buster_amd64.deb \
+ && rm wkhtmltox_0.12.6-1.buster_amd64.deb
+
+# Establecer directorio de trabajo
 WORKDIR /
 
-# Copia e instala las dependencias de Python
+# Instalar dependencias de Python
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copia el resto del proyecto
+# Copiar el proyecto
 COPY . .
 
-# Expone el puerto si usas Flask o similar
+# Puerto para Cloud Run
 EXPOSE 8080
 
-# Comando para iniciar la app (ajusta según tu framework)
+# Comando de inicio
 CMD ["python", "app.py"]

@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <link href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet">
+  <title>Acta de Entrega</title>
+  <style>
+    @page {
+      size: A4;
+      margin: 9mm;
+      background: #F6F7F9;
+    }
+
+    body {
+      font-family: 'Urbanist', sans-serif;
+      font-size: 11pt;
+      color: #111214;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      padding: 10pt;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 15pt;
+    }
+
+    .header h1 {
+      font-size: 18pt;
+      margin: 0;
+    }
+
+    .highlight {
+      color: #f97316;
+    }
+
+    .meta {
+      font-size: 10pt;
+      margin: 3pt 0;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 4pt 8pt;
+      background: #111;
+      color: #fff;
+      border-radius: 8pt;
+      font-weight: bold;
+      font-size: 10pt;
+      margin-top: 6pt;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 12pt;
+      padding: 15pt;
+      box-shadow: 0 2pt 6pt rgba(0, 0, 0, 0.08);
+      margin-top: 10pt;
+      border: 1pt solid #e5e7eb;
+    }
+
+    .info-boxes {
+      display: flex;
+      gap: 10pt;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .info-box {
+      flex: 1;
+      min-width: 45%;
+      border: 1pt solid #cfd4dc;
+      border-radius: 8pt;
+      overflow: hidden;
+      background: #fff;
+    }
+
+    .info-box table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 9.3pt;
+      color: #374151;
+    }
+
+    .info-box thead th {
+      text-align: center;
+      font-weight: bold;
+      background: #f1f5fb;
+      padding: 8pt;
+      font-size: 10.5pt;
+      color: #4f46e5;
+      border-bottom: 1pt solid #cfd4dc;
+    }
+
+    .info-box td {
+      padding: 6pt 8pt;
+      border-top: 1pt solid #e5e7eb;
+      vertical-align: middle;
+    }
+
+    .info-box td.label {
+      font-weight: 600;
+      color: #111214;
+      width: 20%;
+    }
+
+    .info-box td.value {
+      color: #4b5563;
+      width: 30%;
+    }
+
+    .info-box td.half {
+      width: 10%;
+    }
+
+    .section-title {
+      margin: 0 0 10pt 0;
+      font-size: 12pt;
+      font-weight: 600;
+      color: #111827;
+    }
+
+    .inventory-box table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 10pt;
+      color: #111827;
+    }
+
+    .inventory-box td {
+      padding: 8pt 12pt;
+      border-top: 1px solid #e5e7eb;
+      width: 33%;
+      vertical-align: middle;
+    }
+
+    .inventory-box tr:first-child td {
+      border-top: none;
+    }
+
+    .inventory-box td:not(:last-child) {
+      border-right: 1px solid #e5e7eb;
+    }
+
+    .circle {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      margin-right: 6pt;
+      border-radius: 50%;
+      vertical-align: middle;
+      text-align: center;
+      line-height: 16px;
+      font-size: 11px;
+      font-weight: bold;
+    }
+
+    .circle.check {
+      background-color: #fef9c3;
+      border: 2px solid #22c55e;
+      color: #22c55e;
+      position: relative;
+    }
+
+    .circle.check::after {
+      content: "✓";
+      font-size: 11px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .circle.uncheck {
+      background-color: #fff;
+      border: 2px solid #f97316;
+    }
+
+    /* salto de página para firmas */
+    .firmas {
+      page-break-before: always;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- PRIMERA PÁGINA -->
+  <div class="container">
+    <!-- Header -->
+    <div class="header" style="margin-top: -35px;">
+      <div>
+        <h1 style="font-size: 50px; font-weight: 600;">Acta de <i style="font-weight: 400;" class="highlight">{{ title
+            }}</i></h1>
+        <p class="meta" style="font-weight: 700;">Fecha de recepción: <span
+            style="font-weight: 400;">{{operation_date}}</span> - Hora exacta: <span
+            style="font-weight: 400;">{{operation_hour}}</span></p>
+        <div class="badge">Placa del vehículo: {{vehicle.plate}}</div>
+      </div>
+      <div
+        style="text-align: left; font-size: 13pt; display: flex; flex-direction: column; align-items: flex-end; gap: 2pt;">
+        <img style="width: 148px;" src="https://wcar.co/assets/logos/horizontal.svg" alt="Logo WCAR" />
+        <p style="color: #666C89; font-weight: 700; margin: 0;">Acta No. <span class="highlight">{{id}}</span></p>
+        <p style="color: #666C89; font-weight: 400; margin: 0;">contacto@wcar.co</p>
+        <p style="color: #666C89; font-weight: 400; margin: 0;">www.wcar.co</p>
+      </div>
+    </div>
+
+    <!-- Card con contenido -->
+    <div class="card" style="margin-top: 0px;">
+      <div class="info-boxes">
+        <!-- Cliente -->
+        <div class="info-box">
+          <table>
+            <thead>
+              <tr>
+                <th colspan="2">Información del <i>cliente</i></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="label">Nombre:</td>
+                <td class="value">{{client.full_name}}</td>
+              </tr>
+              <tr>
+                <td class="label">Documento:</td>
+                <td class="value">{{client.document_number}}</td>
+              </tr>
+              <tr>
+                <td class="label">Email:</td>
+                <td class="value">{{client.email}}</td>
+              </tr>
+              <tr>
+                <td class="label">Dirección de entrega:</td>
+                <td class="value">{{client.address}}</td>
+              </tr>
+              <tr>
+                <td class="label">Teléfono:</td>
+                <td class="value">{{client.phone_number}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Vehículo -->
+        <div class="info-box">
+          <table>
+            <thead>
+              <tr>
+                <th colspan="4">Información del <i>vehículo</i></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="label half">Placa:</td>
+                <td class="value half">{{vehicle.plate}}</td>
+                <td class="label half">Año modelo:</td>
+                <td class="value half">{{vehicle.year}}</td>
+              </tr>
+              <tr>
+                <td class="label half">Marca:</td>
+                <td class="value half">{{vehicle.brand}}</td>
+                <td class="label half">Referencia:</td>
+                <td class="value half">{{vehicle.reference}}</td>
+              </tr>
+              <tr>
+                <td class="label half">Color:</td>
+                <td class="value half">{{vehicle.color}}</td>
+                <td class="label half">Kilometraje:</td>
+                <td class="value half">{{vehicle.mileage}}</td>
+              </tr>
+              <tr>
+                <td class="label half">V. SOAT:</td>
+                <td class="value half">{{vehicle.soat_date}}</td>
+                <td class="label half">V. RTM:</td>
+                <td style="padding: 6pt 0pt;" class="value half">{{vehicle.rtm_date}}</td>
+              </tr>
+              <tr>
+                <td class="label" colspan="2">Tipo de carrocería:</td>
+                <td class="value" colspan="2">{{vehicle.body_work}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Inventario -->
+        <h3 class="section-title" style="margin-top: 15pt; margin-bottom: 0;">Inventario</h3>
+        <div class="card" style="width: 100%; margin-top: 0; height: 190px;">
+          <div class="inventory-box">
+            <table>
+              <tbody>
+                <tr>
+                  <td><span class="circle {{inventary.spare_tire}}"></span> Llanta de repuesto</td>
+                  <td><span class="circle {{inventary.key_duplicate}}"></span> Duplicado de llave</td>
+                  <td><span class="circle {{inventary.road_kit}}"></span> Kit de carretera</td>
+                </tr>
+                <tr>
+                  <td><span class="circle {{inventary.lug_wrench}}"></span> Llave de pernos</td>
+                  <td><span class="circle {{inventary.jack}}"></span> Gato</td>
+                  <td><span class="circle {{inventary.lug_wrench_crossbar}}"></span> Cruceta</td>
+                </tr>
+                <tr>
+                  <td><span class="circle {{inventary.manuals}}"></span> Manuales</td>
+                  <td><span class="circle {{inventary.folders}}"></span> Carpeta</td>
+                  <td><span class="circle {{inventary.taxes}}"></span> Impuestos</td>
+                </tr>
+                <tr>
+                  <td><span class="circle {{inventary.radio}}"></span> Radio</td>
+                  <td><span class="circle {{inventary.compressor}}"></span> Compresor</td>
+                  <td><span class="circle {{inventary.soat}}"></span> SOAT</td>
+                </tr>
+                <tr>
+                  <td><span class="circle {{inventary.property_card}}"></span> Tarjeta de propiedad</td>
+                  <td><span class="circle {{inventary.rtm}}"></span> RTM</td>
+                  <td><span class="circle {{inventary.rugs}}"></span> Tapetes</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Observaciones y Nivel de gasolina -->
+        <div style="align-items: flex-end; display: flex; flex-direction: row; align-content: space-between;">
+          <h3 class="section-title" style="margin-top: 15pt; margin-bottom: 0;">Observaciones del <i>funcionario</i>
+          </h3>
+          <h3 class="section-title" style="margin-top: 15pt; margin-bottom: 0; margin-left: 221px;">Nivel de
+            <i>gasolina</i>
+          </h3>
+        </div>
+        <div style="width: 100%; margin-top: 0;">
+          <div
+            style="display: flex; align-items: stretch; width: 100%; border: 1px solid #cfd4dc; border-radius: 8pt; overflow: hidden;">
+
+            <!-- Observaciones -->
+            <div style="flex: 2; padding: 12pt; display: flex; align-items: center; justify-content: flex-start;">
+              <p style="margin: 0; font-size: 11pt; font-style: italic; color: #4b5563;">
+                {{ observations }}
+              </p>
+            </div>
+
+            <!-- Nivel de gasolina -->
+            <div
+              style="flex: 1.2; border-left: 1px solid #cfd4dc; display: flex; align-items: center; justify-content: center; padding: 8pt;">
+              <div style="text-align: center;">
+                <img src="{{gasoil_level}}" alt="Nivel de gasolina" style="width: 140px;">
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Texto Legal -->
+        <div style="font-size: 9pt; color: #374151; line-height: 1.2; margin-top: -10px;">
+          <p>
+          {{ text_area }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SEGUNDA PÁGINA -->
+  <div class="container firmas">
+    <!-- Header repetido -->
+    <div class="header" style="margin-top: -35px;">
+      <div>
+        <h1 style="font-size: 50px; font-weight: 600;">Acta de <i style="font-weight: 400;"
+            class="highlight">{{title}}</i></h1>
+        <p class="meta" style="font-weight: 700;">Fecha de recepción: <span style="font-weight: 400;">2025 / 06 /
+            25</span> - Hora exacta: <span style="font-weight: 400;">16:01:00</span></p>
+        <div class="badge">Placa del vehículo: {{vehicle.plate}}</div>
+      </div>
+      <div
+        style="text-align: left; font-size: 13pt; display: flex; flex-direction: column; align-items: flex-end; gap: 2pt;">
+        <img style="width: 148px;" src="https://wcar.co/assets/logos/horizontal.svg" alt="Logo WCAR" />
+        <p style="color: #666C89; font-weight: 700; margin: 0;">Acta No. <span class="highlight">{{id}}</span></p>
+        <p style="color: #666C89; font-weight: 400; margin: 0;">contacto@wcar.co</p>
+        <p style="color: #666C89; font-weight: 400; margin: 0;">www.wcar.co</p>
+      </div>
+    </div>
+
+    <!-- Sección de Firmas -->
+    <div class="card" style="display: flex; justify-content: space-between; margin-top: 25pt;">
+      <!-- Cliente -->
+      <div style="flex: 1; text-align: left;">
+        <img src="{{client.signature}}" alt="" style="width: 148px;">
+        <hr style="border: none; border-top: 1px solid #cfd4dc; margin-bottom: 6pt; width: 80%;">
+        <p style="margin: 0; font-weight: 600; color: #111827;">Cliente</p>
+        <p style="margin: 0; font-size: 10pt; color: #374151;">{{client.full_name}}</p>
+        <p style="margin: 0; font-size: 10pt; color: #374151;">{{client.email}}</p>
+        <p style="margin: 0; font-size: 10pt; color: #374151;">{{client.document_number}}</p>
+      </div>
+
+      <!-- Funcionario -->
+      <div style="flex: 1; text-align: left;">
+        <img src="{{user.signature}}" alt="" style="width: 148px;">
+        <hr style="border: none; border-top: 1px solid #cfd4dc; margin-bottom: 6pt; width: 80%;">
+        <p style="margin: 0; font-weight: 600; color: #111827;">Funcionario</p>
+        <p style="margin: 0; font-size: 10pt; color: #374151;">{{user.full_name}}</p>
+        <p style="margin: 0; font-size: 10pt; color: #374151;">{{user.email}}</p>
+      </div>
+
+      <!-- Contacto -->
+      <div style="flex: 1; text-align: right; font-size: 10pt; color: #374151; margin-top: 123px;">
+        <p style="margin: 0;">+57 324 4001212</p>
+        <p style="margin: 0;">NIT - No. 90156049 - 8</p>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

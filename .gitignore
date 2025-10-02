@@ -1,0 +1,38 @@
+# Entornos virtuales
+venv/
+.venv/
+ENV/
+env/
+
+# Archivos de compilación
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Archivos de distribución
+*.egg
+*.egg-info/
+dist/
+build/
+eggs/
+parts/
+var/
+sdist/
+develop-eggs/
+.installed.cfg
+lib/
+lib64/
+pip-wheel-metadata/
+
+# Configuración IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Archivos de entorno
+*.env
+*.ini
+*.cfg
+*.DS_Store

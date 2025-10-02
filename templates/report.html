@@ -6,9 +6,237 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://storage.googleapis.com/course-gcp-2024-images/2025/styles.css">
+    <link rel="stylesheet" href="https://storage.googleapis.com/course-gcp-2024-images/publics/styles.css">
   </head>
   <body>
+    <div>
+      <div class="header">
+        <div class="logo">
+          <img src="https://wcar.co/assets/logos/horizontal.svg" alt="Logo WCAR" />
+        </div>
+        <div class="title">Inspección general de vehículos</div>
+        <div class="title-number"><span class="title-number-prefix">Nº</span> <span class="title-number-value">{{numero_reporte}}</span></div>
+        {% if not accident['compliance'] or accident['siniestro'] != 'N/A' %}
+        {% if not accident['compliance'] %}
+        <img
+          src="https://storage.googleapis.com/course-gcp-2024-images/2025/standar_not_compliance.png"
+          alt="Vehiculo fuera de estandar"
+          style="width: 150px; height: 36px"
+        />
+        {% else %}
+        <span style="color: #ec671b; font-size: 14px; font-weight: bold"
+          >{{accident['siniestro']}}</span
+        >
+        {% endif %} {% endif %}
+      </div>
+      <div style="height: 32px;"></div>
+      <div class="separator">
+        <div class="separator-box">
+          <div class="separator-number">
+            <p>1</p>
+          </div>
+          <p class="separator-text">Información del vehículo</p>
+        </div>
+      </div>
+      <div class="general-data-container">
+        <!-- First row: 3 columns -->
+        <div class="general-data-row">
+          <div class="general-data-field">
+            <div class="gd-field-left">
+              <p>Marca</p>
+            </div>
+            <div class="gd-field-right">
+              <p>{{resumen['vehicle']['brand']}}</p>
+            </div>
+          </div>
+          <div class="general-data-field">
+            <div class="gd-field-left">
+              <p>Referencia</p>
+            </div>
+            <div class="gd-field-right">
+              <p>{{resumen['vehicle']['reference']}}</p>
+            </div>
+          </div>
+          <div class="general-data-field">
+            <div class="gd-field-left">
+              <p>Año de modelo</p>
+            </div>
+            <div class="gd-field-right">
+              <p>{{resumen['vehicle']['year']}}</p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Second row: 3 columns -->
+        <div class="general-data-row">
+          <div class="general-data-field">
+            <div class="gd-field-left">
+              <p>Kilometraje</p>
+            </div>
+            <div class="gd-field-right">
+              <p>{{ resumen['vehicle']['kilometers'] }}</p>
+            </div>
+          </div>
+          <div class="general-data-field">
+            <div class="gd-field-left">
+              <p>Color</p>
+            </div>
+            <div class="gd-field-right">
+              <p>{{resumen['vehicle']['color']}}</p>
+            </div>
+          </div>
+          <div class="general-data-field">
+            <div class="gd-field-left">
+              <p>Asegurado</p>
+            </div>
+            <div class="gd-field-right">
+              <p>Sí</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Third row: 3 columns -->
+        <div class="general-data-row">
+          <div class="general-data-field">
+            <div class="gd-field-left">
+              <p>Tipo de carrocería</p>
+            </div>
+            <div class="gd-field-right">
+              <p>{{resumen['vehicle']['bodywork']}}</p>
+            </div>
+          </div>
+          <div class="general-data-field">
+            <div class="gd-field-left">
+              <p>Tipo de caja</p>
+            </div>
+            <div class="gd-field-right">
+              <p>{{resumen['vehicle']['transmission']}}</p>
+            </div>
+          </div>
+          <div class="general-data-field">
+            <div class="gd-field-left">
+              <p>Placa</p>
+            </div>
+            <div class="gd-field-right">
+              <p>{{resumen['vehicle']['plate']}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% if not resumen['vehicle_compliance']['is_compliant'] %}
+        <div class="out-standard-container">
+          <div class="out-standard-box">
+            <p class="out-standard-title">Vehículo fuera de estándar</p>
+            <!-- Tipo de siniestro -->
+            <p class="out-standard-type">{{ resumen['vehicle_compliance']['type'] }}</p>
+          </div>
+          <p class="out-standard-description">
+            {{ resumen['vehicle_compliance']['reason'] }}
+          </p>
+        </div>
+      {% endif %}
+      <div class="separator" style="margin-top: 32px">
+        <div class="separator-box">
+          <div class="separator-number">
+            <p>2</p>
+          </div>
+          <p class="separator-text">Presupuestos</p>
+        </div>
+      </div>
+      <div class="budget-chart-container">
+        <div class="budget-chart-left">
+          <div class="budget-chart-row">
+            <span class="budget-chart-number">2</span>
+            <span class="budget-chart-label">Exterior del vehiculo</span>
+          </div>
+          <div class="budget-chart-row">
+            <span class="budget-chart-number">3</span>
+            <span class="budget-chart-label">Inferior del vehiculo</span>
+          </div>
+          <div class="budget-chart-row">
+            <span class="budget-chart-number">4</span>
+            <span class="budget-chart-label">Interior del vehiculo</span>
+          </div>
+          <div class="budget-chart-row">
+            <span class="budget-chart-number">5</span>
+            <span class="budget-chart-label">Ventilación</span>
+          </div>
+          <div class="budget-chart-row">
+            <span class="budget-chart-number">6</span>
+            <span class="budget-chart-label">Motor</span>
+          </div>
+          <div class="budget-chart-row">
+            <span class="budget-chart-number">7</span>
+            <span class="budget-chart-label">Transmisión</span>
+          </div>
+          <div class="budget-chart-row">
+            <span class="budget-chart-number">8</span>
+            <span class="budget-chart-label">Frenos</span>
+          </div>
+          <div class="budget-chart-row">
+            <span class="budget-chart-number">9</span>
+            <span class="budget-chart-label">Dirección</span>
+          </div>
+          <div class="budget-chart-row">
+            <span class="budget-chart-number">10</span>
+            <span class="budget-chart-label">Suspensión</span>
+          </div>
+          <div class="budget-chart-row">
+            <span class="budget-chart-number">11</span>
+            <span class="budget-chart-label">Llantas</span>
+          </div>
+        </div>
+        <div class="budget-chart-bars">
+          <div class="budget-bar" style="width: {{ resumen['budgets']['vehicle_exterior']['budget_percentage']}}%"></div>
+          <div class="budget-bar" style="width: {{ resumen['budgets']['vehicle_underbody']['budget_percentage'] }}%"></div>
+          <div class="budget-bar" style="width: {{ resumen['budgets']['vehicle_interior']['budget_percentage'] }}%"></div>
+          <div class="budget-bar" style="width: {{ resumen['budgets']['ventilation']['budget_percentage'] }}%"></div>
+          <div class="budget-bar" style="width: {{ resumen['budgets']['engine']['budget_percentage'] }}%"></div>
+          <div class="budget-bar" style="width: {{ resumen['budgets']['transmision']['budget_percentage'] }}%"></div>
+          <div class="budget-bar" style="width: {{ resumen['budgets']['brakes']['budget_percentage'] }}%"></div>
+          <div class="budget-bar" style="width: {{ resumen['budgets']['direction']['budget_percentage'] }}%"></div>
+          <div class="budget-bar" style="width: {{ resumen['budgets']['suspension']['budget_percentage'] }}%"></div>
+          <div class="budget-bar" style="width: {{ resumen['budgets']['tires']['budget_percentage'] }}%"></div>
+        </div>
+        <div class="budget-chart-right">
+          <div class="budget-chart-header">Presupuesto</div>
+          <div class="budget-chart-value">{{ resumen['budgets']['vehicle_exterior']['budget_suggested'] }}</div>
+          <div class="budget-chart-value">{{ resumen['budgets']['vehicle_underbody']['budget_suggested'] }}</div>
+          <div class="budget-chart-value">{{ resumen['budgets']['vehicle_interior']['budget_suggested'] }}</div>
+          <div class="budget-chart-value">{{ resumen['budgets']['ventilation']['budget_suggested'] }}</div>
+          <div class="budget-chart-value">{{ resumen['budgets']['engine']['budget_suggested'] }}</div>
+          <div class="budget-chart-value">{{ resumen['budgets']['transmision']['budget_suggested'] }}</div>
+          <div class="budget-chart-value">{{ resumen['budgets']['brakes']['budget_suggested'] }}</div>
+          <div class="budget-chart-value">{{ resumen['budgets']['direction']['budget_suggested'] }}</div>
+          <div class="budget-chart-value">{{ resumen['budgets']['suspension']['budget_suggested'] }}</div>
+          <div class="budget-chart-value">{{ resumen['budgets']['tires']['budget_suggested'] }}</div>
+          <div class="budget-chart-total">
+            <span>{{ resumen['budgets']['total_budget'] }}</span>
+            <span class="budget-chart-total-label">Presupuesto Total</span>
+          </div>
+        </div>
+      </div>
+  
+      <div class="presupuesto-sugerido-observaciones" style="padding-bottom: 8px">
+        <p>
+          <b>Observaciones generales:</b> {{ resumen['observations']['general_observations'] }}
+        </p>
+      </div>
+  
+      <div class="presupuesto-sugerido-observaciones">
+        <p>
+          <b>Observaciones:</b> {{ resumen['observations']['price_observations'] }}
+        </p>
+        <div class="right-box">
+          <div class="presupuesto-sugerido-badge">
+            <p>Presupuesto Final: <span>{{ resumen['observations']['price_suggested'] }}</span></p>
+          </div>
+        </div>
+      </div>
+  
+    </div>
+
+<div style="height: 220px;"></div>
     <div class="container">
       <div class="page">
         <div class="header">
@@ -189,6 +417,10 @@
               </div>
             </div>
           </div>
+        </div>
+        <div style="height: 600px;"></div>
+        <div class="logo-placeholder" style="display: flex; justify-content: center; align-items: center; max-width: 80%; margin: auto;">
+          <img src="https://storage.googleapis.com/course-gcp-2024-images/publics/wcar.svg" style="width: 90%;" alt="Logo WCAR" />
         </div>
       </div>
 
@@ -446,317 +678,439 @@
               </div>
               {% endfor %}
             </div>
+            <div style="height: 600px;"></div>
+            <div class="logo-placeholder" style="display: flex; justify-content: center; align-items: center; max-width: 80%; margin: auto; margin-top: 250px; ">
+              <img src="https://storage.googleapis.com/course-gcp-2024-images/publics/wcar.svg" style="width: 90%;" alt="Logo WCAR" />
+            </div>
           </div>
         </div>
       </div>
 
-      <div class="page">
-        <div class="header">
-          <div class="logo">
-            <img src="https://wcar.co/assets/logos/horizontal.svg" alt="Logo WCAR" />
-          </div>
-          <div class="title">Inspección general de vehículos</div>
-          <div class="title-number"><span class="title-number-prefix">Nº</span> <span class="title-number-value">{{numero_reporte}}</span></div>
-        </div>
         <!-- ------------------------------------------ Interior del vehiculo ------------------------------------------ -->
-        <div class="section">
-          <div class="section-title">
-            <span class="section-number">4</span>
-            <span class="section-title-text">Interior del vehiculo</span>
-          </div>
-          <div class="subtitle">
-            Por medio del presente documento, confirmamos que estamos
-            inspeccionando el vehículo a continuación relacionado
-          </div>
-
-          <div class="tabla-seccion-container">
-             <div class="tabla-seccion-sidebar">
-                 <div class="tabla-seccion-sidebar-text">ACCESORIOS</div>
-                </div>
-             <div class="tabla-seccion-content">
-                 <table class="tabla-seccion-table">
-                  <thead>
-                    <tr>
-                             <th class="tabla-seccion-col-parte">Parte</th>
-                             <th class="tabla-seccion-col-estado">Estado</th>
-                             <th class="tabla-seccion-col-descripcion">Descripción</th>
-                             <th class="tabla-seccion-col-presupuesto">Presupuesto</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>Parlantes</td>
-                             <td class="estado-bueno">{{ accessories['parlantes']['state'] }}</td>
-                      <td>{{ accessories['parlantes']['description'] }}</td>
-                             <td class="tabla-seccion-col-presupuesto">{{ accessories['parlantes']['price'] }}</td>
-                    </tr>
-                    <tr>
-                      <td>Alarma</td>
-                             <td class="estado-bueno">{{ accessories['alarma']['state'] }}</td>
-                      <td>{{ accessories['alarma']['description'] }}</td>
-                             <td class="tabla-seccion-col-presupuesto">{{ accessories['alarma']['price'] }}</td>
-                    </tr>
-                    <tr>
-                      <td>Exploradoras</td>
-                             <td class="estado-malo">{{ accessories['exploradoras']['state'] }}</td>
-                      <td>{{ accessories['exploradoras']['description'] }}</td>
-                             <td class="tabla-seccion-col-presupuesto">{{ accessories['exploradoras']['price'] }}</td>
-                    </tr>
-                    <tr>
-                      <td>Aire acondicionado</td>
-                             <td class="estado-bueno">{{ accessories['aire_acondicionado']['state'] }}</td>
-                             <td>{{ accessories['aire_acondicionado']['description'] }}</td>
-                             <td class="tabla-seccion-col-presupuesto">{{ accessories['aire_acondicionado']['price'] }}</td>
-                    </tr>
-                    <tr>
-                      <td>Bloqueo central</td>
-                             <td class="estado-bueno">{{ accessories['bloqueo_central']['state'] }}</td>
-                             <td>{{ accessories['bloqueo_central']['description'] }}</td>
-                             <td class="tabla-seccion-col-presupuesto">{{ accessories['bloqueo_central']['price'] }}</td>
-                    </tr>
-                    <tr>
-                      <td>Seguros</td>
-                             <td class="estado-bueno">{{ accessories['seguros']['state'] }}</td>
-                      <td>{{ accessories['seguros']['description'] }}</td>
-                             <td class="tabla-seccion-col-presupuesto">{{ accessories['seguros']['price'] }}</td>
-                    </tr>
-                    <tr>
-                      <td>Película de seguridad</td>
-                             <td class="tabla-seccion-guiones" style="text-align: center;">{{ accessories['pelicula_de_seguridad']['state'] }}</td>
-                             <td class="tabla-seccion-guiones">{{ accessories['pelicula_de_seguridad']['description'] }}</td>
-                             <td class="tabla-seccion-col-presupuesto">{{ accessories['pelicula_de_seguridad']['price'] }}</td>
-                    </tr>
-                    <tr>
-                      <td>Tapicería en cuero</td>
-                             <td class="tabla-seccion-guiones" style="text-align: center;">{{ accessories['tapiceria_en_cuero']['state'] }}</td>
-                             <td class="tabla-seccion-guiones">{{ accessories['tapiceria_en_cuero']['description'] }}</td>
-                             <td class="tabla-seccion-col-presupuesto">{{ accessories['tapiceria_en_cuero']['price'] }}</td>
-                    </tr>
-                    <tr>
-                      <td>Luces general</td>
-                             <td class="estado-regular" style="text-align: center;">{{ accessories['luces_generales']['state'] }}</td>
-                             <td>{{ accessories['luces_generales']['description'] }}</td>
-                             <td class="tabla-seccion-col-presupuesto">{{ accessories['luces_generales']['price'] }}</td>
-                    </tr>
-                  </tbody>
-                </table>
-                 <div class="tabla-seccion-footer">
-                     <div class="tabla-seccion-observaciones">
-                  {{ accessories['observations'] }}
-                </div>
-                     <div class="tabla-seccion-total">
-                         <div class="tabla-seccion-total-label">Presupuesto Total</div>
-                         <div class="tabla-seccion-total-valor">{{ accessories['total_price'] }}</div>
-                  </div>
-                </div>
-              </div>
+        <div class="page">
+          <div class="header">
+            <div class="logo">
+              <img src="https://wcar.co/assets/logos/horizontal.svg" alt="Logo WCAR" />
             </div>
-         
-         <!-- Tabla para TAPIZADO -->
-         <div class="tabla-seccion-container">
-             <div class="tabla-seccion-sidebar">
-                 <div class="tabla-seccion-sidebar-text">TAPIZADO</div>
-             </div>
-             <div class="tabla-seccion-content">
-                 <table class="tabla-seccion-table">
-                  <thead>
-                    <tr>
-                             <th class="tabla-seccion-col-parte">Parte</th>
-                             <th class="tabla-seccion-col-estado">Estado</th>
-                             <th class="tabla-seccion-col-descripcion">Descripción</th>
-                             <th class="tabla-seccion-col-presupuesto">Presupuesto</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                             <td>Limpieza tapicería</td>
-                             <td class="estado-regular">{{ upholstery['limpieza_tapiceria']['state'] }}</td>
-                             <td>{{ upholstery['limpieza_tapiceria']['description'] }}</td>
-                             <td class="tabla-seccion-col-presupuesto">{{ upholstery['limpieza_tapiceria']['price'] }}</td>
-                    </tr>
-                    <tr>
-                             <td>Estado tapicería</td>
-                             <td class="estado-bueno">{{ upholstery['estado_tapiceria']['state'] }}</td>
-                             <td>{{ upholstery['estado_tapiceria']['description'] }}</td>
-                             <td class="tabla-seccion-col-presupuesto">{{ upholstery['estado_tapiceria']['price'] }}</td>
-                    </tr>
-                    <tr>
-                      <td>Ajuste de sillas</td>
-                             <td class="estado-bueno">{{ upholstery['ajuste_de_sillas']['state'] }}</td>
-                             <td>{{ upholstery['ajuste_de_sillas']['description'] }}</td>
-                             <td class="tabla-seccion-col-presupuesto">{{ upholstery['ajuste_de_sillas']['price'] }}</td>
-                    </tr>
-                    <tr>
-                      <td>Cinturon de seguridad</td>
-                             <td class="estado-bueno">{{ upholstery['cinturon_de_seguridad']['state'] }}</td>
-                             <td>{{ upholstery['cinturon_de_seguridad']['description'] }}</td>
-                             <td class="tabla-seccion-col-presupuesto">{{ upholstery['cinturon_de_seguridad']['price'] }}</td>
-                    </tr>
-                    <tr>
-                      <td>Estado de millaré</td>
-                             <td class="estado-regular">{{ upholstery['estado_de_millare']['state'] }}</td>
-                             <td>{{ upholstery['estado_de_millare']['description'] }}</td>
-                             <td class="tabla-seccion-col-presupuesto">{{ upholstery['estado_de_millare']['price'] }}</td>
-                    </tr>
-                    <tr>
-                      <td>Alfombra</td>
-                             <td class="estado-malo">{{ upholstery['alfombra']['state'] }}</td>
-                      <td>{{ upholstery['alfombra']['description'] }}</td>
-                             <td class="tabla-seccion-col-presupuesto">{{ upholstery['alfombra']['price'] }}</td>
-                    </tr>
-                    <tr>
-                      <td>Tapetes</td>
-                             <td class="estado-bueno">{{ upholstery['tapetes']['state'] }}</td>
-                      <td>{{ upholstery['tapetes']['description'] }}</td>
-                             <td class="tabla-seccion-col-presupuesto">{{ upholstery['tapetes']['price'] }}</td>
-                    </tr>
-                    <tr>
-                      <td>Manijas interiores</td>
-                             <td class="estado-bueno">{{ upholstery['manijas_interiores']['state'] }}</td>
-                             <td>{{ upholstery['manijas_interiores']['description'] }}</td>
-                             <td class="tabla-seccion-col-presupuesto">{{ upholstery['manijas_interiores']['price'] }}</td>
-                    </tr>
-                    <tr>
-                      <td>Timón</td>
-                             <td class="estado-regular">{{ upholstery['timon']['state'] }}</td>
-                      <td>{{ upholstery['timon']['description'] }}</td>
-                             <td class="tabla-seccion-col-presupuesto">{{ upholstery['timon']['price'] }}</td>
-                    </tr>
-                    <tr>
-                      <td>Otros defectos</td>
-                             <td class="estado-na">{{ upholstery['otros_defectos']['state']|default('N/A') }}</td>
-                             <td>{{ upholstery['otros_defectos']['description']|default('N/A') }}</td>
-                             <td class="tabla-seccion-col-presupuesto">{{ upholstery['otros_defectos']['price']|default('N/A') }}</td>
-                    </tr>
-                  </tbody>
-                </table>
-                 <div class="tabla-seccion-footer">
-                     <div class="tabla-seccion-observaciones">
-                         {{ upholstery['observations']|default('') }}
-              </div>
-                     <div class="tabla-seccion-total">
-                         <div class="tabla-seccion-total-label">Presupuesto Total</div>
-                         <div class="tabla-seccion-total-valor">{{ upholstery['total_price'] }}</div>
-                </div>
-                  </div>
-                </div>
-              </div>
-         <!-- Tabla para SISTEMA ELÉCTRICO -->
-         <div class="tabla-seccion-container">
-             <div class="tabla-seccion-sidebar">
-                 <div class="tabla-seccion-sidebar-text">SISTEMA ELECTRICO</div>
-            </div>
-             <div class="tabla-seccion-content">
-                 <table class="tabla-seccion-table">
-                  <thead>
-                    <tr>
-                             <th class="tabla-seccion-col-parte">Parte</th>
-                             <th class="tabla-seccion-col-estado">Estado</th>
-                             <th class="tabla-seccion-col-descripcion">Descripción</th>
-                             <th class="tabla-seccion-col-presupuesto">Presupuesto</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>Radio</td>
-                             <td class="estado-bueno">{{ electrical_system['radio']['state'] }}</td>
-                      <td>{{ electrical_system['radio']['description'] }}</td>
-                             <td class="tabla-seccion-col-presupuesto">{{ electrical_system['radio']['price'] }}</td>
-                    </tr>
-                    <tr>
-                      <td>Testigos tablero</td>
-                             <td class="estado-bueno">{{ electrical_system['testigos_tablero']['state'] }}</td>
-                             <td>{{ electrical_system['testigos_tablero']['description'] }}</td>
-                             <td class="tabla-seccion-col-presupuesto">{{ electrical_system['testigos_tablero']['price'] }}</td>
-                    </tr>
-                    <tr>
-                      <td>Luces de emergencia</td>
-                             <td class="estado-bueno">{{ electrical_system['luces_de_emergencia']['state'] }}</td>
-                             <td>{{ electrical_system['luces_de_emergencia']['description'] }}</td>
-                             <td class="tabla-seccion-col-presupuesto">{{ electrical_system['luces_de_emergencia']['price'] }}</td>
-                    </tr>
-                    <tr>
-                      <td>Limpia parabrisas</td>
-                             <td class="estado-bueno">{{ electrical_system['limpia_parabrisas']['state'] }}</td>
-                             <td>{{ electrical_system['limpia_parabrisas']['description'] }}</td>
-                             <td class="tabla-seccion-col-presupuesto">{{ electrical_system['limpia_parabrisas']['price'] }}</td>
-                    </tr>
-                    <tr>
-                      <td>Reloj Digital</td>
-                             <td class="estado-bueno">{{ electrical_system['reloj']['state'] }}</td>
-                      <td>{{ electrical_system['reloj']['description'] }}</td>
-                             <td class="tabla-seccion-col-presupuesto">{{ electrical_system['reloj']['price'] }}</td>
-                    </tr>
-                    <tr>
-                      <td>Velocímetro</td>
-                             <td class="estado-bueno">{{ electrical_system['velocimetro']['state'] }}</td>
-                             <td>{{ electrical_system['velocimetro']['description'] }}</td>
-                             <td class="tabla-seccion-col-presupuesto">{{ electrical_system['velocimetro']['price'] }}</td>
-                    </tr>
-                    <tr>
-                      <td>Tacómetro</td>
-                             <td class="estado-bueno">{{ electrical_system['tacometro']['state'] }}</td>
-                             <td>{{ electrical_system['tacometro']['description'] }}</td>
-                             <td class="tabla-seccion-col-presupuesto">{{ electrical_system['tacometro']['price'] }}</td>
-                    </tr>
-                    <tr>
-                      <td>Alternador</td>
-                             <td class="estado-bueno">{{ electrical_system['alternador']['state'] }}</td>
-                             <td>{{ electrical_system['alternador']['description'] }}</td>
-                             <td class="tabla-seccion-col-presupuesto">{{ electrical_system['alternador']['price'] }}</td>
-                    </tr>
-                    <tr>
-                      <td>Batéria</td>
-                             <td class="estado-bueno">{{ electrical_system['bateria']['state'] }}</td>
-                      <td>{{ electrical_system['bateria']['description'] }}</td>
-                             <td class="tabla-seccion-col-presupuesto">{{ electrical_system['bateria']['price'] }}</td>
-                    </tr>
-                    <tr>
-                      <td>Luces generales</td>
-                             <td class="estado-bueno">{{ electrical_system['luces_generales']['state'] }}</td>
-                             <td>{{ electrical_system['luces_generales']['description'] }}</td>
-                             <td class="tabla-seccion-col-presupuesto">{{ electrical_system['luces_generales']['price'] }}</td>
-                    </tr>
-                    <tr>
-                      <td>Otros</td>
-                             <td class="estado-bueno">{{ electrical_system['otros']['state'] }}</td>
-                      <td>{{ electrical_system['otros']['description'] }}</td>
-                             <td class="tabla-seccion-col-presupuesto">{{ electrical_system['otros']['price'] }}</td>
-                    </tr>
-                  </tbody>
-                </table>
-                 <div class="tabla-seccion-footer">
-                     <div class="tabla-seccion-observaciones">
-                         {{ electrical_system['observations']|default('') }}
-              </div>
-                     <div class="tabla-seccion-total">
-                         <div class="tabla-seccion-total-label">Presupuesto Total</div>
-                         <div class="tabla-seccion-total-valor">{{ electrical_system['total_price'] }}</div>
-                </div>
-                  </div>
-                </div>
-        </div>
-        <!-- ------------------------------------------ Interior del vehiculo ------------------------------------------ -->
-      </div>
-
-      <div class="page">
-        <div class="header">
-          <div class="logo">
-            <img src="https://wcar.co/assets/logos/horizontal.svg" alt="Logo WCAR" />
+            <div class="title">Inspección general de vehículos</div>
+            <div class="title-number"><span class="title-number-prefix">Nº</span> <span class="title-number-value">{{numero_reporte}}</span></div>
           </div>
-          <div class="title">Inspección general de vehículos</div>
-          <div class="title-number"><span class="title-number-prefix">Nº</span> <span class="title-number-value">{{numero_reporte}}</span></div>
+          <div class="section">
+            <div class="section-title">
+              <span class="section-number">4</span>
+              <span class="section-title-text">Interior del vehiculo</span>
+            </div>
+            <div class="subtitle">
+              Por medio del presente documento, confirmamos que estamos
+              inspeccionando el vehículo a continuación relacionado
+            </div>
+            <!-- Tabla para ACCESORIOS -->
+            <div class="tabla-seccion-container">
+              <div class="tabla-seccion-sidebar">
+                  <div class="tabla-seccion-sidebar-text">ACCESORIOS</div>
+                  </div>
+              <div class="tabla-seccion-content">
+                  <table class="tabla-seccion-table">
+                    <thead>
+                      <tr>
+                              <th class="tabla-seccion-col-parte">Parte</th>
+                              <th class="tabla-seccion-col-estado">Estado</th>
+                              <th class="tabla-seccion-col-descripcion">Descripción</th>
+                              <th class="tabla-seccion-col-presupuesto">Presupuesto</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Parlantes</td>
+                              <td class="estado-bueno">{{ accessories['parlantes']['state'] }}</td>
+                        <td>{{ accessories['parlantes']['description'] }}</td>
+                              <td class="tabla-seccion-col-presupuesto">{{ accessories['parlantes']['price'] }}</td>
+                      </tr>
+                      <tr>
+                        <td>Alarma</td>
+                              <td class="estado-bueno">{{ accessories['alarma']['state'] }}</td>
+                        <td>{{ accessories['alarma']['description'] }}</td>
+                              <td class="tabla-seccion-col-presupuesto">{{ accessories['alarma']['price'] }}</td>
+                      </tr>
+                      <tr>
+                        <td>Exploradoras</td>
+                              <td class="estado-malo">{{ accessories['exploradoras']['state'] }}</td>
+                        <td>{{ accessories['exploradoras']['description'] }}</td>
+                              <td class="tabla-seccion-col-presupuesto">{{ accessories['exploradoras']['price'] }}</td>
+                      </tr>
+                      <tr>
+                        <td>Aire acondicionado</td>
+                              <td class="estado-bueno">{{ accessories['aire_acondicionado']['state'] }}</td>
+                              <td>{{ accessories['aire_acondicionado']['description'] }}</td>
+                              <td class="tabla-seccion-col-presupuesto">{{ accessories['aire_acondicionado']['price'] }}</td>
+                      </tr>
+                      <tr>
+                        <td>Bloqueo central</td>
+                              <td class="estado-bueno">{{ accessories['bloqueo_central']['state'] }}</td>
+                              <td>{{ accessories['bloqueo_central']['description'] }}</td>
+                              <td class="tabla-seccion-col-presupuesto">{{ accessories['bloqueo_central']['price'] }}</td>
+                      </tr>
+                      <tr>
+                        <td>Seguros</td>
+                              <td class="estado-bueno">{{ accessories['seguros']['state'] }}</td>
+                        <td>{{ accessories['seguros']['description'] }}</td>
+                              <td class="tabla-seccion-col-presupuesto">{{ accessories['seguros']['price'] }}</td>
+                      </tr>
+                      <tr>
+                        <td>Película de seguridad</td>
+                              <td class="tabla-seccion-guiones" style="text-align: center;">{{ accessories['pelicula_de_seguridad']['state'] }}</td>
+                              <td class="tabla-seccion-guiones">{{ accessories['pelicula_de_seguridad']['description'] }}</td>
+                              <td class="tabla-seccion-col-presupuesto">{{ accessories['pelicula_de_seguridad']['price'] }}</td>
+                      </tr>
+                      <tr>
+                        <td>Tapicería en cuero</td>
+                              <td class="tabla-seccion-guiones" style="text-align: center;">{{ accessories['tapiceria_en_cuero']['state'] }}</td>
+                              <td class="tabla-seccion-guiones">{{ accessories['tapiceria_en_cuero']['description'] }}</td>
+                              <td class="tabla-seccion-col-presupuesto">{{ accessories['tapiceria_en_cuero']['price'] }}</td>
+                      </tr>
+                      <tr>
+                        <td>Luces general</td>
+                              <td class="estado-regular" style="text-align: center;">{{ accessories['luces_generales']['state'] }}</td>
+                              <td>{{ accessories['luces_generales']['description'] }}</td>
+                              <td class="tabla-seccion-col-presupuesto">{{ accessories['luces_generales']['price'] }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <div class="tabla-seccion-footer">
+                      <div class="tabla-seccion-observaciones">
+                    {{ accessories['observations'] }}
+                  </div>
+                      <div class="tabla-seccion-total">
+                          <div class="tabla-seccion-total-label">Presupuesto Total</div>
+                          <div class="tabla-seccion-total-valor">{{ accessories['total_price'] }}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <!-- Tabla para TAPIZADO -->
+            <div class="tabla-seccion-container">
+                <div class="tabla-seccion-sidebar">
+                    <div class="tabla-seccion-sidebar-text">TAPIZADO</div>
+                </div>
+                <div class="tabla-seccion-content">
+                    <table class="tabla-seccion-table">
+                      <thead>
+                        <tr>
+                                <th class="tabla-seccion-col-parte">Parte</th>
+                                <th class="tabla-seccion-col-estado">Estado</th>
+                                <th class="tabla-seccion-col-descripcion">Descripción</th>
+                                <th class="tabla-seccion-col-presupuesto">Presupuesto</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                                <td>Limpieza tapicería</td>
+                                <td class="estado-regular">{{ upholstery['limpieza_tapiceria']['state'] }}</td>
+                                <td>{{ upholstery['limpieza_tapiceria']['description'] }}</td>
+                                <td class="tabla-seccion-col-presupuesto">{{ upholstery['limpieza_tapiceria']['price'] }}</td>
+                        </tr>
+                        <tr>
+                                <td>Estado tapicería</td>
+                                <td class="estado-bueno">{{ upholstery['estado_tapiceria']['state'] }}</td>
+                                <td>{{ upholstery['estado_tapiceria']['description'] }}</td>
+                                <td class="tabla-seccion-col-presupuesto">{{ upholstery['estado_tapiceria']['price'] }}</td>
+                        </tr>
+                        <tr>
+                          <td>Ajuste de sillas</td>
+                                <td class="estado-bueno">{{ upholstery['ajuste_de_sillas']['state'] }}</td>
+                                <td>{{ upholstery['ajuste_de_sillas']['description'] }}</td>
+                                <td class="tabla-seccion-col-presupuesto">{{ upholstery['ajuste_de_sillas']['price'] }}</td>
+                        </tr>
+                        <tr>
+                          <td>Cinturon de seguridad</td>
+                                <td class="estado-bueno">{{ upholstery['cinturon_de_seguridad']['state'] }}</td>
+                                <td>{{ upholstery['cinturon_de_seguridad']['description'] }}</td>
+                                <td class="tabla-seccion-col-presupuesto">{{ upholstery['cinturon_de_seguridad']['price'] }}</td>
+                        </tr>
+                        <tr>
+                          <td>Estado de millaré</td>
+                                <td class="estado-regular">{{ upholstery['estado_de_millare']['state'] }}</td>
+                                <td>{{ upholstery['estado_de_millare']['description'] }}</td>
+                                <td class="tabla-seccion-col-presupuesto">{{ upholstery['estado_de_millare']['price'] }}</td>
+                        </tr>
+                        <tr>
+                          <td>Alfombra</td>
+                                <td class="estado-malo">{{ upholstery['alfombra']['state'] }}</td>
+                          <td>{{ upholstery['alfombra']['description'] }}</td>
+                                <td class="tabla-seccion-col-presupuesto">{{ upholstery['alfombra']['price'] }}</td>
+                        </tr>
+                        <tr>
+                          <td>Tapetes</td>
+                                <td class="estado-bueno">{{ upholstery['tapetes']['state'] }}</td>
+                          <td>{{ upholstery['tapetes']['description'] }}</td>
+                                <td class="tabla-seccion-col-presupuesto">{{ upholstery['tapetes']['price'] }}</td>
+                        </tr>
+                        <tr>
+                          <td>Manijas interiores</td>
+                                <td class="estado-bueno">{{ upholstery['manijas_interiores']['state'] }}</td>
+                                <td>{{ upholstery['manijas_interiores']['description'] }}</td>
+                                <td class="tabla-seccion-col-presupuesto">{{ upholstery['manijas_interiores']['price'] }}</td>
+                        </tr>
+                        <tr>
+                          <td>Timón</td>
+                                <td class="estado-regular">{{ upholstery['timon']['state'] }}</td>
+                          <td>{{ upholstery['timon']['description'] }}</td>
+                                <td class="tabla-seccion-col-presupuesto">{{ upholstery['timon']['price'] }}</td>
+                        </tr>
+                        <tr>
+                          <td>Otros defectos</td>
+                                <td class="estado-na">{{ upholstery['otros_defectos']['state']|default('N/A') }}</td>
+                                <td>{{ upholstery['otros_defectos']['description']|default('N/A') }}</td>
+                                <td class="tabla-seccion-col-presupuesto">{{ upholstery['otros_defectos']['price']|default('N/A') }}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <div class="tabla-seccion-footer">
+                        <div class="tabla-seccion-observaciones">
+                            {{ upholstery['observations']|default('') }}
+                  </div>
+                        <div class="tabla-seccion-total">
+                            <div class="tabla-seccion-total-label">Presupuesto Total</div>
+                            <div class="tabla-seccion-total-valor">{{ upholstery['total_price'] }}</div>
+                    </div>
+                      </div>
+                    </div>
+            </div>
+            <div style="height: 200px;"></div>
+            <div class="logo-placeholder" style="display: flex; justify-content: center; align-items: center; max-width: 80%; margin: auto;">
+              <img src="https://storage.googleapis.com/course-gcp-2024-images/publics/wcar.svg" style="width: 90%;" alt="Logo WCAR" />
+            </div>
         </div>
-        <div class="section">
+
+        <!-- ------------------------------------------ Sistema electrico y transmisión ------------------------------------------ -->
+        <div class="page">
+          <div class="header">
+            <div class="logo">
+              <img src="https://wcar.co/assets/logos/horizontal.svg" alt="Logo WCAR" />
+            </div>
+            <div class="title">Inspección general de vehículos</div>
+            <div class="title-number"><span class="title-number-prefix">Nº</span> <span class="title-number-value">{{numero_reporte}}</span></div>
+          </div> 
+          <div class="section">
           <div class="section-title">
             <span class="section-number">5</span>
-            <span class="section-title-text">Ventilación, Motor y Transmisión</span>
+            <span class="section-title-text">Sistema Eléctrico y Transmisión</span>
           </div>
           <div class="subtitle">
             Por medio del presente documento, confirmamos que estamos
             inspeccionando el vehículo a continuación relacionado
           </div>
-          <!-- Aqui deben ir las tablas de ventilación, motor y transmisión -->
+
+          <!-- Tabla para SISTEMA ELÉCTRICO -->
+          <div class="tabla-seccion-container">
+          <div class="tabla-seccion-sidebar">
+              <div class="tabla-seccion-sidebar-text">SISTEMA ELECTRICO</div>
+         </div>
+          <div class="tabla-seccion-content">
+              <table class="tabla-seccion-table">
+               <thead>
+                 <tr>
+                          <th class="tabla-seccion-col-parte">Parte</th>
+                          <th class="tabla-seccion-col-estado">Estado</th>
+                          <th class="tabla-seccion-col-descripcion">Descripción</th>
+                          <th class="tabla-seccion-col-presupuesto">Presupuesto</th>
+                 </tr>
+               </thead>
+               <tbody>
+                 <tr>
+                   <td>Radio</td>
+                          <td class="estado-bueno">{{ electrical_system['radio']['state'] }}</td>
+                   <td>{{ electrical_system['radio']['description'] }}</td>
+                          <td class="tabla-seccion-col-presupuesto">{{ electrical_system['radio']['price'] }}</td>
+                 </tr>
+                 <tr>
+                   <td>Testigos tablero</td>
+                          <td class="estado-bueno">{{ electrical_system['testigos_tablero']['state'] }}</td>
+                          <td>{{ electrical_system['testigos_tablero']['description'] }}</td>
+                          <td class="tabla-seccion-col-presupuesto">{{ electrical_system['testigos_tablero']['price'] }}</td>
+                 </tr>
+                 <tr>
+                   <td>Luces de emergencia</td>
+                          <td class="estado-bueno">{{ electrical_system['luces_de_emergencia']['state'] }}</td>
+                          <td>{{ electrical_system['luces_de_emergencia']['description'] }}</td>
+                          <td class="tabla-seccion-col-presupuesto">{{ electrical_system['luces_de_emergencia']['price'] }}</td>
+                 </tr>
+                 <tr>
+                   <td>Limpia parabrisas</td>
+                          <td class="estado-bueno">{{ electrical_system['limpia_parabrisas']['state'] }}</td>
+                          <td>{{ electrical_system['limpia_parabrisas']['description'] }}</td>
+                          <td class="tabla-seccion-col-presupuesto">{{ electrical_system['limpia_parabrisas']['price'] }}</td>
+                 </tr>
+                 <tr>
+                   <td>Reloj Digital</td>
+                          <td class="estado-bueno">{{ electrical_system['reloj']['state'] }}</td>
+                   <td>{{ electrical_system['reloj']['description'] }}</td>
+                          <td class="tabla-seccion-col-presupuesto">{{ electrical_system['reloj']['price'] }}</td>
+                 </tr>
+                 <tr>
+                   <td>Velocímetro</td>
+                          <td class="estado-bueno">{{ electrical_system['velocimetro']['state'] }}</td>
+                          <td>{{ electrical_system['velocimetro']['description'] }}</td>
+                          <td class="tabla-seccion-col-presupuesto">{{ electrical_system['velocimetro']['price'] }}</td>
+                 </tr>
+                 <tr>
+                   <td>Tacómetro</td>
+                          <td class="estado-bueno">{{ electrical_system['tacometro']['state'] }}</td>
+                          <td>{{ electrical_system['tacometro']['description'] }}</td>
+                          <td class="tabla-seccion-col-presupuesto">{{ electrical_system['tacometro']['price'] }}</td>
+                 </tr>
+                 <tr>
+                   <td>Alternador</td>
+                          <td class="estado-bueno">{{ electrical_system['alternador']['state'] }}</td>
+                          <td>{{ electrical_system['alternador']['description'] }}</td>
+                          <td class="tabla-seccion-col-presupuesto">{{ electrical_system['alternador']['price'] }}</td>
+                 </tr>
+                 <tr>
+                   <td>Batéria</td>
+                          <td class="estado-bueno">{{ electrical_system['bateria']['state'] }}</td>
+                   <td>{{ electrical_system['bateria']['description'] }}</td>
+                          <td class="tabla-seccion-col-presupuesto">{{ electrical_system['bateria']['price'] }}</td>
+                 </tr>
+                 <tr>
+                   <td>Luces generales</td>
+                          <td class="estado-bueno">{{ electrical_system['luces_generales']['state'] }}</td>
+                          <td>{{ electrical_system['luces_generales']['description'] }}</td>
+                          <td class="tabla-seccion-col-presupuesto">{{ electrical_system['luces_generales']['price'] }}</td>
+                 </tr>
+                 <tr>
+                   <td>Otros</td>
+                          <td class="estado-bueno">{{ electrical_system['otros']['state'] }}</td>
+                   <td>{{ electrical_system['otros']['description'] }}</td>
+                          <td class="tabla-seccion-col-presupuesto">{{ electrical_system['otros']['price'] }}</td>
+                 </tr>
+               </tbody>
+             </table>
+              <div class="tabla-seccion-footer">
+                  <div class="tabla-seccion-observaciones">
+                      {{ electrical_system['observations']|default('') }}
+           </div>
+                  <div class="tabla-seccion-total">
+                      <div class="tabla-seccion-total-label">Presupuesto Total</div>
+                      <div class="tabla-seccion-total-valor">{{ electrical_system['total_price'] }}</div>
+             </div>
+               </div>
+             </div>
+          </div>
+
+          <!-- Tabla para TRANSMISIÓN -->
+          <div class="tabla-seccion-container">
+            <div class="tabla-seccion-sidebar">
+                <div class="tabla-seccion-sidebar-text">TRANSMISIÓN</div>
+          </div>
+            <div class="tabla-seccion-content">
+                <table class="tabla-seccion-table">
+                <thead>
+                  <tr>
+                            <th class="tabla-seccion-col-parte">Parte</th>
+                            <th class="tabla-seccion-col-estado">Estado</th>
+                            <th class="tabla-seccion-col-descripcion">Descripción</th>
+                            <th class="tabla-seccion-col-presupuesto">Presupuesto</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Transmisión</td>
+                            <td class="estado-bueno">{{ transmission['transmision']['state'] }}</td>
+                    <td>{{ transmission['transmision']['description'] }}</td>
+                            <td class="tabla-seccion-col-presupuesto">{{ transmission['transmision']['price'] }}</td>
+                  </tr>
+                  <tr>
+                    <td>Golpeteo en caja</td>
+                            <td class="estado-bueno">{{ transmission['golpeteo_en_caja']['state'] }}</td>
+                            <td>{{ transmission['golpeteo_en_caja']['description'] }}</td>
+                            <td class="tabla-seccion-col-presupuesto">{{ transmission['golpeteo_en_caja']['price'] }}</td>
+                  </tr>
+                  <tr>
+                    <td>Ruidos anormales</td>
+                            <td class="estado-bueno">{{ transmission['ruidos_anormales']['state'] }}</td>
+                            <td>{{ transmission['ruidos_anormales']['description'] }}</td>
+                            <td class="tabla-seccion-col-presupuesto">{{ transmission['ruidos_anormales']['price'] }}</td>
+                  </tr>
+                  <tr>
+                    <td>Dificultad de cambios</td>
+                            <td class="estado-bueno">{{ transmission['dificultad_de_cambios']['state'] }}</td>
+                            <td>{{ transmission['dificultad_de_cambios']['description'] }}</td>
+                            <td class="tabla-seccion-col-presupuesto">{{ transmission['dificultad_de_cambios']['price'] }}</td>
+                  </tr>
+                  <tr>
+                    <td>Cambios bruscos</td>
+                            <td class="estado-bueno">{{ transmission['cambios_bruscos']['state'] }}</td>
+                            <td>{{ transmission['cambios_bruscos']['description'] }}</td>
+                            <td class="tabla-seccion-col-presupuesto">{{ transmission['cambios_bruscos']['price'] }}</td>
+                  </tr>
+                  <tr>
+                    <td>Fugas de acéite</td>
+                            <td class="estado-bueno">{{ transmission['fugas_de_aceite']['state'] }}</td>
+                            <td>{{ transmission['fugas_de_aceite']['description'] }}</td>
+                            <td class="tabla-seccion-col-presupuesto">{{ transmission['fugas_de_aceite']['price'] }}</td>
+                  </tr>
+                  <tr>
+                    <td>Tracción en ruedas</td>
+                            <td class="estado-bueno">{{ transmission['traccion_en_ruedas']['state'] }}</td>
+                            <td>{{ transmission['traccion_en_ruedas']['description'] }}</td>
+                            <td class="tabla-seccion-col-presupuesto">{{ transmission['traccion_en_ruedas']['price'] }}</td>
+                  </tr>
+                  <tr>
+                    <td>Embrague</td>
+                            <td class="estado-bueno">{{ transmission['embrague']['state'] }}</td>
+                    <td>{{ transmission['embrague']['description'] }}</td>
+                            <td class="tabla-seccion-col-presupuesto">{{ transmission['embrague']['price'] }}</td>
+                  </tr>
+                  <tr>
+                    <td>Nivel de aceite</td>
+                            <td class="estado-bueno">{{ transmission['nivel_de_aceite']['state'] }}</td>
+                            <td>{{ transmission['nivel_de_aceite']['description'] }}</td>
+                            <td class="tabla-seccion-col-presupuesto">{{ transmission['nivel_de_aceite']['price'] }}</td>
+                  </tr>
+                  <tr>
+                    <td>Otros defectos</td>
+                            <td class="estado-bueno">{{ transmission['otros_defectos']['state'] }}</td>
+                            <td>{{ transmission['otros_defectos']['description'] }}</td>
+                            <td class="tabla-seccion-col-presupuesto">{{ transmission['otros_defectos']['price'] }}</td>
+                  </tr>
+                </tbody>
+              </table>
+                <div class="tabla-seccion-footer">
+                    <div class="tabla-seccion-observaciones">
+                        {{ transmission['observations']|default('') }}
+            </div>
+                    <div class="tabla-seccion-total">
+                        <div class="tabla-seccion-total-label">Presupuesto Total</div>
+                        <div class="tabla-seccion-total-valor">{{ transmission['total_price'] }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="height: 180px;"></div>
+        <div class="logo-placeholder" style="display: flex; justify-content: center; align-items: center; max-width: 80%; margin: auto;">
+          <img src="https://storage.googleapis.com/course-gcp-2024-images/publics/wcar.svg" style="width: 90%;" alt="Logo WCAR" />
+        </div>
+         </div>
+        </div>
+        <!-- ------------------------------------------ Ventilación y Motor ------------------------------------------ -->
+        <div class="page">
+        <div class="header">
+          <div class="logo">
+            <img src="https://wcar.co/assets/logos/horizontal.svg" alt="Logo WCAR" />
+          </div>
+          <div class="title">Inspección general de vehículos</div>
+          <div class="title-number"><span class="title-number-prefix">Nº</span> <span class="title-number-value">{{numero_reporte}}</span></div>
+        </div>
+        <div class="section">
+          <div class="section-title">
+            <span class="section-number">6</span>
+            <span class="section-title-text">Ventilación y Motor</span>
+          </div>
+          <div class="subtitle">
+            Por medio del presente documento, confirmamos que estamos
+            inspeccionando el vehículo a continuación relacionado
+          </div>
+          <!-- Aqui deben ir las tablas de ventilación y motor -->
           <!-- Tabla para VENTILACIÓN -->
           <div class="tabla-seccion-container">
               <div class="tabla-seccion-sidebar">
@@ -834,7 +1188,6 @@
                   </div>
                 </div>
               </div>
-
           <!-- Tabla para MOTOR -->
           <div class="tabla-seccion-container">
               <div class="tabla-seccion-sidebar">
@@ -936,100 +1289,15 @@
                   </div>
                 </div>
               </div>
-
-          <!-- Tabla para TRANSMISIÓN -->
-          <div class="tabla-seccion-container">
-              <div class="tabla-seccion-sidebar">
-                  <div class="tabla-seccion-sidebar-text">TRANSMISIÓN</div>
-            </div>
-              <div class="tabla-seccion-content">
-                  <table class="tabla-seccion-table">
-                  <thead>
-                    <tr>
-                              <th class="tabla-seccion-col-parte">Parte</th>
-                              <th class="tabla-seccion-col-estado">Estado</th>
-                              <th class="tabla-seccion-col-descripcion">Descripción</th>
-                              <th class="tabla-seccion-col-presupuesto">Presupuesto</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>Transmisión</td>
-                              <td class="estado-bueno">{{ transmission['transmision']['state'] }}</td>
-                      <td>{{ transmission['transmision']['description'] }}</td>
-                              <td class="tabla-seccion-col-presupuesto">{{ transmission['transmision']['price'] }}</td>
-                    </tr>
-                    <tr>
-                      <td>Golpeteo en caja</td>
-                              <td class="estado-bueno">{{ transmission['golpeteo_en_caja']['state'] }}</td>
-                              <td>{{ transmission['golpeteo_en_caja']['description'] }}</td>
-                              <td class="tabla-seccion-col-presupuesto">{{ transmission['golpeteo_en_caja']['price'] }}</td>
-                    </tr>
-                    <tr>
-                      <td>Ruidos anormales</td>
-                              <td class="estado-bueno">{{ transmission['ruidos_anormales']['state'] }}</td>
-                              <td>{{ transmission['ruidos_anormales']['description'] }}</td>
-                              <td class="tabla-seccion-col-presupuesto">{{ transmission['ruidos_anormales']['price'] }}</td>
-                    </tr>
-                    <tr>
-                      <td>Dificultad de cambios</td>
-                              <td class="estado-bueno">{{ transmission['dificultad_de_cambios']['state'] }}</td>
-                              <td>{{ transmission['dificultad_de_cambios']['description'] }}</td>
-                              <td class="tabla-seccion-col-presupuesto">{{ transmission['dificultad_de_cambios']['price'] }}</td>
-                    </tr>
-                    <tr>
-                      <td>Cambios bruscos</td>
-                              <td class="estado-bueno">{{ transmission['cambios_bruscos']['state'] }}</td>
-                              <td>{{ transmission['cambios_bruscos']['description'] }}</td>
-                              <td class="tabla-seccion-col-presupuesto">{{ transmission['cambios_bruscos']['price'] }}</td>
-                    </tr>
-                    <tr>
-                      <td>Fugas de acéite</td>
-                              <td class="estado-bueno">{{ transmission['fugas_de_aceite']['state'] }}</td>
-                              <td>{{ transmission['fugas_de_aceite']['description'] }}</td>
-                              <td class="tabla-seccion-col-presupuesto">{{ transmission['fugas_de_aceite']['price'] }}</td>
-                    </tr>
-                    <tr>
-                      <td>Tracción en ruedas</td>
-                              <td class="estado-bueno">{{ transmission['traccion_en_ruedas']['state'] }}</td>
-                              <td>{{ transmission['traccion_en_ruedas']['description'] }}</td>
-                              <td class="tabla-seccion-col-presupuesto">{{ transmission['traccion_en_ruedas']['price'] }}</td>
-                    </tr>
-                    <tr>
-                      <td>Embrague</td>
-                              <td class="estado-bueno">{{ transmission['embrague']['state'] }}</td>
-                      <td>{{ transmission['embrague']['description'] }}</td>
-                              <td class="tabla-seccion-col-presupuesto">{{ transmission['embrague']['price'] }}</td>
-                    </tr>
-                    <tr>
-                      <td>Nivel de aceite</td>
-                              <td class="estado-bueno">{{ transmission['nivel_de_aceite']['state'] }}</td>
-                              <td>{{ transmission['nivel_de_aceite']['description'] }}</td>
-                              <td class="tabla-seccion-col-presupuesto">{{ transmission['nivel_de_aceite']['price'] }}</td>
-                    </tr>
-                    <tr>
-                      <td>Otros defectos</td>
-                              <td class="estado-bueno">{{ transmission['otros_defectos']['state'] }}</td>
-                              <td>{{ transmission['otros_defectos']['description'] }}</td>
-                              <td class="tabla-seccion-col-presupuesto">{{ transmission['otros_defectos']['price'] }}</td>
-                    </tr>
-                  </tbody>
-                </table>
-                  <div class="tabla-seccion-footer">
-                      <div class="tabla-seccion-observaciones">
-                          {{ transmission['observations']|default('') }}
-              </div>
-                      <div class="tabla-seccion-total">
-                          <div class="tabla-seccion-total-label">Presupuesto Total</div>
-                          <div class="tabla-seccion-total-valor">{{ transmission['total_price'] }}</div>
-                </div>
-              </div>
-            </div>
-          </div>
+              <div style="height: 160px;"></div>
+        <div class="logo-placeholder" style="display: flex; justify-content: center; align-items: center; max-width: 80%; margin: auto;">
+          <img src="https://storage.googleapis.com/course-gcp-2024-images/publics/wcar.svg" style="width: 90%;" alt="Logo WCAR" />
         </div>
-      </div>
+        </div>
+        </div>
 
-      <div class="page">
+        <!-- ------------------------------------------ Frenos y dirección ------------------------------------------ -->
+        <div class="page">
         <div class="header">
           <div class="logo">
             <img src="https://wcar.co/assets/logos/horizontal.svg" alt="Logo WCAR" />
@@ -1039,7 +1307,7 @@
         </div>
         <div class="section">
           <div class="section-title">
-            <span class="section-number">6</span>
+            <span class="section-number">7</span>
             <span class="section-title-text">Frenos y dirección</span>
           </div>
           <div class="subtitle">
@@ -1232,9 +1500,10 @@
             </div>
           </div>
         </div>
-      </div>
+        </div>
 
-      <div class="page">
+        <!-- ------------------------------------------ Suspension, llantas y rines ------------------------------------------ -->
+        <div class="page">
         <div class="header">
           <div class="logo">
             <img src="https://wcar.co/assets/logos/horizontal.svg" alt="Logo WCAR" />
@@ -1244,8 +1513,8 @@
         </div>
         <div class="section">
           <div class="section-title">
-            <span class="section-number">7</span>
-            <span class="section-title-text">Suspensión, llantas y frenos</span>
+            <span class="section-number">8</span>
+            <span class="section-title-text">Suspensión, llantas y rines</span>
           </div>
           <div class="subtitle">
             Por medio del presente documento, confirmamos que estamos
@@ -1253,8 +1522,9 @@
           </div>
           <div class="row">
             <div class="col">
+
               <!-- Tabla para SUSPENSIÓN -->
-              <div class="tabla-seccion-container">
+                <div class="tabla-seccion-container">
                   <div class="tabla-seccion-sidebar">
                       <div class="tabla-seccion-sidebar-text">SUSPENSIÓN</div>
                   </div>
@@ -1361,71 +1631,11 @@
                 </div>
               </div>
 
-              <!-- Tabla para LLANTAS -->
+              <!-- Tabla para LLANTAS Y RINES -->
               <div class="tabla-seccion-container">
                   <div class="tabla-seccion-sidebar">
-                      <div class="tabla-seccion-sidebar-text">LLANTAS</div>
-            </div>
-                  <div class="tabla-seccion-content">
-                      <table class="tabla-seccion-table">
-                  <thead>
-                    <tr>
-                                  <th class="tabla-seccion-col-parte">Parte</th>
-                                  <th class="tabla-seccion-col-estado">Estado</th>
-                                  <th class="tabla-seccion-col-descripcion">Descripción</th>
-                                  <th class="tabla-seccion-col-presupuesto">Presupuesto</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>Llanta delantera Iz</td>
-                                  <td class="estado-bueno">{{ tires['llanta_delantera_izquierda']['state'] }}</td>
-                                  <td>{{ tires['llanta_delantera_izquierda']['description'] }}</td>
-                                  <td class="tabla-seccion-col-presupuesto">{{ tires['llanta_delantera_izquierda']['price'] }}</td>
-                    </tr>
-                    <tr>
-                      <td>Llanta delantera De</td>
-                                  <td class="estado-bueno">{{ tires['llanta_delantera_derecha']['state'] }}</td>
-                                  <td>{{ tires['llanta_delantera_derecha']['description'] }}</td>
-                                  <td class="tabla-seccion-col-presupuesto">{{ tires['llanta_delantera_derecha']['price'] }}</td>
-                    </tr>
-                    <tr>
-                      <td>Llanta trasera Iz</td>
-                                  <td class="estado-bueno">{{ tires['llanta_trasera_izquierda']['state'] }}</td>
-                                  <td>{{ tires['llanta_trasera_izquierda']['description'] }}</td>
-                                  <td class="tabla-seccion-col-presupuesto">{{ tires['llanta_trasera_izquierda']['price'] }}</td>
-                    </tr>
-                    <tr>
-                      <td>Llanta trasera De</td>
-                                  <td class="estado-bueno">{{ tires['llanta_trasera_derecha']['state'] }}</td>
-                                  <td>{{ tires['llanta_trasera_derecha']['description'] }}</td>
-                                  <td class="tabla-seccion-col-presupuesto">{{ tires['llanta_trasera_derecha']['price'] }}</td>
-                    </tr>
-                    <tr>
-                      <td>Llanta de repueso</td>
-                                  <td class="estado-bueno">{{ tires['llanta_de_repuesto']['state'] }}</td>
-                      <td>{{ tires['llanta_de_repuesto']['description'] }}</td>
-                                  <td class="tabla-seccion-col-presupuesto">{{ tires['llanta_de_repuesto']['price'] }}</td>
-                    </tr>
-                  </tbody>
-                </table>
-                      <div class="tabla-seccion-footer">
-                          <div class="tabla-seccion-observaciones">
-                              {{ tires['observations']|default('') }}
-              </div>
-                          <div class="tabla-seccion-total">
-                              <div class="tabla-seccion-total-label">Presupuesto Total</div>
-                              <div class="tabla-seccion-total-valor">{{ tires['total_price'] }}</div>
-                </div>
+                      <div class="tabla-seccion-sidebar-text">LLANTAS Y RINES</div>
                   </div>
-                </div>
-              </div>
-
-              <!-- Tabla para RIN -->
-              <div class="tabla-seccion-container">
-                  <div class="tabla-seccion-sidebar">
-                      <div class="tabla-seccion-sidebar-text">RIN</div>
-            </div>
                   <div class="tabla-seccion-content">
                       <table class="tabla-seccion-table">
                   <thead>
@@ -1438,28 +1648,34 @@
                   </thead>
                   <tbody>
                     <tr>
-                      <td>Rin delantero Iz</td>
-                                  <td class="estado-bueno">{{ rin['rin_delantero_izquierdo']['state'] }}</td>
-                                  <td>{{ rin['rin_delantero_izquierdo']['description'] }}</td>
-                                  <td class="tabla-seccion-col-presupuesto">{{ rin['rin_delantero_izquierdo']['price'] }}</td>
+                      <td>Llantas delanteras</td>
+                        <td class="estado-bueno">{{ tires['llantas_delanteras']['state'] }}</td>
+                        <td>{{ tires['llantas_delanteras']['description'] }}</td>
+                        <td class="tabla-seccion-col-presupuesto">{{ tires['llantas_delanteras']['price'] }}</td>
                     </tr>
                     <tr>
-                      <td>Rin delantero De</td>
-                                  <td class="estado-bueno">{{ rin['rin_delantero_derecho']['state'] }}</td>
-                      <td>{{ rin['rin_delantero_derecho']['description'] }}</td>
-                                  <td class="tabla-seccion-col-presupuesto">{{ rin['rin_delantero_derecho']['price'] }}</td>
+                      <td>Llantas traseras</td>
+                        <td class="estado-bueno">{{ tires['llantas_traseras']['state'] }}</td>
+                        <td>{{ tires['llantas_traseras']['description'] }}</td>
+                        <td class="tabla-seccion-col-presupuesto">{{ tires['llantas_traseras']['price'] }}</td>
                     </tr>
                     <tr>
-                      <td>Rin trasero Iz</td>
-                                  <td class="estado-bueno">{{ rin['rin_trasero_izquierdo']['state'] }}</td>
-                      <td>{{ rin['rin_trasero_izquierdo']['description'] }}</td>
-                                  <td class="tabla-seccion-col-presupuesto">{{ rin['rin_trasero_izquierdo']['price'] }}</td>
+                      <td>Llanta de repuesto</td>
+                        <td class="estado-bueno">{{ tires['llanta_de_repuesto']['state'] }}</td>
+                        <td>{{ tires['llanta_de_repuesto']['description'] }}</td>
+                        <td class="tabla-seccion-col-presupuesto">{{ tires['llanta_de_repuesto']['price'] }}</td>
                     </tr>
                     <tr>
-                      <td>Rin trasero De</td>
-                                  <td class="estado-bueno">{{ rin['rin_trasero_derecho']['state'] }}</td>
-                      <td>{{ rin['rin_trasero_derecho']['description'] }}</td>
-                                  <td class="tabla-seccion-col-presupuesto">{{ rin['rin_trasero_derecho']['price'] }}</td>
+                      <td>Rines delanteros</td>
+                        <td class="estado-bueno">{{ rin['rines_delanteros']['state'] }}</td>
+                        <td>{{ rin['rines_delanteros']['description'] }}</td>
+                        <td class="tabla-seccion-col-presupuesto">{{ rin['rines_delanteros']['price'] }}</td>
+                    </tr>
+                    <tr>
+                      <td>Rines traseros</td>
+                        <td class="estado-bueno">{{ rin['rines_traseros']['state'] }}</td>
+                        <td>{{ rin['rines_traseros']['description'] }}</td>
+                        <td class="tabla-seccion-col-presupuesto">{{ rin['rines_traseros']['price'] }}</td>
                     </tr>
                     <tr>
                       <td>Rin de repuesto</td>
@@ -1471,16 +1687,19 @@
                 </table>
                       <div class="tabla-seccion-footer">
                           <div class="tabla-seccion-observaciones">
+                              {{ tires['observations']|default('') }}
                               {{ rin['observations']|default('') }}
-              </div>
+                          </div>
                           <div class="tabla-seccion-total">
                               <div class="tabla-seccion-total-label">Presupuesto Total</div>
-                              <div class="tabla-seccion-total-valor">{{ rin['total_price'] }}</div>
-                </div>
+                              <div class="tabla-seccion-total-valor">{{ tires['total_price'] }}</div>
+                          </div>
+                      </div>
                   </div>
-                </div>
               </div>
 
+              <div style="height: 100px;"></div>
+            <div class="page">
               <div class="observations-box">
                 <div class="presupuesto-sugerido-observaciones">
                   <p>
@@ -1488,7 +1707,7 @@
                   </p>
                   <div class="right-box">
                     <div class="presupuesto-sugerido-badge">
-                      <p>Presupuesto Sugerido: <span>{{total_budget}}</span></p>
+                      <p>Precio de compra del vehículo: <span>{{total_budget}}</span></p>
                     </div>
                   </div>
                 </div>
@@ -1500,9 +1719,10 @@
                     <div class="signature-title">FIRMA PERITO AUTORIZADO</div>
                 </div>
                 <div class="signature-box">
-                    <div class="signature-line">NOMBRE GERENTE</div>
+                    <div class="signature-line"><img src="https://storage.googleapis.com/course-gcp-2024-images/publics/sing_ivan_correct.png" alt="Firma Gerente" style="max-width: 200px; height: auto;"></div>
                     <div class="signature-title">FIRMA GERENTE COMPRAS</div>
                 </div>
+            </div>
             </div>
             </div>
           </div>
