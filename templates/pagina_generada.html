@@ -1,0 +1,2543 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Inspección general de vehículos</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet">
+  <style>
+    /* --- Configuración de Página para WeasyPrint --- */
+    @page {
+      size: 'letter';
+      /* Puedes usar 'Letter', 'A4', etc. */
+      margin: 9mm;
+    }
+
+    /* --- Estilos Generales --- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Urbanist", sans-serif;
+      /* Asegúrate de que esta fuente esté disponible para WeasyPrint */
+    }
+
+    body {
+      font-family: "Urbanist", sans-serif;
+      font-size: 16px;
+      color: #1d1d1d;
+      width: 100%;
+      /* Eliminado el ancho fijo de 1200px */
+    }
+
+    /* --- Control de Saltos de Página --- */
+    .page-break {
+      page-break-before: always;
+    }
+
+    /* --- Contenedores y Layout (Convertidos a Tablas) --- */
+    .container {
+      width: 100%;
+      page-break-inside: avoid;
+    }
+
+    /* Ejemplo de layout de fila/columna usando tablas */
+    .row {
+      display: table;
+      width: 100%;
+      table-layout: fixed;
+      border-spacing: 10px 0;
+      /* Simula el 'gap' */
+    }
+
+    .col {
+      display: table-cell;
+      padding: 5px;
+      vertical-align: top;
+    }
+
+    .double-col {
+      width: 66%;
+      /* Ajusta el ancho para simular flex: 2 */
+    }
+
+    /* --- Encabezado --- */
+    .header {
+      display: table;
+      width: 100%;
+      margin-bottom: 20px;
+      table-layout: fixed;
+    }
+
+    .header-cell {
+      display: table-cell;
+      vertical-align: middle;
+    }
+
+    .logo {
+      text-align: left;
+    }
+
+    .logo img {
+      height: 40px;
+    }
+
+    .title {
+      width: 50%;
+      text-align: center;
+      font-size: 18px;
+      font-weight: 600;
+      color: #000;
+    }
+
+    .title-number {
+      width: 25%;
+      text-align: right;
+      font-size: 16px;
+    }
+
+    .title-number-prefix {
+      color: #000;
+      font-weight: 700;
+    }
+
+    .title-number-value {
+      color: #ec671b;
+      font-weight: 600;
+    }
+
+    .title {
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    .title-number {
+      font-size: 24px;
+    }
+
+    .title-number-prefix {
+      color: #000;
+      font-weight: 700;
+    }
+
+    .title-number-value {
+      color: #ff5f00;
+      font-weight: 600;
+      font-style: italic;
+    }
+
+    /* --- Títulos de Sección --- */
+    .section-title {
+      font-family: "Urbanist-Bold";
+      font-size: 16px;
+      font-weight: bold;
+      margin: 20px 0 5px;
+      display: table;
+      width: 100%;
+    }
+
+    .section-number {
+      display: table-cell;
+      width: 40px;
+    }
+
+    .section-number-circle {
+      color: black;
+      border: 0.5px solid black;
+      border-radius: 50%;
+      display: inline-block;
+      text-align: center;
+      width: 28px;
+      height: 28px;
+      line-height: 28px;
+      padding: 4px;
+    }
+
+    .section-title-text {
+      display: table-cell;
+      font-size: 26px;
+      font-weight: 600;
+      vertical-align: middle;
+    }
+
+    .subtitle {
+      font-size: 16px;
+      color: #ec671b;
+      font-weight: 700;
+      font-style: italic;
+      margin-bottom: 10px;
+    }
+
+    .value {
+      border-radius: 12px;
+      padding: 7px;
+      background-color: #f6f7f9;
+      color: #aaa;
+      min-height: 25px;
+      display: table;
+      width: 100%;
+    }
+
+    .value .label {
+      display: table-cell;
+      font-weight: bold;
+      color: #1d1d1d;
+    }
+
+    .value .text {
+      display: table-cell;
+      color: #aaa;
+      text-align: right;
+    }
+
+    /* --- Tablas de Sección (Estructura principal) --- */
+    .tabla-seccion-container {
+      width: 100%;
+      border-radius: 24px;
+      border: 0.5px solid #909090;
+      overflow: hidden;
+      margin-bottom: 30px;
+      display: table;
+      table-layout: fixed;
+    }
+
+    .tabla-seccion-row {
+      display: table-row;
+    }
+
+    .tabla-seccion-sidebar {
+      display: table-cell;
+      width: 40px;
+      background-color: #e84d1c;
+      color: white;
+      vertical-align: middle;
+      text-align: center;
+      /* El texto vertical se debe manejar con una imagen SVG/PNG en el HTML */
+    }
+
+    .tabla-seccion-sidebar-text {
+      /* Este elemento contendría la imagen del texto vertical */
+      width: 100%;
+    }
+
+    .tabla-seccion-content {
+      display: table-cell;
+      vertical-align: top;
+    }
+
+    .tabla-seccion-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .tabla-seccion-table th,
+    .tabla-seccion-table td {
+      border: 0.5px solid #909090;
+      padding: 8px 10px;
+      vertical-align: middle;
+      font-size: 14px;
+      word-wrap: break-word;
+    }
+
+    .tabla-seccion-table th {
+      font-weight: bold;
+      text-align: center;
+      background-color: #fff;
+      color: #000;
+    }
+
+    .tabla-seccion-col-presupuesto {
+      text-align: right;
+      font-weight: 900;
+      font-size: 18px;
+      color: #e84d1c;
+    }
+
+    .tabla-seccion-footer {
+      display: table;
+      width: 100%;
+      table-layout: fixed;
+    }
+
+    .tabla-seccion-observaciones {
+      display: table-cell;
+      padding: 10px 15px;
+      font-size: 14px;
+      width: 65%;
+    }
+
+    .tabla-seccion-total {
+      display: table-cell;
+      width: 35%;
+      background-color: #e84d1c;
+      color: white;
+      padding: 10px 15px;
+      text-align: center;
+      vertical-align: middle;
+      border-top-left-radius: 20px;
+      border-bottom-right-radius: 20px;
+    }
+
+    /* --- Firmas --- */
+    .signature-section {
+      display: table;
+      width: 100%;
+      margin-top: 50px;
+      border-spacing: 20px 0;
+    }
+
+    .signature-box {
+      display: table-cell;
+      width: 50%;
+      text-align: center;
+    }
+
+    .signature-line {
+      border-bottom: 1px solid #333;
+      padding-bottom: 5px;
+      margin-bottom: 10px;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .signature-title {
+      color: #f26e21;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    /* --- Contenedor principal --- */
+    .budget-chart-container {
+      display: table;
+      width: 750px;
+      height: 450px;
+      margin-top: 14px;
+      padding: 0 0 7px 0;
+      background: #fff;
+      border-spacing: 14px 0;
+      /* simula gap */
+      table-layout: fixed;
+    }
+
+    /* --- Columna izquierda (números y labels) --- */
+    .budget-chart-left {
+      display: table-cell;
+      vertical-align: top;
+      width: 180px;
+      padding: 16px 0;
+    }
+
+    /* --- Filas (número + etiqueta) --- */
+    .budget-chart-row {
+      display: table;
+      width: 100%;
+      margin-bottom: 18px;
+      table-layout: fixed;
+    }
+
+    .budget-chart-number {
+      display: table-cell;
+      width: 36px;
+      height: 36px;
+      background: #ec671b;
+      color: #fff;
+      font-weight: 700;
+      font-size: 13px;
+      border-radius: 50%;
+      text-align: center;
+      vertical-align: middle;
+    }
+
+    .budget-chart-label {
+      display: table-cell;
+      font-size: 13px;
+      font-weight: 600;
+      color: #000000;
+      border-bottom: 1px solid #90a3bf;
+      padding-bottom: 4px;
+      text-align: center;
+      vertical-align: middle;
+    }
+
+    .budget-chart-row:last-child .budget-chart-label {
+      border: none;
+    }
+
+    /* --- Barras centrales --- */
+    .budget-chart-bars {
+      display: table-cell;
+      vertical-align: top;
+      border: 2px solid #ec671b;
+      border-radius: 0 0 56px 0;
+      padding: 16px 32px 8px 0;
+      width: auto;
+    }
+
+    .budget-bar {
+      height: 36px;
+      background: #ffa631;
+      border-radius: 0 0 32px 0;
+      margin-bottom: 18px;
+    }
+
+    /* --- Columna derecha --- */
+    .budget-chart-right {
+      display: table-cell;
+      vertical-align: top;
+      width: 140px;
+      text-align: center;
+      padding-bottom: 16px;
+    }
+
+    .budget-chart-header {
+      font-size: 20px;
+      font-weight: 700;
+      color: #222;
+      margin-bottom: 22px;
+      border-bottom: 1px solid #90a3bf;
+      padding-bottom: 4px;
+    }
+
+    .budget-chart-value {
+      font-size: 13px;
+      font-weight: 800;
+      color: #000000;
+      margin-bottom: 22px;
+      border-bottom: 1px solid #90a3bf;
+      padding-bottom: 4px;
+    }
+
+    .budget-chart-total {
+      margin-top: 16px;
+      font-size: 26px;
+      font-weight: 700;
+      color: #ec671b;
+    }
+
+    .budget-chart-total-label {
+      font-size: 16px;
+      font-weight: 600;
+      color: #ec671b;
+      margin-top: 4px;
+    }
+
+    /* Otros estilos (ajustados para simplicidad) */
+    .text-center {
+      text-align: center;
+    }
+
+    .text-orange {
+      color: #ec671b;
+    }
+
+    .font-10 {
+      font-size: 10px;
+    }
+
+    /* El resto de las clases deben ser revisadas y adaptadas a una estructura
+   de tablas si son complejas. Las clases simples de texto/color funcionarán bien. */
+
+    .separator {
+      width: 100%;
+      border-bottom: 4px solid #ec671b;
+      margin: 10px 0;
+    }
+
+    .separator-box {
+      background-color: #ec671b;
+      border-top-left-radius: 32px;
+      border-top-right-radius: 32px;
+      display: table;
+      height: 40px;
+      padding: 0 16px;
+    }
+
+    .separator-number {
+      display: table-cell;
+      width: 28px;
+      height: 28px;
+      background-color: white;
+      border-radius: 50%;
+      text-align: center;
+      vertical-align: middle;
+    }
+
+    .separator-number p {
+      font-size: 18px;
+      font-weight: 700;
+      color: #ec671b;
+      margin: 0;
+      line-height: 28px;
+      /* centra verticalmente el número */
+    }
+
+    .separator-text {
+      display: table-cell;
+      font-size: 20px;
+      font-weight: 700;
+      color: white;
+      padding-left: 8px;
+      vertical-align: middle;
+    }
+
+
+    .general-data-container {
+      width: 100%;
+      padding-top: 16px;
+      margin: auto;
+    }
+
+    .general-data-row {
+      display: table;
+      width: 100%;
+      table-layout: fixed;
+      border-spacing: 16px 0;
+      margin-bottom: 16px;
+    }
+
+    .general-data-field {
+      display: table-cell;
+      background-color: #e8eef5;
+      border-radius: 8px;
+      padding: 3px 6px;
+      vertical-align: top;
+    }
+
+    .gd-field-left {
+      width: 100%;
+      margin-bottom: 4px;
+    }
+
+    .gd-field-left p {
+      font-size: 16px;
+      font-weight: 600;
+      color: #000000;
+      margin: 0;
+    }
+
+    .gd-field-right {
+      width: 100%;
+      text-align: right;
+    }
+
+    .presupuesto-total-observaciones {
+  border: 1px solid #909090;
+  padding-left: 16px;
+  border-radius: 4px;
+  border-bottom-right-radius: 32px;
+  padding-top: 8px;
+}
+
+.presupuesto-sugerido-observaciones {
+  margin-top: 24px;
+  border: 1px solid #909090;
+  padding-left: 16px;
+  border-radius: 4px;
+  border-bottom-right-radius: 32px;
+  padding-top: 8px;
+}
+
+.presupuesto-total-observaciones p {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.presupuesto-sugerido-observaciones p {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.right-box {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.presupuesto-total-badge {
+  padding: 12px 42px;
+  background-color: #ec671b;
+  border-top-left-radius: 32px;
+  border-bottom-right-radius: 32px;
+  display: flex;
+  align-items: center;
+}
+
+.presupuesto-total-badge p {
+  color: white;
+  font-size: 16px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+}
+
+.presupuesto-total-badge p span {
+  font-size: 24px;
+  font-weight: 900;
+  margin-left: 8px;
+}
+
+.presupuesto-sugerido-badge {
+  padding: 12px 42px;
+  background-color: #fff;
+  border: 1px solid #ec671b;
+  border-top-left-radius: 32px;
+  border-bottom-right-radius: 32px;
+  display: flex;
+  align-items: center;
+}
+
+.presupuesto-sugerido-badge p {
+  color: #ec671b;
+  font-size: 16px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+}
+
+.presupuesto-sugerido-badge p span {
+  font-size: 24px;
+  font-weight: 900;
+  margin-left: 8px;
+}
+
+.exterior-section {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  margin-top: 80px;
+}
+
+.side-container {
+  width: 480px;
+  height: 300px;
+  border: 1px solid #909090;
+  border-bottom-right-radius: 42px;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.side-container-top-label {
+  width: "auto";
+  height: 40px;
+  background-color: #ec671b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top-right-radius: 32px;
+  border-top-left-radius: 32px;
+  position: absolute;
+  top: -40px;
+  left: -0.5px;
+  padding: 0 54px;
+}
+
+.side-container-top-label p {
+  color: white;
+  font-size: 18px;
+  font-weight: 600;
+  font-family: "Poppins", sans-serif;
+}
+
+.side-body {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.side-imperfection-list {
+  min-width: 130px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding-top: 8px;
+  padding-left: 8px;
+}
+
+.side-imperfection {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  border-bottom: 1px solid #909090;
+  padding-bottom: 4px;
+  margin: 4px 0px;
+}
+
+.side-imperfection-item-number {
+  min-width: 20px;
+  min-height: 20px;
+  max-width: 20px;
+  max-height: 20px;
+  background-color: #ec671b;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 8px;
+}
+
+.side-imperfection-item-number p {
+  color: white;
+  font-size: 11px;
+  font-weight: 600;
+  font-family: "Poppins", sans-serif;
+}
+
+.side-imperfection-item-box {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.side-imperfection-item-name {
+  font-size: 14px;
+  font-weight: 500;
+  font-family: "Poppins", sans-serif;
+}
+
+.side-imperfection-item-level {
+  font-size: 14px;
+  font-weight: 500;
+  font-family: "Poppins", sans-serif;
+  color: #ec671b;
+}
+
+.side-image-box {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.side-image-box img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.side-observations {
+  font-size: 12px;
+  font-weight: 400;
+  font-family: "Poppins", sans-serif;
+}
+
+.side-total-price-box {
+  width: 100%;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  background-color: #ec671b;
+  border-top-left-radius: 32px;
+  border-bottom-right-radius: 40px;
+}
+
+.side-total-price-box-label {
+  font-size: 14px;
+  font-weight: 400;
+  font-family: "Poppins", sans-serif;
+  color: white;
+  margin-right: 12px;
+}
+
+.side-total-price-box-price {
+  font-size: 20px;
+  font-weight: 600;
+  font-family: "Poppins", sans-serif;
+  color: white;
+}
+
+.underbody-table {
+  width: 100%;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 64px;
+}
+
+.underbody-table-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 8px;
+}
+
+.underbody-table-row-item {
+  flex: 1;
+  border-bottom: 1px solid #909090;
+  padding-bottom: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.underbody-table-row-item:nth-child(2) {
+  flex: 2;
+}
+
+.underbody-table-row-item:nth-child(1) span {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.underbody-table-row-item:nth-child(1) p {
+  color: #ec671b;
+  font-size: 16px;
+  font-weight: 600;
+  margin-top: 6px;
+}
+
+.underbody-table-observations {
+  font-size: 16px;
+  font-weight: 500;
+  padding: 4px 8px;
+}
+
+.underbody-table-price {
+  font-size: 20px;
+  text-align: center;
+  font-weight: 900;
+  color: #ec671b;
+}
+
+.underbody-section {
+  margin-top: 80px;
+}
+
+  </style>
+</head>
+
+<body>
+  <div>
+    <!-- HEADER -->
+    <div class="header">
+      <div class="header-cell logo">
+        <img src="https://wcar.co/assets/logos/horizontal.svg" alt="Logo WCAR" />
+      </div>
+      <div class="header-cell title">
+        Inspección general de vehículos
+      </div>
+      <div class="header-cell title-number">
+        <span class="title-number-prefix">No</span>
+        <span class="title-number-value">3488</span>
+      </div>
+    </div>
+    <div style="height: 32px;"></div>
+    <div class="separator">
+      <div class="separator-box">
+        <div class="separator-number">
+          <p>1</p>
+        </div>
+        <p class="separator-text">Información del vehículo</p>
+      </div>
+    </div>
+    <div class="general-data-container">
+      <!-- First row: 3 columns -->
+      <div class="general-data-row">
+        <div class="general-data-field">
+          <div class="gd-field-left">
+            <p>Marca</p>
+          </div>
+          <div class="gd-field-right">
+            <p>Mitsubishi </p>
+          </div>
+        </div>
+        <div class="general-data-field">
+          <div class="gd-field-left">
+            <p>Referencia</p>
+          </div>
+          <div class="gd-field-right">
+            <p>outlander </p>
+          </div>
+        </div>
+        <div class="general-data-field">
+          <div class="gd-field-left">
+            <p>Año de modelo</p>
+          </div>
+          <div class="gd-field-right">
+            <p>2009</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Second row: 3 columns -->
+      <div class="general-data-row">
+        <div class="general-data-field">
+          <div class="gd-field-left">
+            <p>Kilometraje</p>
+          </div>
+          <div class="gd-field-right">
+            <p>78592</p>
+          </div>
+        </div>
+        <div class="general-data-field">
+          <div class="gd-field-left">
+            <p>Color</p>
+          </div>
+          <div class="gd-field-right">
+            <p>beige</p>
+          </div>
+        </div>
+        <div class="general-data-field">
+          <div class="gd-field-left">
+            <p>Asegurado</p>
+          </div>
+          <div class="gd-field-right">
+            <p>Sí</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Third row: 3 columns -->
+      <div class="general-data-row">
+        <div class="general-data-field">
+          <div class="gd-field-left">
+            <p>Tipo de carrocería</p>
+          </div>
+          <div class="gd-field-right">
+            <p>wagon</p>
+          </div>
+        </div>
+        <div class="general-data-field">
+          <div class="gd-field-left">
+            <p>Tipo de caja</p>
+          </div>
+          <div class="gd-field-right">
+            <p>Automático</p>
+          </div>
+        </div>
+        <div class="general-data-field">
+          <div class="gd-field-left">
+            <p>Placa</p>
+          </div>
+          <div class="gd-field-right">
+            <p>FBK595</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="separator" style="margin-top: 10px">
+      <div class="separator-box">
+        <div class="separator-number">
+          <p>2</p>
+        </div>
+        <p class="separator-text">Presupuestos</p>
+      </div>
+    </div>
+    <div class="budget-chart-container">
+      <div class="budget-chart-left">
+        <div class="budget-chart-row">
+          <span class="budget-chart-number">2</span>
+          <span class="budget-chart-label">Exterior del vehiculo</span>
+        </div>
+        <div class="budget-chart-row">
+          <span class="budget-chart-number">3</span>
+          <span class="budget-chart-label">Inferior del vehiculo</span>
+        </div>
+        <div class="budget-chart-row">
+          <span class="budget-chart-number">4</span>
+          <span class="budget-chart-label">Interior del vehiculo</span>
+        </div>
+        <div class="budget-chart-row">
+          <span class="budget-chart-number">5</span>
+          <span class="budget-chart-label">Ventilación</span>
+        </div>
+        <div class="budget-chart-row">
+          <span class="budget-chart-number">6</span>
+          <span class="budget-chart-label">Motor</span>
+        </div>
+        <div class="budget-chart-row">
+          <span class="budget-chart-number">7</span>
+          <span class="budget-chart-label">Transmisión</span>
+        </div>
+        <div class="budget-chart-row">
+          <span class="budget-chart-number">8</span>
+          <span class="budget-chart-label">Frenos</span>
+        </div>
+        <div class="budget-chart-row">
+          <span class="budget-chart-number">9</span>
+          <span class="budget-chart-label">Dirección</span>
+        </div>
+        <div class="budget-chart-row">
+          <span class="budget-chart-number">10</span>
+          <span class="budget-chart-label">Suspensión</span>
+        </div>
+        <div class="budget-chart-row">
+          <span class="budget-chart-number">11</span>
+          <span class="budget-chart-label">Llantas</span>
+        </div>
+      </div>
+      <div class="budget-chart-bars">
+        <div class="budget-bar" style="width: 79%"></div>
+        <div class="budget-bar" style="width: 0%"></div>
+        <div class="budget-bar" style="width: 33%"></div>
+        <div class="budget-bar" style="width: 0%"></div>
+        <div class="budget-bar" style="width: 100%"></div>
+        <div class="budget-bar" style="width: 0%"></div>
+        <div class="budget-bar" style="width: 12%"></div>
+        <div class="budget-bar" style="width: 64%"></div>
+        <div class="budget-bar" style="width: 41%"></div>
+        <div class="budget-bar" style="width: 16%"></div>
+      </div>
+      <div class="budget-chart-right">
+        <div class="budget-chart-header">Presupuesto</div>
+        <div class="budget-chart-value">$1,900,000 </div>
+        <div class="budget-chart-value">$ 0</div>
+        <div class="budget-chart-value">$800,000 </div>
+        <div class="budget-chart-value">$ 0</div>
+        <div class="budget-chart-value">$2,400,000 </div>
+        <div class="budget-chart-value">$ 0</div>
+        <div class="budget-chart-value">$300,000 </div>
+        <div class="budget-chart-value">$1,550,000 </div>
+        <div class="budget-chart-value">$1,000,000 </div>
+        <div class="budget-chart-value">$400,000 </div>
+        <div class="budget-chart-total">
+          <span>$8,350,000 </span>
+          <span class="budget-chart-total-label">Presupuesto Total</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="presupuesto-sugerido-observaciones" style="padding-bottom: 8px">
+      <p>
+        <b>Observaciones generales:</b> N/A
+      </p>
+    </div>
+
+    <div class="presupuesto-sugerido-observaciones">
+      <p>
+        <b>Observaciones:</b> N/A
+      </p>
+      <div class="right-box">
+        <div class="presupuesto-sugerido-badge">
+          <p>Precio Final: <span>N/A</span></p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div style="height: 220px;"></div>
+  <div class="container">
+    <div class="page">
+    <!-- HEADER -->
+    <div class="header">
+      <div class="header-cell logo">
+        <img src="https://wcar.co/assets/logos/horizontal.svg" alt="Logo WCAR" />
+      </div>
+      <div class="header-cell title">
+        Inspección general de vehículos
+      </div>
+      <div class="header-cell title-number">
+        <span class="title-number-prefix">No</span>
+        <span class="title-number-value">3488</span>
+      </div>
+    </div>
+
+      <div class="section">
+        <div class="section-title">
+          <p class="section-number">1</p>
+          <p class="section-title-text">Datos Principales</p>
+        </div>
+        <div class="subtitle">
+          Por medio del presente documento, confirmamos que estamos
+          inspeccionando el vehículo a continuación relacionado
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="value">
+              <span class="label">Nombre cliente</span>
+              <span class="text">Hernando Enrique Ruiz rocha</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <div class="value">
+              <span class="label">Cédula</span>
+              <span class="text">79297049</span>
+            </div>
+          </div>
+          <div class="col">
+            <div class="value">
+              <span class="label">Teléfono</span>
+              <span class="text">0000000000</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col double-col">
+            <div class="value">
+              <span class="label">Dirección</span>
+              <span class="text">00000</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <div class="value">
+              <span class="label">Gmail</span>
+              <span class="text">a@a.com</span>
+            </div>
+          </div>
+          <div class="col">
+            <div class="value">
+              <span class="label">Fecha</span>
+              <span class="text">01 / 01 / 2025</span>
+            </div>
+          </div>
+          <div class="col">
+            <div class="value">
+              <span class="label">Hora</span>
+              <span class="text">00:00 P.M</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <div class="value">
+              <span class="label">Placa</span>
+              <span class="text">FBK595</span>
+            </div>
+          </div>
+          <div class="col">
+            <div class="value">
+              <span class="label">Marca</span>
+              <span class="text">Mitsubishi </span>
+            </div>
+          </div>
+          <div class="col">
+            <div class="value">
+              <span class="label">Versión exacta</span>
+              <span class="text">outlander </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <div class="value">
+              <span class="label">Año de modelo</span>
+              <span class="text">2009</span>
+            </div>
+          </div>
+          <div class="col">
+            <div class="value">
+              <span class="label">Color</span>
+              <span class="text">beige</span>
+            </div>
+          </div>
+          <div class="col">
+            <div class="value">
+              <span class="label">Kilómetros</span>
+              <span class="text">78592</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <div class="value">
+              <span class="label">Tipo de carrocería</span>
+              <span class="text">wagon</span>
+            </div>
+          </div>
+          <div class="col">
+            <div class="value">
+              <span class="label">Tipo de caja</span>
+              <span class="text">1</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col double-col">
+            <div class="value">
+              <span class="label">Persona registrada</span>
+              <span class="text">000000</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <div class="value">
+              <span class="label">Siniestro</span>
+              <span class="text"></span>
+            </div>
+          </div>
+          <div class="col">
+            <div class="value">
+              <span class="label">Cuantía</span>
+              <span class="text">100000000</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <div class="value">
+              <span class="label">Fecha SOAT</span>
+              <span class="text">N/A</span>
+            </div>
+          </div>
+          <div class="col">
+            <div class="value">
+              <span class="label">Fecha TECNO</span>
+              <span class="text"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="height: 600px;"></div>
+      <div class="logo-placeholder"
+        style="display: flex; justify-content: center; align-items: center; max-width: 80%; margin: auto;">
+        <img src="https://storage.googleapis.com/course-gcp-2024-images/publics/wcar.svg" style="width: 90%;"
+          alt="Logo WCAR" />
+      </div>
+    </div>
+
+    <div class="page">
+    <!-- HEADER -->
+    <div class="header">
+      <div class="header-cell logo">
+        <img src="https://wcar.co/assets/logos/horizontal.svg" alt="Logo WCAR" />
+      </div>
+      <div class="header-cell title">
+        Inspección general de vehículos
+      </div>
+      <div class="header-cell title-number">
+        <span class="title-number-prefix">No</span>
+        <span class="title-number-value">3488</span>
+      </div>
+    </div>
+      <div class="section">
+        <div class="section-title">
+          <span class="section-number">2</span>
+          <span class="section-title-text">Exterior del vehiculo</span>
+        </div>
+        <div class="subtitle">
+          Por medio del presente documento, confirmamos que estamos
+          inspeccionando el vehículo a continuación relacionado
+        </div>
+        <div class="exterior-section">
+          <!-- Lado izquierdo -->
+          <div class="side-container">
+            <div class="side-container-top-label">
+              <p>LADO IZQUIERDO</p>
+            </div>
+            <div class="side-imperfection-list">
+
+            </div>
+            <div class="side-body">
+              <div class="side-image-box">
+                <img
+                  src="https://storage.googleapis.com/course-gcp-2024-images/2025/09/15/960b2cce-ac08-4a4a-89b5-ccca35c7dc91.png"
+                  alt="" />
+                <p class="side-observations">
+                  malas reparacines rayones y sumiduras
+                </p>
+              </div>
+              <div class="side-total-price-box">
+                <p class="side-total-price-box-label">Presupuesto estimado</p>
+                <p class="side-total-price-box-price">$500,000 </p>
+              </div>
+            </div>
+          </div>
+          <!-- Lado derecho -->
+          <div class="side-container">
+            <div class="side-container-top-label">
+              <p>LADO DERECHO</p>
+            </div>
+            <div class="side-imperfection-list">
+
+            </div>
+            <div class="side-body">
+              <div class="side-image-box">
+                <img
+                  src="https://storage.googleapis.com/course-gcp-2024-images/2025/09/15/561a474d-4033-48b7-a63c-573aa32ff93e.png"
+                  alt="" />
+                <p class="side-observations">
+                  rayones y sumiduras
+                </p>
+              </div>
+              <div class="side-total-price-box">
+                <p class="side-total-price-box-label">Presupuesto estimado</p>
+                <p class="side-total-price-box-price">$300,000 </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="exterior-section">
+        <!-- Lado frontal -->
+        <div class="side-container">
+          <div class="side-container-top-label">
+            <p>LADO FRONTAL</p>
+          </div>
+          <div class="side-imperfection-list">
+
+          </div>
+          <div class="side-body">
+            <div class="side-image-box">
+              <img
+                src="https://storage.googleapis.com/course-gcp-2024-images/2025/09/15/585e3633-6c7d-4fa8-a567-71e9df2d1d4b.png"
+                alt="" />
+              <p class="side-observations">
+                farolas rayadas ,rayones
+              </p>
+            </div>
+            <div class="side-total-price-box">
+              <p class="side-total-price-box-label">Presupuesto estimado</p>
+              <p class="side-total-price-box-price">$300,000 </p>
+            </div>
+          </div>
+        </div>
+        <!-- Lado trasero -->
+        <div class="side-container">
+          <div class="side-container-top-label">
+            <p>LADO TRASERO</p>
+          </div>
+          <div class="side-imperfection-list">
+
+          </div>
+          <div class="side-body">
+            <div class="side-image-box">
+              <img
+                src="https://storage.googleapis.com/course-gcp-2024-images/2025/09/15/0647b82c-b98d-4676-ac59-a1efb241d78b.png"
+                alt="" />
+              <p class="side-observations">
+                malas reparacines rayones y sumiduras
+              </p>
+            </div>
+            <div class="side-total-price-box">
+              <p class="side-total-price-box-label">Presupuesto estimado</p>
+              <p class="side-total-price-box-price">$300,000 </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="exterior-section">
+        <!-- Lado superior -->
+        <div class="side-container">
+          <div class="side-container-top-label">
+            <p>LADO SUPERIOR</p>
+          </div>
+          <div class="side-imperfection-list">
+
+          </div>
+          <div class="side-body">
+            <div class="side-image-box">
+              <img
+                src="https://storage.googleapis.com/course-gcp-2024-images/2025/09/15/6aee38b1-fcc9-4bd3-ad7e-c98d1a632519.png"
+                alt="" />
+              <p class="side-observations">
+                ok
+              </p>
+            </div>
+            <div class="side-total-price-box">
+              <p class="side-total-price-box-label">Presupuesto estimado</p>
+              <p class="side-total-price-box-price">N/A</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page">
+    <!-- HEADER -->
+    <div class="header">
+      <div class="header-cell logo">
+        <img src="https://wcar.co/assets/logos/horizontal.svg" alt="Logo WCAR" />
+      </div>
+      <div class="header-cell title">
+        Inspección general de vehículos
+      </div>
+      <div class="header-cell title-number">
+        <span class="title-number-prefix">No</span>
+        <span class="title-number-value">3488</span>
+      </div>
+    </div>
+      <div class="section">
+        <div class="section-title">
+          <span class="section-number">3</span>
+          <span class="section-title-text">Inferior del vehiculo</span>
+        </div>
+        <div class="subtitle">
+          Por medio del presente documento, confirmamos que estamos
+          inspeccionando el vehículo a continuación relacionado
+        </div>
+
+        <div class="underbody-section">
+          <!-- Lado inferior -->
+          <div class="underbody-table">
+
+            <div class="underbody-table-row">
+              <div class="underbody-table-row-item">
+                <span>Estructura Chasis</span>
+                <p>En buen estado</p>
+              </div>
+              <div class="underbody-table-row-item">
+                <p class="underbody-table-observations">
+                  ok
+                </p>
+              </div>
+              <div class="underbody-table-row-item">
+                <p class="underbody-table-price">0.0</p>
+              </div>
+            </div>
+
+            <div class="underbody-table-row">
+              <div class="underbody-table-row-item">
+                <span>Punta Chasis</span>
+                <p>En buen estado</p>
+              </div>
+              <div class="underbody-table-row-item">
+                <p class="underbody-table-observations">
+                  ok
+                </p>
+              </div>
+              <div class="underbody-table-row-item">
+                <p class="underbody-table-price">0.0</p>
+              </div>
+            </div>
+
+            <div class="underbody-table-row">
+              <div class="underbody-table-row-item">
+                <span>Pisos General</span>
+                <p>En buen estado</p>
+              </div>
+              <div class="underbody-table-row-item">
+                <p class="underbody-table-observations">
+                  ok
+                </p>
+              </div>
+              <div class="underbody-table-row-item">
+                <p class="underbody-table-price">0.0</p>
+              </div>
+            </div>
+
+            <div class="underbody-table-row">
+              <div class="underbody-table-row-item">
+                <span>Estribos</span>
+                <p>En buen estado</p>
+              </div>
+              <div class="underbody-table-row-item">
+                <p class="underbody-table-observations">
+                  ok
+                </p>
+              </div>
+              <div class="underbody-table-row-item">
+                <p class="underbody-table-price">0.0</p>
+              </div>
+            </div>
+
+            <div class="underbody-table-row">
+              <div class="underbody-table-row-item">
+                <span>Traviesas</span>
+                <p>En buen estado</p>
+              </div>
+              <div class="underbody-table-row-item">
+                <p class="underbody-table-observations">
+                  ok
+                </p>
+              </div>
+              <div class="underbody-table-row-item">
+                <p class="underbody-table-price">0.0</p>
+              </div>
+            </div>
+
+          </div>
+          <div style="height: 600px;"></div>
+          <div class="logo-placeholder"
+            style="display: flex; justify-content: center; align-items: center; max-width: 80%; margin: auto; margin-top: 250px; ">
+            <img src="https://storage.googleapis.com/course-gcp-2024-images/publics/wcar.svg" style="width: 90%;"
+              alt="Logo WCAR" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ------------------------------------------ Interior del vehiculo ------------------------------------------ -->
+    <div class="page">
+
+      <div class="section">
+        <div class="section-title">
+          <span class="section-number">4</span>
+          <span class="section-title-text">Interior del vehiculo</span>
+        </div>
+        <div class="subtitle">
+          Por medio del presente documento, confirmamos que estamos
+          inspeccionando el vehículo a continuación relacionado
+        </div>
+        <!-- Tabla para ACCESORIOS -->
+        <div class="tabla-seccion-container">
+          <div class="tabla-seccion-sidebar">
+            <div class="tabla-seccion-sidebar-text">ACCESORIOS</div>
+          </div>
+          <div class="tabla-seccion-content">
+            <table class="tabla-seccion-table">
+              <thead>
+                <tr>
+                  <th class="tabla-seccion-col-parte">Parte</th>
+                  <th class="tabla-seccion-col-estado">Estado</th>
+                  <th class="tabla-seccion-col-descripcion">Descripción</th>
+                  <th class="tabla-seccion-col-presupuesto">Presupuesto</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Parlantes</td>
+                  <td class="estado-bueno">En buen estado</td>
+                  <td></td>
+                  <td class="tabla-seccion-col-presupuesto">N/A</td>
+                </tr>
+                <tr>
+                  <td>Alarma</td>
+                  <td class="estado-bueno">En buen estado</td>
+                  <td></td>
+                  <td class="tabla-seccion-col-presupuesto">N/A</td>
+                </tr>
+                <tr>
+                  <td>Exploradoras</td>
+                  <td class="estado-malo">En buen estado</td>
+                  <td></td>
+                  <td class="tabla-seccion-col-presupuesto">N/A</td>
+                </tr>
+                <tr>
+                  <td>Aire acondicionado</td>
+                  <td class="estado-bueno">En buen estado</td>
+                  <td></td>
+                  <td class="tabla-seccion-col-presupuesto">N/A</td>
+                </tr>
+                <tr>
+                  <td>Bloqueo central</td>
+                  <td class="estado-bueno">En buen estado</td>
+                  <td></td>
+                  <td class="tabla-seccion-col-presupuesto">N/A</td>
+                </tr>
+                <tr>
+                  <td>Seguros</td>
+                  <td class="estado-bueno">En buen estado</td>
+                  <td></td>
+                  <td class="tabla-seccion-col-presupuesto">N/A</td>
+                </tr>
+                <tr>
+                  <td>Película de seguridad</td>
+                  <td class="tabla-seccion-guiones" style="text-align: center;">En buen estado</td>
+                  <td class="tabla-seccion-guiones"></td>
+                  <td class="tabla-seccion-col-presupuesto">N/A</td>
+                </tr>
+                <tr>
+                  <td>Tapicería en cuero</td>
+                  <td class="tabla-seccion-guiones" style="text-align: center;">En buen estado</td>
+                  <td class="tabla-seccion-guiones"></td>
+                  <td class="tabla-seccion-col-presupuesto">N/A</td>
+                </tr>
+                <tr>
+                  <td>Luces general</td>
+                  <td class="estado-regular" style="text-align: center;">En estado regular</td>
+                  <td>ok</td>
+                  <td class="tabla-seccion-col-presupuesto">N/A</td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="tabla-seccion-footer">
+              <div class="tabla-seccion-observaciones">
+
+              </div>
+              <div class="tabla-seccion-total">
+                <div class="tabla-seccion-total-label">Presupuesto Total</div>
+                <div class="tabla-seccion-total-valor">$0 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Tabla para TAPIZADO -->
+        <div class="tabla-seccion-container">
+          <div class="tabla-seccion-sidebar">
+            <div class="tabla-seccion-sidebar-text">TAPIZADO</div>
+          </div>
+          <div class="tabla-seccion-content">
+            <table class="tabla-seccion-table">
+              <thead>
+                <tr>
+                  <th class="tabla-seccion-col-parte">Parte</th>
+                  <th class="tabla-seccion-col-estado">Estado</th>
+                  <th class="tabla-seccion-col-descripcion">Descripción</th>
+                  <th class="tabla-seccion-col-presupuesto">Presupuesto</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Limpieza tapicería</td>
+                  <td class="estado-regular">Malo</td>
+                  <td>restaurar</td>
+                  <td class="tabla-seccion-col-presupuesto">$200,000 </td>
+                </tr>
+                <tr>
+                  <td>Estado tapicería</td>
+                  <td class="estado-bueno">Malo</td>
+                  <td>restaurar</td>
+                  <td class="tabla-seccion-col-presupuesto">$300,000 </td>
+                </tr>
+                <tr>
+                  <td>Ajuste de sillas</td>
+                  <td class="estado-bueno">En buen estado</td>
+                  <td></td>
+                  <td class="tabla-seccion-col-presupuesto">N/A</td>
+                </tr>
+                <tr>
+                  <td>Cinturon de seguridad</td>
+                  <td class="estado-bueno">En buen estado</td>
+                  <td></td>
+                  <td class="tabla-seccion-col-presupuesto">N/A</td>
+                </tr>
+                <tr>
+                  <td>Estado de millaré</td>
+                  <td class="estado-regular">En estado regular</td>
+                  <td>ok</td>
+                  <td class="tabla-seccion-col-presupuesto">N/A</td>
+                </tr>
+                <tr>
+                  <td>Alfombra</td>
+                  <td class="estado-malo">En buen estado</td>
+                  <td></td>
+                  <td class="tabla-seccion-col-presupuesto">N/A</td>
+                </tr>
+                <tr>
+                  <td>Tapetes</td>
+                  <td class="estado-bueno">En buen estado</td>
+                  <td></td>
+                  <td class="tabla-seccion-col-presupuesto">N/A</td>
+                </tr>
+                <tr>
+                  <td>Manijas interiores</td>
+                  <td class="estado-bueno">En buen estado</td>
+                  <td></td>
+                  <td class="tabla-seccion-col-presupuesto">N/A</td>
+                </tr>
+                <tr>
+                  <td>Timón</td>
+                  <td class="estado-regular">Malo</td>
+                  <td>desgaste</td>
+                  <td class="tabla-seccion-col-presupuesto">$300,000 </td>
+                </tr>
+                <tr>
+                  <td>Otros defectos</td>
+                  <td class="estado-na">N/A</td>
+                  <td>N/A</td>
+                  <td class="tabla-seccion-col-presupuesto">N/A</td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="tabla-seccion-footer">
+              <div class="tabla-seccion-observaciones">
+
+              </div>
+              <div class="tabla-seccion-total">
+                <div class="tabla-seccion-total-label">Presupuesto Total</div>
+                <div class="tabla-seccion-total-valor">$800,000 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="height: 200px;"></div>
+        <div class="logo-placeholder"
+          style="display: flex; justify-content: center; align-items: center; max-width: 80%; margin: auto;">
+          <img src="https://storage.googleapis.com/course-gcp-2024-images/publics/wcar.svg" style="width: 90%;"
+            alt="Logo WCAR" />
+        </div>
+      </div>
+
+      <!-- ------------------------------------------ Sistema electrico y transmisión ------------------------------------------ -->
+      <div class="page">
+    <!-- HEADER -->
+    <div class="header">
+      <div class="header-cell logo">
+        <img src="https://wcar.co/assets/logos/horizontal.svg" alt="Logo WCAR" />
+      </div>
+      <div class="header-cell title">
+        Inspección general de vehículos
+      </div>
+      <div class="header-cell title-number">
+        <span class="title-number-prefix">No</span>
+        <span class="title-number-value">3488</span>
+      </div>
+    </div>
+        <div class="section">
+          <div class="section-title">
+            <span class="section-number">5</span>
+            <span class="section-title-text">Sistema Eléctrico y Transmisión</span>
+          </div>
+          <div class="subtitle">
+            Por medio del presente documento, confirmamos que estamos
+            inspeccionando el vehículo a continuación relacionado
+          </div>
+
+          <!-- Tabla para SISTEMA ELÉCTRICO -->
+          <div class="tabla-seccion-container">
+            <div class="tabla-seccion-sidebar">
+              <div class="tabla-seccion-sidebar-text">SISTEMA ELECTRICO</div>
+            </div>
+            <div class="tabla-seccion-content">
+              <table class="tabla-seccion-table">
+                <thead>
+                  <tr>
+                    <th class="tabla-seccion-col-parte">Parte</th>
+                    <th class="tabla-seccion-col-estado">Estado</th>
+                    <th class="tabla-seccion-col-descripcion">Descripción</th>
+                    <th class="tabla-seccion-col-presupuesto">Presupuesto</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Radio</td>
+                    <td class="estado-bueno">En buen estado</td>
+                    <td></td>
+                    <td class="tabla-seccion-col-presupuesto">N/A</td>
+                  </tr>
+                  <tr>
+                    <td>Testigos tablero</td>
+                    <td class="estado-bueno">En buen estado</td>
+                    <td></td>
+                    <td class="tabla-seccion-col-presupuesto">N/A</td>
+                  </tr>
+                  <tr>
+                    <td>Luces de emergencia</td>
+                    <td class="estado-bueno">En buen estado</td>
+                    <td></td>
+                    <td class="tabla-seccion-col-presupuesto">N/A</td>
+                  </tr>
+                  <tr>
+                    <td>Limpia parabrisas</td>
+                    <td class="estado-bueno">En buen estado</td>
+                    <td></td>
+                    <td class="tabla-seccion-col-presupuesto">N/A</td>
+                  </tr>
+                  <tr>
+                    <td>Reloj Digital</td>
+                    <td class="estado-bueno">En buen estado</td>
+                    <td></td>
+                    <td class="tabla-seccion-col-presupuesto">N/A</td>
+                  </tr>
+                  <tr>
+                    <td>Velocímetro</td>
+                    <td class="estado-bueno">En buen estado</td>
+                    <td></td>
+                    <td class="tabla-seccion-col-presupuesto">N/A</td>
+                  </tr>
+                  <tr>
+                    <td>Tacómetro</td>
+                    <td class="estado-bueno">En buen estado</td>
+                    <td></td>
+                    <td class="tabla-seccion-col-presupuesto">N/A</td>
+                  </tr>
+                  <tr>
+                    <td>Alternador</td>
+                    <td class="estado-bueno">En buen estado</td>
+                    <td></td>
+                    <td class="tabla-seccion-col-presupuesto">N/A</td>
+                  </tr>
+                  <tr>
+                    <td>Batéria</td>
+                    <td class="estado-bueno">En buen estado</td>
+                    <td></td>
+                    <td class="tabla-seccion-col-presupuesto">N/A</td>
+                  </tr>
+                  <tr>
+                    <td>Luces generales</td>
+                    <td class="estado-bueno">En estado regular</td>
+                    <td>ok</td>
+                    <td class="tabla-seccion-col-presupuesto">N/A</td>
+                  </tr>
+                  <tr>
+                    <td>Otros</td>
+                    <td class="estado-bueno">N/A</td>
+                    <td>N/A</td>
+                    <td class="tabla-seccion-col-presupuesto">N/A</td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="tabla-seccion-footer">
+                <div class="tabla-seccion-observaciones">
+
+                </div>
+                <div class="tabla-seccion-total">
+                  <div class="tabla-seccion-total-label">Presupuesto Total</div>
+                  <div class="tabla-seccion-total-valor">$0 </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tabla para TRANSMISIÓN -->
+          <div class="tabla-seccion-container">
+            <div class="tabla-seccion-sidebar">
+              <div class="tabla-seccion-sidebar-text">TRANSMISIÓN</div>
+            </div>
+            <div class="tabla-seccion-content">
+              <table class="tabla-seccion-table">
+                <thead>
+                  <tr>
+                    <th class="tabla-seccion-col-parte">Parte</th>
+                    <th class="tabla-seccion-col-estado">Estado</th>
+                    <th class="tabla-seccion-col-descripcion">Descripción</th>
+                    <th class="tabla-seccion-col-presupuesto">Presupuesto</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Transmisión</td>
+                    <td class="estado-bueno">Malo</td>
+                    <td>ok</td>
+                    <td class="tabla-seccion-col-presupuesto">N/A</td>
+                  </tr>
+                  <tr>
+                    <td>Golpeteo en caja</td>
+                    <td class="estado-bueno">En buen estado</td>
+                    <td></td>
+                    <td class="tabla-seccion-col-presupuesto">N/A</td>
+                  </tr>
+                  <tr>
+                    <td>Ruidos anormales</td>
+                    <td class="estado-bueno">En buen estado</td>
+                    <td></td>
+                    <td class="tabla-seccion-col-presupuesto">N/A</td>
+                  </tr>
+                  <tr>
+                    <td>Dificultad de cambios</td>
+                    <td class="estado-bueno">En buen estado</td>
+                    <td></td>
+                    <td class="tabla-seccion-col-presupuesto">N/A</td>
+                  </tr>
+                  <tr>
+                    <td>Cambios bruscos</td>
+                    <td class="estado-bueno">En buen estado</td>
+                    <td></td>
+                    <td class="tabla-seccion-col-presupuesto">N/A</td>
+                  </tr>
+                  <tr>
+                    <td>Fugas de acéite</td>
+                    <td class="estado-bueno">En buen estado</td>
+                    <td></td>
+                    <td class="tabla-seccion-col-presupuesto">N/A</td>
+                  </tr>
+                  <tr>
+                    <td>Tracción en ruedas</td>
+                    <td class="estado-bueno">En buen estado</td>
+                    <td></td>
+                    <td class="tabla-seccion-col-presupuesto">N/A</td>
+                  </tr>
+                  <tr>
+                    <td>Embrague</td>
+                    <td class="estado-bueno">En buen estado</td>
+                    <td></td>
+                    <td class="tabla-seccion-col-presupuesto">N/A</td>
+                  </tr>
+                  <tr>
+                    <td>Nivel de aceite</td>
+                    <td class="estado-bueno">En buen estado</td>
+                    <td></td>
+                    <td class="tabla-seccion-col-presupuesto">N/A</td>
+                  </tr>
+                  <tr>
+                    <td>Otros defectos</td>
+                    <td class="estado-bueno">N/A</td>
+                    <td>N/A</td>
+                    <td class="tabla-seccion-col-presupuesto">N/A</td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="tabla-seccion-footer">
+                <div class="tabla-seccion-observaciones">
+
+                </div>
+                <div class="tabla-seccion-total">
+                  <div class="tabla-seccion-total-label">Presupuesto Total</div>
+                  <div class="tabla-seccion-total-valor">$0 </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div style="height: 180px;"></div>
+          <div class="logo-placeholder"
+            style="display: flex; justify-content: center; align-items: center; max-width: 80%; margin: auto;">
+            <img src="https://storage.googleapis.com/course-gcp-2024-images/publics/wcar.svg" style="width: 90%;"
+              alt="Logo WCAR" />
+          </div>
+        </div>
+      </div>
+      <!-- ------------------------------------------ Ventilación y Motor ------------------------------------------ -->
+      <div class="page">
+    <!-- HEADER -->
+    <div class="header">
+      <div class="header-cell logo">
+        <img src="https://wcar.co/assets/logos/horizontal.svg" alt="Logo WCAR" />
+      </div>
+      <div class="header-cell title">
+        Inspección general de vehículos
+      </div>
+      <div class="header-cell title-number">
+        <span class="title-number-prefix">No</span>
+        <span class="title-number-value">3488</span>
+      </div>
+    </div>
+        <div class="section">
+          <div class="section-title">
+            <span class="section-number">6</span>
+            <span class="section-title-text">Ventilación y Motor</span>
+          </div>
+          <div class="subtitle">
+            Por medio del presente documento, confirmamos que estamos
+            inspeccionando el vehículo a continuación relacionado
+          </div>
+          <!-- Aqui deben ir las tablas de ventilación y motor -->
+          <!-- Tabla para VENTILACIÓN -->
+          <div class="tabla-seccion-container">
+            <div class="tabla-seccion-sidebar">
+              <div class="tabla-seccion-sidebar-text">VENTILACIÓN</div>
+            </div>
+            <div class="tabla-seccion-content">
+              <table class="tabla-seccion-table">
+                <thead>
+                  <tr>
+                    <th class="tabla-seccion-col-parte">Parte</th>
+                    <th class="tabla-seccion-col-estado">Estado</th>
+                    <th class="tabla-seccion-col-descripcion">Descripción</th>
+                    <th class="tabla-seccion-col-presupuesto">Presupuesto</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Aire acondicionado</td>
+                    <td class="estado-bueno">En buen estado</td>
+                    <td></td>
+                    <td class="tabla-seccion-col-presupuesto">N/A</td>
+                  </tr>
+                  <tr>
+                    <td>Electro ventilación AA</td>
+                    <td class="estado-bueno">En buen estado</td>
+                    <td></td>
+                    <td class="tabla-seccion-col-presupuesto">N/A</td>
+                  </tr>
+                  <tr>
+                    <td>Rejillas ventilación</td>
+                    <td class="estado-bueno">En buen estado</td>
+                    <td></td>
+                    <td class="tabla-seccion-col-presupuesto">N/A</td>
+                  </tr>
+                  <tr>
+                    <td>Calefacción</td>
+                    <td class="estado-bueno">En buen estado</td>
+                    <td></td>
+                    <td class="tabla-seccion-col-presupuesto">N/A</td>
+                  </tr>
+                  <tr>
+                    <td>Controles de mando</td>
+                    <td class="estado-bueno">En buen estado</td>
+                    <td></td>
+                    <td class="tabla-seccion-col-presupuesto">N/A</td>
+                  </tr>
+                  <tr>
+                    <td>Motor de calefacción</td>
+                    <td class="estado-bueno">En buen estado</td>
+                    <td></td>
+                    <td class="tabla-seccion-col-presupuesto">N/A</td>
+                  </tr>
+                  <tr>
+                    <td>Tuberia Aire</td>
+                    <td class="estado-bueno">En buen estado</td>
+                    <td></td>
+                    <td class="tabla-seccion-col-presupuesto">N/A</td>
+                  </tr>
+                  <tr>
+                    <td>Ruidos anormales</td>
+                    <td class="estado-bueno">En buen estado</td>
+                    <td></td>
+                    <td class="tabla-seccion-col-presupuesto">N/A</td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="tabla-seccion-footer">
+                <div class="tabla-seccion-observaciones">
+
+                </div>
+                <div class="tabla-seccion-total">
+                  <div class="tabla-seccion-total-label">Presupuesto Total</div>
+                  <div class="tabla-seccion-total-valor">$0 </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Tabla para MOTOR -->
+          <div class="tabla-seccion-container">
+            <div class="tabla-seccion-sidebar">
+              <div class="tabla-seccion-sidebar-text">MOTOR</div>
+            </div>
+            <div class="tabla-seccion-content">
+              <table class="tabla-seccion-table">
+                <thead>
+                  <tr>
+                    <th class="tabla-seccion-col-parte">Parte</th>
+                    <th class="tabla-seccion-col-estado">Estado</th>
+                    <th class="tabla-seccion-col-descripcion">Descripción</th>
+                    <th class="tabla-seccion-col-presupuesto">Presupuesto</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Nivel del refrigerante</td>
+                    <td class="estado-bueno">En buen estado</td>
+                    <td></td>
+                    <td class="tabla-seccion-col-presupuesto">N/A</td>
+                  </tr>
+                  <tr>
+                    <td>Operación motor</td>
+                    <td class="estado-bueno">Malo</td>
+                    <td>mantenimiento preventivo por kilometraje</td>
+                    <td class="tabla-seccion-col-presupuesto">$1,500,000 </td>
+                  </tr>
+                  <tr>
+                    <td>Fugas de acéite</td>
+                    <td class="estado-bueno">Malo</td>
+                    <td>corregir fugas por carter</td>
+                    <td class="tabla-seccion-col-presupuesto">$500,000 </td>
+                  </tr>
+                  <tr>
+                    <td>Compresión</td>
+                    <td class="estado-bueno">En buen estado</td>
+                    <td></td>
+                    <td class="tabla-seccion-col-presupuesto">N/A</td>
+                  </tr>
+                  <tr>
+                    <td>Lodos</td>
+                    <td class="estado-bueno">N/A</td>
+                    <td>N/A</td>
+                    <td class="tabla-seccion-col-presupuesto">N/A</td>
+                  </tr>
+                  <tr>
+                    <td>Soportes</td>
+                    <td class="estado-bueno">En buen estado</td>
+                    <td></td>
+                    <td class="tabla-seccion-col-presupuesto">N/A</td>
+                  </tr>
+                  <tr>
+                    <td>Filtro de aire</td>
+                    <td class="estado-bueno">En buen estado</td>
+                    <td></td>
+                    <td class="tabla-seccion-col-presupuesto">N/A</td>
+                  </tr>
+                  <tr>
+                    <td>Filtro de aceire</td>
+                    <td class="estado-bueno">N/A</td>
+                    <td>N/A</td>
+                    <td class="tabla-seccion-col-presupuesto">N/A</td>
+                  </tr>
+                  <tr>
+                    <td>Correa de repartición</td>
+                    <td class="estado-bueno">En buen estado</td>
+                    <td></td>
+                    <td class="tabla-seccion-col-presupuesto">N/A</td>
+                  </tr>
+                  <tr>
+                    <td>Correa accesorios</td>
+                    <td class="estado-bueno">En buen estado</td>
+                    <td></td>
+                    <td class="tabla-seccion-col-presupuesto">N/A</td>
+                  </tr>
+                  <tr>
+                    <td>Ruidos anormales</td>
+                    <td class="estado-bueno">En buen estado</td>
+                    <td></td>
+                    <td class="tabla-seccion-col-presupuesto">N/A</td>
+                  </tr>
+                  <tr>
+                    <td>Retenedores</td>
+                    <td class="estado-bueno">En estado regular</td>
+                    <td>ok</td>
+                    <td class="tabla-seccion-col-presupuesto">N/A</td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="tabla-seccion-footer">
+                <div class="tabla-seccion-observaciones">
+
+                </div>
+                <div class="tabla-seccion-total">
+                  <div class="tabla-seccion-total-label">Presupuesto Total</div>
+                  <div class="tabla-seccion-total-valor">$2,400,000 </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div style="height: 160px;"></div>
+          <div class="logo-placeholder"
+            style="display: flex; justify-content: center; align-items: center; max-width: 80%; margin: auto;">
+            <img src="https://storage.googleapis.com/course-gcp-2024-images/publics/wcar.svg" style="width: 90%;"
+              alt="Logo WCAR" />
+          </div>
+        </div>
+      </div>
+
+      <!-- ------------------------------------------ Frenos y dirección ------------------------------------------ -->
+      <div class="page">
+    <!-- HEADER -->
+    <div class="header">
+      <div class="header-cell logo">
+        <img src="https://wcar.co/assets/logos/horizontal.svg" alt="Logo WCAR" />
+      </div>
+      <div class="header-cell title">
+        Inspección general de vehículos
+      </div>
+      <div class="header-cell title-number">
+        <span class="title-number-prefix">No</span>
+        <span class="title-number-value">3488</span>
+      </div>
+    </div>
+        <div class="section">
+          <div class="section-title">
+            <span class="section-number">7</span>
+            <span class="section-title-text">Frenos y dirección</span>
+          </div>
+          <div class="subtitle">
+            Por medio del presente documento, confirmamos que estamos
+            inspeccionando el vehículo a continuación relacionado
+          </div>
+          <!-- Tabla para FRENOS -->
+          <div class="tabla-seccion-container">
+            <div class="tabla-seccion-sidebar">
+              <div class="tabla-seccion-sidebar-text">FRENOS</div>
+            </div>
+            <div class="tabla-seccion-content">
+              <table class="tabla-seccion-table">
+                <thead>
+                  <tr>
+                    <th class="tabla-seccion-col-parte">Parte</th>
+                    <th class="tabla-seccion-col-estado">Estado</th>
+                    <th class="tabla-seccion-col-descripcion">Descripción</th>
+                    <th class="tabla-seccion-col-presupuesto">Presupuesto</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Nivel de fluidos</td>
+                    <td class="estado-bueno">En estado regular</td>
+                    <td>ok</td>
+                    <td class="tabla-seccion-col-presupuesto">N/A</td>
+                  </tr>
+                  <tr>
+                    <td>Ruidos anormales</td>
+                    <td class="estado-bueno">En buen estado</td>
+                    <td></td>
+                    <td class="tabla-seccion-col-presupuesto">N/A</td>
+                  </tr>
+                  <tr>
+                    <td>Testigo ruido al frenar</td>
+                    <td class="estado-bueno">N/A</td>
+                    <td>N/A</td>
+                    <td class="tabla-seccion-col-presupuesto">N/A</td>
+                  </tr>
+                  <tr>
+                    <td>Vibración al frenar</td>
+                    <td class="estado-bueno">En buen estado</td>
+                    <td></td>
+                    <td class="tabla-seccion-col-presupuesto">N/A</td>
+                  </tr>
+                  <tr>
+                    <td>Freno de mano</td>
+                    <td class="estado-bueno">En buen estado</td>
+                    <td></td>
+                    <td class="tabla-seccion-col-presupuesto">N/A</td>
+                  </tr>
+                  <tr>
+                    <td>Fugas de liquido</td>
+                    <td class="estado-bueno">En estado regular</td>
+                    <td>ok</td>
+                    <td class="tabla-seccion-col-presupuesto">N/A</td>
+                  </tr>
+                  <tr>
+                    <td>Disco izquierdo frontal</td>
+                    <td class="estado-bueno">N/A</td>
+                    <td>N/A</td>
+                    <td class="tabla-seccion-col-presupuesto">N/A</td>
+                  </tr>
+                  <tr>
+                    <td>Disco derecho frontol</td>
+                    <td class="estado-bueno">N/A</td>
+                    <td>N/A</td>
+                    <td class="tabla-seccion-col-presupuesto">N/A</td>
+                  </tr>
+                  <tr>
+                    <td>Disco izquierdo trasero</td>
+                    <td class="estado-bueno">N/A</td>
+                    <td>N/A</td>
+                    <td class="tabla-seccion-col-presupuesto">N/A</td>
+                  </tr>
+                  <tr>
+                    <td>Disco derecho trasero</td>
+                    <td class="estado-bueno">N/A</td>
+                    <td>N/A</td>
+                    <td class="tabla-seccion-col-presupuesto">N/A</td>
+                  </tr>
+                  <tr>
+                    <td>Retenedores</td>
+                    <td class="estado-bueno">En buen estado</td>
+                    <td></td>
+                    <td class="tabla-seccion-col-presupuesto">N/A</td>
+                  </tr>
+                  <tr>
+                    <td>Otros defectos</td>
+                    <td class="estado-bueno">N/A</td>
+                    <td>N/A</td>
+                    <td class="tabla-seccion-col-presupuesto">N/A</td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="tabla-seccion-footer">
+                <div class="tabla-seccion-observaciones">
+                  mantenimiento preventivo
+                </div>
+                <div class="tabla-seccion-total">
+                  <div class="tabla-seccion-total-label">Presupuesto Total</div>
+                  <div class="tabla-seccion-total-valor">$300,000 </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tabla para DIRECCIÓN -->
+          <div class="tabla-seccion-container">
+            <div class="tabla-seccion-sidebar">
+              <div class="tabla-seccion-sidebar-text">DIRECCIÓN</div>
+            </div>
+            <div class="tabla-seccion-content">
+              <table class="tabla-seccion-table">
+                <thead>
+                  <tr>
+                    <th class="tabla-seccion-col-parte">Parte</th>
+                    <th class="tabla-seccion-col-estado">Estado</th>
+                    <th class="tabla-seccion-col-descripcion">Descripción</th>
+                    <th class="tabla-seccion-col-presupuesto">Presupuesto</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Estado Dirección</td>
+                    <td class="estado-bueno">Muy malo</td>
+                    <td>presenta golpeteo fuerte para intervenir</td>
+                    <td class="tabla-seccion-col-presupuesto">$1,000,000 </td>
+                  </tr>
+                  <tr>
+                    <td>Nivel de aceite</td>
+                    <td class="estado-bueno">En estado regular</td>
+                    <td>ok</td>
+                    <td class="tabla-seccion-col-presupuesto">N/A</td>
+                  </tr>
+                  <tr>
+                    <td>Estado del aceite</td>
+                    <td class="estado-bueno">Malo</td>
+                    <td>presenta golpeteo fuerte cambio muecos estabilizadora</td>
+                    <td class="tabla-seccion-col-presupuesto">$400,000 </td>
+                  </tr>
+                  <tr>
+                    <td>Fugas de aceite</td>
+                    <td class="estado-bueno">En buen estado</td>
+                    <td></td>
+                    <td class="tabla-seccion-col-presupuesto">N/A</td>
+                  </tr>
+                  <tr>
+                    <td>Desempeño</td>
+                    <td class="estado-bueno">N/A</td>
+                    <td>N/A</td>
+                    <td class="tabla-seccion-col-presupuesto">N/A</td>
+                  </tr>
+                  <tr>
+                    <td>Terminales</td>
+                    <td class="estado-bueno">N/A</td>
+                    <td>N/A</td>
+                    <td class="tabla-seccion-col-presupuesto">N/A</td>
+                  </tr>
+                  <tr>
+                    <td>Alineción dirección</td>
+                    <td class="estado-bueno">N/A</td>
+                    <td>N/A</td>
+                    <td class="tabla-seccion-col-presupuesto">N/A</td>
+                  </tr>
+                  <tr>
+                    <td>Orientación timón</td>
+                    <td class="estado-bueno">Malo</td>
+                    <td>alineacin y balanceo</td>
+                    <td class="tabla-seccion-col-presupuesto">$150,000 </td>
+                  </tr>
+                  <tr>
+                    <td>Otros problemas</td>
+                    <td class="estado-bueno">N/A</td>
+                    <td>N/A</td>
+                    <td class="tabla-seccion-col-presupuesto">N/A</td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="tabla-seccion-footer">
+                <div class="tabla-seccion-observaciones">
+
+                </div>
+                <div class="tabla-seccion-total">
+                  <div class="tabla-seccion-total-label">Presupuesto Total</div>
+                  <div class="tabla-seccion-total-valor">$1,550,000 </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ------------------------------------------ Suspension, llantas y rines ------------------------------------------ -->
+      <div class="page">
+    <!-- HEADER -->
+    <div class="header">
+      <div class="header-cell logo">
+        <img src="https://wcar.co/assets/logos/horizontal.svg" alt="Logo WCAR" />
+      </div>
+      <div class="header-cell title">
+        Inspección general de vehículos
+      </div>
+      <div class="header-cell title-number">
+        <span class="title-number-prefix">No</span>
+        <span class="title-number-value">3488</span>
+      </div>
+    </div>
+        <div class="section">
+          <div class="section-title">
+            <span class="section-number">8</span>
+            <span class="section-title-text">Suspensión, llantas y rines</span>
+          </div>
+          <div class="subtitle">
+            Por medio del presente documento, confirmamos que estamos
+            inspeccionando el vehículo a continuación relacionado
+          </div>
+          <div class="row">
+            <div class="col">
+
+              <!-- Tabla para SUSPENSIÓN -->
+              <div class="tabla-seccion-container">
+                <div class="tabla-seccion-sidebar">
+                  <div class="tabla-seccion-sidebar-text">SUSPENSIÓN</div>
+                </div>
+                <div class="tabla-seccion-content">
+                  <table class="tabla-seccion-table">
+                    <thead>
+                      <tr>
+                        <th class="tabla-seccion-col-parte">Parte</th>
+                        <th class="tabla-seccion-col-estado">Estado</th>
+                        <th class="tabla-seccion-col-descripcion">Descripción</th>
+                        <th class="tabla-seccion-col-presupuesto">Presupuesto</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Guarda polvos</td>
+                        <td class="estado-bueno">En buen estado</td>
+                        <td></td>
+                        <td class="tabla-seccion-col-presupuesto">N/A</td>
+                      </tr>
+                      <tr>
+                        <td>Retenes</td>
+                        <td class="estado-bueno">En buen estado</td>
+                        <td></td>
+                        <td class="tabla-seccion-col-presupuesto">N/A</td>
+                      </tr>
+                      <tr>
+                        <td>Amortiguador D / I</td>
+                        <td class="estado-bueno">N/A</td>
+                        <td>N/A</td>
+                        <td class="tabla-seccion-col-presupuesto">N/A</td>
+                      </tr>
+                      <tr>
+                        <td>Amortiguador D / D</td>
+                        <td class="estado-bueno">N/A</td>
+                        <td>N/A</td>
+                        <td class="tabla-seccion-col-presupuesto">N/A</td>
+                      </tr>
+                      <tr>
+                        <td>Amortiguador T / I</td>
+                        <td class="estado-bueno">N/A</td>
+                        <td>N/A</td>
+                        <td class="tabla-seccion-col-presupuesto">N/A</td>
+                      </tr>
+                      <tr>
+                        <td>Amortiguador T / D</td>
+                        <td class="estado-bueno">N/A</td>
+                        <td>N/A</td>
+                        <td class="tabla-seccion-col-presupuesto">N/A</td>
+                      </tr>
+                      <tr>
+                        <td>Brazos suspensión</td>
+                        <td class="estado-bueno">En buen estado</td>
+                        <td></td>
+                        <td class="tabla-seccion-col-presupuesto">N/A</td>
+                      </tr>
+                      <tr>
+                        <td>Bujes o cauchos</td>
+                        <td class="estado-bueno">En buen estado</td>
+                        <td></td>
+                        <td class="tabla-seccion-col-presupuesto">N/A</td>
+                      </tr>
+                      <tr>
+                        <td>Rodamiento D / I</td>
+                        <td class="estado-bueno">N/A</td>
+                        <td>N/A</td>
+                        <td class="tabla-seccion-col-presupuesto">N/A</td>
+                      </tr>
+                      <tr>
+                        <td>Rodamiento D / D</td>
+                        <td class="estado-bueno">N/A</td>
+                        <td>N/A</td>
+                        <td class="tabla-seccion-col-presupuesto">N/A</td>
+                      </tr>
+                      <tr>
+                        <td>Rodamiento T / I</td>
+                        <td class="estado-bueno">N/A</td>
+                        <td>N/A</td>
+                        <td class="tabla-seccion-col-presupuesto">N/A</td>
+                      </tr>
+                      <tr>
+                        <td>Rodamiento T / D</td>
+                        <td class="estado-bueno">N/A</td>
+                        <td>N/A</td>
+                        <td class="tabla-seccion-col-presupuesto">N/A</td>
+                      </tr>
+                      <tr>
+                        <td>Otros defectos</td>
+                        <td class="estado-bueno">N/A</td>
+                        <td>N/A</td>
+                        <td class="tabla-seccion-col-presupuesto">N/A</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <div class="tabla-seccion-footer">
+                    <div class="tabla-seccion-observaciones">
+
+                    </div>
+                    <div class="tabla-seccion-total">
+                      <div class="tabla-seccion-total-label">Presupuesto Total</div>
+                      <div class="tabla-seccion-total-valor">$1,000,000 </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Tabla para LLANTAS Y RINES -->
+              <div class="tabla-seccion-container">
+                <div class="tabla-seccion-sidebar">
+                  <div class="tabla-seccion-sidebar-text">LLANTAS Y RINES</div>
+                </div>
+                <div class="tabla-seccion-content">
+                  <table class="tabla-seccion-table">
+                    <thead>
+                      <tr>
+                        <th class="tabla-seccion-col-parte">Parte</th>
+                        <th class="tabla-seccion-col-estado">Estado</th>
+                        <th class="tabla-seccion-col-descripcion">Descripción</th>
+                        <th class="tabla-seccion-col-presupuesto">Presupuesto</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Llantas delanteras</td>
+                        <td class="estado-bueno">En buen estado</td>
+                        <td></td>
+                        <td class="tabla-seccion-col-presupuesto">N/A</td>
+                      </tr>
+                      <tr>
+                        <td>Llantas traseras</td>
+                        <td class="estado-bueno">En buen estado</td>
+                        <td></td>
+                        <td class="tabla-seccion-col-presupuesto">N/A</td>
+                      </tr>
+                      <tr>
+                        <td>Llanta de repuesto</td>
+                        <td class="estado-bueno">En buen estado</td>
+                        <td></td>
+                        <td class="tabla-seccion-col-presupuesto">N/A</td>
+                      </tr>
+                      <tr>
+                        <td>Rines delanteros</td>
+                        <td class="estado-bueno">Malo</td>
+                        <td>rines en mal estado</td>
+                        <td class="tabla-seccion-col-presupuesto">$200,000 </td>
+                      </tr>
+                      <tr>
+                        <td>Rines traseros</td>
+                        <td class="estado-bueno">Malo</td>
+                        <td>rines en mal estado</td>
+                        <td class="tabla-seccion-col-presupuesto">$200,000 </td>
+                      </tr>
+                      <tr>
+                        <td>Rin de repuesto</td>
+                        <td class="estado-bueno">En buen estado</td>
+                        <td></td>
+                        <td class="tabla-seccion-col-presupuesto">N/A</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <div class="tabla-seccion-footer">
+                    <div class="tabla-seccion-observaciones">
+
+
+                    </div>
+                    <div class="tabla-seccion-total">
+                      <div class="tabla-seccion-total-label">Presupuesto Total</div>
+                      <div class="tabla-seccion-total-valor">$0 </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div style="height: 100px;"></div>
+              <div class="page">
+                <div class="observations-box">
+                  <div class="presupuesto-sugerido-observaciones">
+                    <p>
+                      <b>Observaciones:</b> N/A
+                    </p>
+                    <div class="right-box">
+                      <div class="presupuesto-sugerido-badge">
+                        <p>Precio de compra del vehículo: <span>N/A</span></p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="signature-section">
+                  <div class="signature-box">
+                    <div class="signature-line">Jayder Yepes</div>
+                    <div class="signature-title">FIRMA PERITO AUTORIZADO</div>
+                  </div>
+                  <div class="signature-box">
+                    <div class="signature-line"><img
+                        src="https://storage.googleapis.com/course-gcp-2024-images/publics/sing_ivan_correct.png"
+                        alt="Firma Gerente" style="max-width: 200px; height: auto;"></div>
+                    <div class="signature-title">FIRMA GERENTE COMPRAS</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+</body>
+
+</html>
