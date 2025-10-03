@@ -194,92 +194,158 @@
     }
 
     /* --- Tablas de Sección (Estructura principal) --- */
-    .tabla-seccion-container {
-      width: 100%;
-      border-radius: 24px;
-      border: 0.5px solid #909090;
-      overflow: hidden;
-      margin-bottom: 30px;
-      display: table;
-      table-layout: fixed;
-    }
+.tabla-seccion-container {
+  width: 100%;
+  border-radius: 24px;
+  overflow: hidden;
+  display: flex;
+  margin-bottom: 30px;
+  position: relative;
+}
 
-    .tabla-seccion-row {
-      display: table-row;
-    }
+.tabla-seccion-sidebar {
+  background-color: #e84d1c;
+  color: white;
+  font-weight: 900;
+  font-size: 14px;
+  width: 40px;
+  min-width: 40px;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+}
 
-    .tabla-seccion-sidebar {
-      display: table-cell;
-      width: 40px;
-      background-color: #e84d1c;
-      color: white;
-      vertical-align: middle;
-      text-align: center;
-      /* El texto vertical se debe manejar con una imagen SVG/PNG en el HTML */
-    }
+.tabla-seccion-sidebar-text {
+  transform: rotate(-90deg);
+  white-space: nowrap;
+  letter-spacing: 1px;
+  font-size: 24px;
+  font-weight: 900;
+}
 
-    .tabla-seccion-sidebar-text {
-      /* Este elemento contendría la imagen del texto vertical */
-      width: 100%;
-    }
+.tabla-seccion-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin-left: 40px;
+}
 
-    .tabla-seccion-content {
-      display: table-cell;
-      vertical-align: top;
-    }
+.tabla-seccion-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
 
-    .tabla-seccion-table {
-      width: 100%;
-      border-collapse: collapse;
-    }
+.tabla-seccion-table th,
+.tabla-seccion-table td {
+  border: 0.5px solid #909090;
+  border-left: none;
+  padding: 8px 10px;
+  vertical-align: middle;
+  font-size: 14px;
+}
 
-    .tabla-seccion-table th,
-    .tabla-seccion-table td {
-      border: 0.5px solid #909090;
-      padding: 8px 10px;
-      vertical-align: middle;
-      font-size: 14px;
-      word-wrap: break-word;
-    }
+.tabla-seccion-table td:nth-child(1) {
+  color: #000;
+  font-weight: 700;
+}
 
-    .tabla-seccion-table th {
-      font-weight: bold;
-      text-align: center;
-      background-color: #fff;
-      color: #000;
-    }
+.tabla-seccion-table th {
+  font-weight: bold;
+  text-align: center;
+  background-color: #fff;
+  color: #000;
+}
 
-    .tabla-seccion-col-presupuesto {
-      text-align: right;
-      font-weight: 900;
-      font-size: 18px;
-      color: #e84d1c;
-    }
+.tabla-seccion-col-parte {
+  width: 25%;
+}
 
-    .tabla-seccion-footer {
-      display: table;
-      width: 100%;
-      table-layout: fixed;
-    }
+.tabla-seccion-col-estado {
+  width: 20%;
+  text-align: center;
+}
 
-    .tabla-seccion-observaciones {
-      display: table-cell;
-      padding: 10px 15px;
-      font-size: 14px;
-      width: 65%;
-    }
+.tabla-seccion-col-descripcion {
+  width: 40%;
+}
 
-    .tabla-seccion-total {
-      display: table-cell;
-      width: 35%;
-      background-color: #e84d1c;
-      color: white;
-      padding: 10px 15px;
-      text-align: center;
-      vertical-align: middle;
-      border-top-left-radius: 20px;
-      border-bottom-right-radius: 20px;
-    }
+.tabla-seccion-col-presupuesto {
+  width: 15%;
+  text-align: right;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  font-weight: 900;
+  font-size: 18px;
+  color: #e84d1c;
+}
+
+th.tabla-seccion-col-presupuesto {
+  width: 120px;
+  min-width: 120px;
+  font-weight: bold;
+}
+
+.estado-bueno,
+.estado-regular,
+.estado-malo,
+.estado-na {
+  color: #e84d1c;
+  font-style: italic;
+  text-align: center;
+  font-weight: bold;
+}
+
+.tabla-seccion-footer {
+  display: flex;
+  width: 100%;
+  border-bottom: 0.5px solid #909090;
+}
+
+.tabla-seccion-observaciones {
+  padding: 10px 15px;
+  font-size: 14px;
+  width: 65%;
+}
+
+.tabla-seccion-total {
+  background-color: #e84d1c;
+  color: white;
+  padding: 10px 15px;
+  width: 35%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-top-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  height: auto;
+}
+
+.tabla-seccion-total-label {
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 0;
+  line-height: 1;
+  text-align: center;
+}
+
+.tabla-seccion-total-valor {
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.tabla-seccion-guiones {
+  color: #777;
+  text-align: center;
+}
 
     /* --- Firmas --- */
     .signature-section {
@@ -611,8 +677,8 @@
 }
 
 .side-container {
-  width: 480px;
-  height: 300px;
+  width: 340px;
+  height: 260px;
   border: 1px solid #909090;
   border-bottom-right-radius: 42px;
   position: relative;
@@ -728,8 +794,8 @@
 }
 
 .side-total-price-box {
-  width: 100%;
-  height: 60px;
+  width: 300px;
+  height: 50px;
   display: flex;
   align-items: center;
   justify-content: space-between;
