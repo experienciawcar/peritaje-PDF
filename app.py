@@ -42,13 +42,13 @@ options = {
 
 @app.route("/")
 def index():
-    return render_template("pagina_generada.html")
+    return render_template("pagina_generada.html", is_pdf=False)
 
 @app.route("/generate_peritaje", methods=["GET"])
 def generate_peritaje():
     print("Accessing generate_pdf endpoint")
     # Renderiza la plantilla usando Flask
-    html = render_template("pagina_generada.html")
+    html = render_template("pagina_generada.html", is_pdf=True)
     print("hice html")
 
     # Si usas recursos estáticos, define la base_url
@@ -95,4 +95,4 @@ def generate_actas_pdf():
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 8080))  # Puerto 8080 por defecto si no se define
-    app.run(host="0.0.0.0", port=port)
+    app.run(host="0.0.0.0", port=port, debug=True)
