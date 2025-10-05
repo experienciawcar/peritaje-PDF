@@ -5,6 +5,21 @@ from weasyprint import HTML
 import os
 # Mappers
 from mappers import ActasMapper
+import logging
+import time
+
+
+# === CONFIGURACIÓN DE LOGGING ===
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s %(levelname)s [%(name)s] %(message)s"
+)
+logger = logging.getLogger("pdf_worker")
+
+# Reducir ruido de librerías internas
+logging.getLogger("weasyprint").setLevel(logging.ERROR)
+logging.getLogger("fontTools").setLevel(logging.ERROR)
+
 
 app = Flask(__name__)
 print("Flask app initialized")
@@ -46,23 +61,34 @@ def index():
 
 @app.route("/generate_peritaje", methods=["GET"])
 def generate_peritaje():
-    print("Accessing generate_pdf endpoint")
+    start_total = time.perf_counter()
+    start_html = time.perf_counter()
     # Renderiza la plantilla usando Flask
     html = render_template("pagina_generada.html", is_pdf=True)
-    print("hice html")
+    end_html = time.perf_counter()
+    print(f"Tiempo para renderizar HTML: {end_html - start_html:.2f} segundos")
 
     # Si usas recursos estáticos, define la base_url
+    start_pdf = time.perf_counter()
     base_url = os.path.abspath(os.path.dirname(__file__))
     print("Voy a hacer el PDF", base_url)
+    logger.info(f"Base URL for resources: {base_url}")
     # Genera el PDF desde el HTML renderizado
     pdf = HTML(string=html, base_url=base_url).write_pdf()
-    print("hice pdf")
+    end_pdf = time.perf_counter()
+    print(f"Tiempo para generar PDF: {end_pdf - start_pdf:.2f} segundos")
 
     # Crear respuesta HTTP con el PDF
+    start_response = time.perf_counter()
     response = make_response(pdf)
+    end_response = time.perf_counter()
+    print(f"Tiempo para crear respuesta HTTP: {end_response - start_response:.2f} segundos")
+    logger.info("PDF response created for peritaje")
     response.headers["Content-Type"] = "application/pdf"
     response.headers["Content-Disposition"] = "inline; filename=acta.pdf"
     print("hice response")
+    logger.info("Response with PDF for peritaje created")
+
 
     return response
 
