@@ -35,9 +35,9 @@
             <div class="basic-table-body">
                 <div class="basic-row">
                     <div class="basic-col part">Testigos tablero</div>
-                    <div class="basic-col status">En estado Regular</div>
-                    <div class="basic-col description">Semi nuevo</div>
-                    <div class="basic-col budget">$ 2.000,00</div>
+                    <div class="basic-col status">{{ electrical_system['testigos_tablero']['state'] }}</div>
+                    <div class="basic-col description">{{ electrical_system['testigos_tablero']['description'] }}</div>
+                    <div class="basic-col budget">{{ electrical_system['testigos_tablero']['price'] }}</div>
                 </div>
                 <div class="basic-row row-gray">
                     <div class="basic-col part">Luces de emergencia</div>

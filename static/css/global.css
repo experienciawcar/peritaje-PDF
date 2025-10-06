@@ -1,6 +1,36 @@
 /* Estilos globales para todas las páginas del PDF */
 
-@import url('https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;500;600;700&display=swap');
+/* Reemplaza Google Fonts por fuentes locales */
+@font-face {
+  font-family: 'Urbanist';
+  src: url('../fonts/Urbanist-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Urbanist';
+  src: url('../fonts/Urbanist-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Urbanist';
+  src: url('../fonts/Urbanist-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Urbanist';
+  src: url('../fonts/Urbanist-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Urbanist';
+  src: url('../fonts/Urbanist-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
 
 @page {
   size: 305mm 297mm;

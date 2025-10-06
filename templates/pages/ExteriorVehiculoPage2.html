@@ -30,49 +30,32 @@
                 <!-- Lado trasero: Imagen -->
                 <div class="vehicle-image-section">
                     <div class="vehicle-image-container">
-                        <img src="https://storage.googleapis.com/wcar-images/cars-95423486-4IMG_8627.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=githubactions%40web-wcar-co.iam.gserviceaccount.com%2F20251004%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20251004T175113Z&X-Goog-Expires=86400&X-Goog-SignedHeaders=host&X-Goog-Signature=26d35ddf5adbd906f5f7e17b105e5db52d17307bc1f4cc5e31f17a93983e3ab990f3a63d43295df250868013c4f90a0d2e9548a537b2437bee83784a139b3fcdcfc146d296eaa1b7bdb90e81762b8dc0ed91621d38ae1251a6e6a2c936b0931da7fc873f87dc01025d3762fd8b6c0fc8ff9e16a56faa7fb176f1840d062742616ea29c59ae8cac199a2698418a7d33dabae82bf1dada0040e785b9dd366be98da5c0d2e717a21c8265629fc6fa2b99fdcc2509b16bdf6edf31eca5f3584cc0053755a4a5118c77b705824af1a98d07b46761048b7a177f0b44cb8b885642cf6a695f6ff6bed2931d79f2a8e037998a59e6efe755b7251fdf3a5486bec928fdfb" alt="Vehículo Lado Trasero" />
+                        <img src="https://storage.googleapis.com/course-gcp-2024-images/2025/10/05/304d3da8-e779-470f-88fe-4f7896a8f83e.png" alt="Vehículo Lado Trasero" />
                     </div>
                 </div>
 
                 <!-- Lado trasero: Tabla de daños y presupuesto -->
                 <div class="vehicle-details-section">
                     <div class="damage-grid">
-                        <div class="damage-item">
-                            <div class="damage-number">1</div>
-                            <div class="damage-info">
-                                <span class="damage-type">Golpe</span>
-                                <span class="damage-status">Mal estado</span>
+                        {% for item in back_side['gravity_items'] %}
+                            <div class="damage-item">
+                                <div class="damage-number">{{ loop.index }}</div>
+                                <div class="damage-info">
+                                    <span class="damage-type">{{ item.title }}</span>
+                                    <span class="damage-status">{{ item.gravity }}</span>
+                                </div>
                             </div>
-                        </div>
-                        <div class="damage-item">
-                            <div class="damage-empty">----------</div>
-                        </div>
-                        <div class="damage-item">
-                            <div class="damage-number">2</div>
-                            <div class="damage-info">
-                                <span class="damage-type">Rayones</span>
-                                <span class="damage-status">Funcional</span>
-                            </div>
-                        </div>
-                        <div class="damage-item">
-                            <div class="damage-empty">----------</div>
-                        </div>
-                        <div class="damage-item">
-                            <div class="damage-empty">----------</div>
-                        </div>
-                        <div class="damage-item">
-                            <div class="damage-empty">----------</div>
-                        </div>
+                        {% endfor %}
                     </div>
                     <div class="estimated-budget">
                         <span class="estimated-budget-label">Presupuesto estimado</span>
-                        <span class="estimated-budget-value">$ 5.400,00</span>
+                        <span class="estimated-budget-value">{{back_side.budget}}</span>
                     </div>
                 </div>
             </div>
             <div class="vehicle-observations">
                 <p class="vehicle-observations-title">Observaciones del <span>funcionario</span></p>
-                <p class="vehicle-observations-text">El vehículo presenta severos problemas en la parte trasera</p>
+                <p class="vehicle-observations-text">{{back_side.description}}</p>
             </div>
         </div>
 
@@ -85,49 +68,32 @@
                 <!-- Lado superior: Imagen -->
                 <div class="vehicle-image-section">
                     <div class="vehicle-image-container">
-                        <img src="https://storage.googleapis.com/wcar-images/cars-81314383-1IMG_8620.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=githubactions%40web-wcar-co.iam.gserviceaccount.com%2F20251004%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20251004T175113Z&X-Goog-Expires=86400&X-Goog-SignedHeaders=host&X-Goog-Signature=6ef15323453f1f63ff1bb7f6f70e25b9de35376400127fd31dbc30b72f81b8ac448bbd2f065c5d8e580e8da528c348c2b16563fc82b9e4b29a5a25f2e60c54e3f9e4630c69b249a808f70cb56bb57417ad7786746b0c45b3c5770dd209e4817c523284b79e3f8c4345651a6e31e7bf2a11263607ca05d56af351249f8eb0ef256ae8b9558aeed2ece0be174ba3d3198cf5fbcf16dd6a6fc0554ebfb71f937d2fdce2df90411ebb0abc4586cc2895049214a4d7f71197507b5dbb37f1c3fc96080a8073efde6f36a8f1b2389194aad50cfea0659f1d26d20e6bfc0bdd12269790b5a9b9541f71773820aa418077396f5f13bd909017ed13ea12352e48dc0d04d8" alt="Vehículo Lado Superior" />
-                    </div>
+                            <img src="https://storage.googleapis.com/course-gcp-2024-images/2025/10/05/304d3da8-e779-470f-88fe-4f7896a8f83e.png" alt="Vehículo Lado Superior" />
+                        </div>
                 </div>
 
                 <!-- Lado superior: Tabla de daños y presupuesto -->
                 <div class="vehicle-details-section">
                     <div class="damage-grid">
-                        <div class="damage-item">
-                            <div class="damage-number">1</div>
-                            <div class="damage-info">
-                                <span class="damage-type">Golpe</span>
-                                <span class="damage-status">Mal estado</span>
+                        {% for item in roof_side['gravity_items'] %}
+                            <div class="damage-item">
+                                <div class="damage-number">{{ loop.index }}</div>
+                                <div class="damage-info">
+                                    <span class="damage-type">{{ item.title }}</span>
+                                    <span class="damage-status">{{ item.gravity }}</span>
+                                </div>
                             </div>
-                        </div>
-                        <div class="damage-item">
-                            <div class="damage-empty">----------</div>
-                        </div>
-                        <div class="damage-item">
-                            <div class="damage-number">2</div>
-                            <div class="damage-info">
-                                <span class="damage-type">Rayones</span>
-                                <span class="damage-status">Funcional</span>
-                            </div>
-                        </div>
-                        <div class="damage-item">
-                            <div class="damage-empty">----------</div>
-                        </div>
-                        <div class="damage-item">
-                            <div class="damage-empty">----------</div>
-                        </div>
-                        <div class="damage-item">
-                            <div class="damage-empty">----------</div>
-                        </div>
+                        {% endfor %}
                     </div>
                     <div class="estimated-budget">
                         <span class="estimated-budget-label">Presupuesto estimado</span>
-                        <span class="estimated-budget-value">$ 5.400,00</span>
+                        <span class="estimated-budget-value">{{roof_side.budget}}</span>
                     </div>
                 </div>
             </div>
             <div class="vehicle-observations">
                 <p class="vehicle-observations-title">Observaciones del <span>funcionario</span></p>
-                <p class="vehicle-observations-text">El vehículo presenta severos problemas en la parte superior</p>
+                <p class="vehicle-observations-text">{{roof_side.description}}</p>
             </div>
         </div>
     </div>

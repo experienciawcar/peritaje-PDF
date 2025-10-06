@@ -35,67 +35,67 @@
             <div class="basic-table-body">
                 <div class="basic-row">
                     <div class="basic-col part">Parlantes</div>
-                    <div class="basic-col status">En estado Regular</div>
-                    <div class="basic-col description">Semi nuevo</div>
-                    <div class="basic-col budget">$ 2.000,00</div>
+                    <div class="basic-col status">{{ accessories['parlantes']['state'] }}</div>
+                    <div class="basic-col description">{{ accessories['parlantes']['description'] }}</div>
+                    <div class="basic-col budget">{{ accessories['parlantes']['price'] }}</div>
                 </div>
                 <div class="basic-row row-gray">
                     <div class="basic-col part">Exploradoras</div>
-                    <div class="basic-col status">En estado Regular</div>
-                    <div class="basic-col description">Funcional</div>
-                    <div class="basic-col budget">$ 0,00</div>
+                    <div class="basic-col status">{{ accessories['exploradoras']['state'] }}</div>
+                    <div class="basic-col description">{{ accessories['exploradoras']['description'] }}</div>
+                    <div class="basic-col budget">{{ accessories['exploradoras']['price'] }}</div>
                 </div>
                 <div class="basic-row">
                     <div class="basic-col part">Aire acondicionado</div>
-                    <div class="basic-col status">En estado Regular</div>
-                    <div class="basic-col description">Semi nuevo</div>
-                    <div class="basic-col budget">$ 2.000,00</div>
+                    <div class="basic-col status">{{ accessories['aire_acondicionado']['state'] }}</div>
+                    <div class="basic-col description">{{ accessories['aire_acondicionado']['description'] }}</div>
+                    <div class="basic-col budget">{{ accessories['aire_acondicionado']['price'] }}</div>
                 </div>
                 <div class="basic-row row-gray">
                     <div class="basic-col part">Bloqueo central</div>
-                    <div class="basic-col status">En estado Regular</div>
-                    <div class="basic-col description">Funcional</div>
-                    <div class="basic-col budget">$ 0,00</div>
+                    <div class="basic-col status">{{ accessories['bloqueo_central']['state'] }}</div>
+                    <div class="basic-col description">{{ accessories['bloqueo_central']['description'] }}</div>
+                    <div class="basic-col budget">{{ accessories['bloqueo_central']['price'] }}</div>
                 </div>
                 <div class="basic-row">
                     <div class="basic-col part">Seguros</div>
-                    <div class="basic-col status">En estado Regular</div>
-                    <div class="basic-col description">Semi nuevo</div>
-                    <div class="basic-col budget">$ 2.000,00</div>
+                    <div class="basic-col status">{{ accessories['seguros']['state'] }}</div>
+                    <div class="basic-col description">{{ accessories['seguros']['description'] }}</div>
+                    <div class="basic-col budget">{{ accessories['seguros']['price'] }}</div>
                 </div>
                 <div class="basic-row row-gray">
                     <div class="basic-col part">Película de seguridad</div>
-                    <div class="basic-col status">En estado Regular</div>
-                    <div class="basic-col description">Funcional</div>
-                    <div class="basic-col budget">$ 0,00</div>
+                    <div class="basic-col status">{{ accessories['pelicula_de_seguridad']['state'] }}</div>
+                    <div class="basic-col description">{{ accessories['pelicula_de_seguridad']['description'] }}</div>
+                    <div class="basic-col budget">{{ accessories['pelicula_de_seguridad']['price'] }}</div>
                 </div>
                 <div class="basic-row">
                     <div class="basic-col part">Tapicería en cuero</div>
-                    <div class="basic-col status">-------</div>
-                    <div class="basic-col description">-------</div>
-                    <div class="basic-col budget">$ 0,00</div>
+                    <div class="basic-col status">{{ accessories['tapiceria_en_cuero']['state'] }}</div>
+                    <div class="basic-col description">{{ accessories['tapiceria_en_cuero']['description'] }}</div>
+                    <div class="basic-col budget">{{ accessories['tapiceria_en_cuero']['price'] }}</div>
                 </div>
                 <div class="basic-row row-gray">
                     <div class="basic-col part">Luces general</div>
-                    <div class="basic-col status">En estado Regular</div>
-                    <div class="basic-col description">la luz el lado is</div>
-                    <div class="basic-col budget">$ 0,00</div>
+                    <div class="basic-col status">{{ accessories['luces_generales']['state'] }}</div>
+                    <div class="basic-col description">{{ accessories['luces_generales']['description'] }}</div>
+                    <div class="basic-col budget">{{ accessories['luces_generales']['price'] }}</div>
                 </div>
                 <div class="basic-row">
                     <div class="basic-col part">Alarma</div>
-                    <div class="basic-col status">-------</div>
-                    <div class="basic-col description">-------</div>
-                    <div class="basic-col budget">$ 0,00</div>
+                    <div class="basic-col status">{{ accessories['alarma']['state'] }}</div>
+                    <div class="basic-col description">{{ accessories['alarma']['description'] }}</div>
+                    <div class="basic-col budget">{{ accessories['alarma']['price'] }}</div>
                 </div>
             </div>
             <div class="basic-table-footer">
                 <div class="basic-footer-observations">
                     <span class="basic-footer-label">Observaciones</span>
-                    <span class="basic-footer-text">presenta diversos problemas en varias partes</span>
+                    <span class="basic-footer-text">{{ accessories['observations'] }}</span>
                 </div>
                 <div class="basic-footer-total">
                     <span class="basic-footer-label">Total</span>
-                    <span class="basic-footer-value">$ 6.000,00</span>
+                    <span class="basic-footer-value">{{ accessories['total_price'] }}</span>
                 </div>
             </div>
         </div>
@@ -114,73 +114,73 @@
             <div class="basic-table-body">
                 <div class="basic-row">
                     <div class="basic-col part">Limpieza tapicería</div>
-                    <div class="basic-col status">Mal estado</div>
-                    <div class="basic-col description">Semi nuevo</div>
-                    <div class="basic-col budget">$ 2.000,00</div>
+                    <div class="basic-col status">{{ upholstery['limpieza_tapiceria']['state'] }}</div>
+                    <div class="basic-col description">{{ upholstery['limpieza_tapiceria']['description'] }}</div>
+                    <div class="basic-col budget">{{ upholstery['limpieza_tapiceria']['price'] }}</div>
                 </div>
                 <div class="basic-row row-gray">
                     <div class="basic-col part">Estado tapicería</div>
-                    <div class="basic-col status">Muy mal estado</div>
-                    <div class="basic-col description">Funcional</div>
-                    <div class="basic-col budget">$ 0,00</div>
+                    <div class="basic-col status">{{ upholstery['estado_tapiceria']['state'] }}</div>
+                    <div class="basic-col description">{{ upholstery['estado_tapiceria']['description'] }}</div>
+                    <div class="basic-col budget">{{ upholstery['estado_tapiceria']['price'] }}</div>
                 </div>
                 <div class="basic-row">
                     <div class="basic-col part">Ajuste de sillas</div>
-                    <div class="basic-col status">En estado Regular</div>
-                    <div class="basic-col description">Semi nuevo</div>
-                    <div class="basic-col budget">$ 2.000,00</div>
+                    <div class="basic-col status">{{ upholstery['ajuste_de_sillas']['state'] }}</div>
+                    <div class="basic-col description">{{ upholstery['ajuste_de_sillas']['description'] }}</div>
+                    <div class="basic-col budget">{{ upholstery['ajuste_de_sillas']['price'] }}</div>
                 </div>
                 <div class="basic-row row-gray">
                     <div class="basic-col part">Cinturon de seguridad</div>
-                    <div class="basic-col status">En estado Regular</div>
-                    <div class="basic-col description">Funcional</div>
-                    <div class="basic-col budget">$ 0,00</div>
+                    <div class="basic-col status">{{ upholstery['cinturon_de_seguridad']['state'] }}</div>
+                    <div class="basic-col description">{{ upholstery['cinturon_de_seguridad']['description'] }}</div>
+                    <div class="basic-col budget">{{ upholstery['cinturon_de_seguridad']['price'] }}</div>
                 </div>
                 <div class="basic-row">
                     <div class="basic-col part">Estado de millaré</div>
-                    <div class="basic-col status">En estado Regular</div>
-                    <div class="basic-col description">Semi nuevo</div>
-                    <div class="basic-col budget">$ 2.000,00</div>
+                    <div class="basic-col status">{{ upholstery['estado_de_millare']['state'] }}</div>
+                    <div class="basic-col description">{{ upholstery['estado_de_millare']['description'] }}</div>
+                    <div class="basic-col budget">{{ upholstery['estado_de_millare']['price'] }}</div>
                 </div>
                 <div class="basic-row row-gray">
                     <div class="basic-col part">Alfombra</div>
-                    <div class="basic-col status">En estado Regular</div>
-                    <div class="basic-col description">Funcional</div>
-                    <div class="basic-col budget">$ 0,00</div>
+                    <div class="basic-col status">{{ upholstery['alfombra']['state'] }}</div>
+                    <div class="basic-col description">{{ upholstery['alfombra']['description'] }}</div>
+                    <div class="basic-col budget">{{ upholstery['alfombra']['price'] }}</div>
                 </div>
                 <div class="basic-row">
                     <div class="basic-col part">Tapetes</div>
-                    <div class="basic-col status">-------</div>
-                    <div class="basic-col description">-------</div>
-                    <div class="basic-col budget">$ 0,00</div>
+                    <div class="basic-col status">{{ upholstery['tapetes']['state'] }}</div>
+                    <div class="basic-col description">{{ upholstery['tapetes']['description'] }}</div>
+                    <div class="basic-col budget">{{ upholstery['tapetes']['price'] }}</div>
                 </div>
                 <div class="basic-row row-gray">
                     <div class="basic-col part">Manijas Interiores</div>
-                    <div class="basic-col status">En estado Regular</div>
-                    <div class="basic-col description">la luz el lado is</div>
-                    <div class="basic-col budget">$ 0,00</div>
+                    <div class="basic-col status">{{ upholstery['manijas_interiores']['state'] }}</div>
+                    <div class="basic-col description">{{ upholstery['manijas_interiores']['description'] }}</div>
+                    <div class="basic-col budget">{{ upholstery['manijas_interiores']['price'] }}</div>
                 </div>
                 <div class="basic-row">
                     <div class="basic-col part">Timón</div>
-                    <div class="basic-col status">-------</div>
-                    <div class="basic-col description">-------</div>
-                    <div class="basic-col budget">$ 0,00</div>
+                    <div class="basic-col status">{{ upholstery['timon']['state'] }}</div>
+                    <div class="basic-col description">{{ upholstery['timon']['description'] }}</div>
+                    <div class="basic-col budget">{{ upholstery['timon']['price'] }}</div>
                 </div>
                 <div class="basic-row row-gray">
                     <div class="basic-col part">Otros defectos</div>
-                    <div class="basic-col status">N/A</div>
-                    <div class="basic-col description">N/A</div>
-                    <div class="basic-col budget">N/A</div>
+                    <div class="basic-col status">{{ upholstery['otros_defectos']['state']|default('N/A') }}</div>
+                    <div class="basic-col description">{{ upholstery['otros_defectos']['description']|default('N/A') }}</div>
+                    <div class="basic-col budget">{{ upholstery['otros_defectos']['price']|default('N/A') }}</div>
                 </div>
             </div>
-            <div class="basic-table-footer">
+            <div class="basic-table-footer"> 
                 <div class="basic-footer-observations">
                     <span class="basic-footer-label">Observaciones</span>
-                    <span class="basic-footer-text">presenta diversos problemas en varias partes</span>
+                    <span class="basic-footer-text">{{ upholstery['observations']|default('') }}</span>
                 </div>
                 <div class="basic-footer-total">
                     <span class="basic-footer-label">Total</span>
-                    <span class="basic-footer-value">$ 6.000,00</span>
+                    <span class="basic-footer-value">{{ upholstery['total_price'] }}</span>
                 </div>
             </div>
         </div>

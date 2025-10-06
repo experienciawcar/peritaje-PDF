@@ -11,8 +11,6 @@
   <!-- CSS por página -->
   <link rel="stylesheet" href="{% if is_pdf %}static/css/pages/resume.css{% else %}{{ url_for('static', filename='css/pages/resume.css') }}{% endif %}">
 
-  <!-- Font Awesome para iconos -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
     <!-- Resumen del peritaje -->
@@ -30,12 +28,12 @@
                 </div>
                 <div class="header-bottom-badge-container">
                     <div class="header-bottom-badge">
-                        <p>Placa del vehículo: <span>ABC123</span></p>
+                        <p>Placa del vehículo: <span>{{resumen['vehicle']['plate']}}</span></p>
                     </div>
                 </div>
             </div>
             <div class="header-bottom-right">
-                <p style="font-weight: 700;">Acta No. <span>123456</span></p>
+                <p style="font-weight: 700;">Acta No. <span>{{numero_reporte}}</span></p>
                 <p>contacto@wcar.co</p>
                 <p>www.wcar.co</p>
             </div>
@@ -52,23 +50,23 @@
                     <div class="info-table-body">
                         <div class="info-row">
                             <div class="info-label">Nombre:</div>
-                            <div class="info-value">Ricardo Gonzales Olaya</div>
+                            <div class="info-value">{{client['name']}}</div>
                         </div>
                         <div class="info-row">
                             <div class="info-label">Documento:</div>
-                            <div class="info-value">1078349538</div>
+                            <div class="info-value">{{client['document']}}</div>
                         </div>
                         <div class="info-row">
                             <div class="info-label">Email:</div>
-                            <div class="info-value">ricardo.gonzales@outlook.com</div>
+                            <div class="info-value">{{client['email']}}</div>
                         </div>
                         <div class="info-row">
                             <div class="info-label">Dirección de entrega:</div>
-                            <div class="info-value">Cll 154 #91-51</div>
+                            <div class="info-value">{{client['address']}}</div>
                         </div>
                         <div class="info-row">
                             <div class="info-label">Teléfono</div>
-                            <div class="info-value">30232295351</div>
+                            <div class="info-value">{{client['phone']}}</div>
                         </div>
                     </div>
                 </div>
@@ -82,46 +80,46 @@
                         <div class="info-row-split">
                             <div class="info-col">
                                 <div class="info-label">Placa:</div>
-                                <div class="info-value">GPS912</div>
+                                <div class="info-value">{{resumen['vehicle']['plate']}}</div>
                             </div>
                             <div class="info-col">
                                 <div class="info-label">Año modelo:</div>
-                                <div class="info-value">2024</div>
+                                <div class="info-value">{{resumen['vehicle']['year']}}</div>
                             </div>
                         </div>
                         <div class="info-row-split">
                             <div class="info-col">
                                 <div class="info-label">Marca:</div>
-                                <div class="info-value">KIA</div>
+                                <div class="info-value">{{resumen['vehicle']['brand']}}</div>
                             </div>
                             <div class="info-col">
                                 <div class="info-label">Referencia:</div>
-                                <div class="info-value">Picanto</div>
+                                <div class="info-value">{{resumen['vehicle']['reference']}}</div>
                             </div>
                         </div>
                         <div class="info-row-split">
                             <div class="info-col">
                                 <div class="info-label">Color:</div>
-                                <div class="info-value">Negro</div>
+                                <div class="info-value">{{resumen['vehicle']['color']}}</div>
                             </div>
                             <div class="info-col">
                                 <div class="info-label">Kilometraje:</div>
-                                <div class="info-value">47957</div>
+                                <div class="info-value">{{resumen['vehicle']['kilometers']}}</div>
                             </div>
                         </div>
                         <div class="info-row-split">
                             <div class="info-col">
                                 <div class="info-label">V. SOAT:</div>
-                                <div class="info-value">2026/03/24</div>
+                                <div class="info-value">{{accident['soat_date']}}</div>
                             </div>
                             <div class="info-col">
                                 <div class="info-label">V. RTM:</div>
-                                <div class="info-value">2026/01/11</div>
+                                <div class="info-value">{{accident['inspection_date']}}</div>
                             </div>
                         </div>
                         <div class="info-row">
                             <div class="info-label">Tipo de carrocería:</div>
-                            <div class="info-value">Hatch back</div>
+                            <div class="info-value">{{resumen['vehicle']['bodywork']}}</div>
                         </div>
                     </div>
                 </div>
@@ -142,101 +140,101 @@
                         <div class="budget-row-part">1. Exterior del vehículo</div>
                         <div class="budget-row-percent">
                             <div class="budget-bar-container">
-                                <div class="budget-bar-fill" style="width: 70%;"></div>
+                                <div class="budget-bar-fill" style="width: {{ resumen['budgets']['vehicle_exterior']['budget_percentage']}}%"></div>
                             </div>
-                            <div class="budget-percent-text">70 %</div>
+                            <div class="budget-percent-text">{{ resumen['budgets']['vehicle_exterior']['budget_percentage']}} %</div>
                         </div>
-                        <div class="budget-row-amount">$ 1.200,00</div>
+                        <div class="budget-row-amount">{{ resumen['budgets']['vehicle_exterior']['budget_suggested'] }}</div>
                     </div>
                     <div class="budget-row">
                         <div class="budget-row-part">2. Inferior del vehículo</div>
                         <div class="budget-row-percent">
                             <div class="budget-bar-container">
-                                <div class="budget-bar-fill" style="width: 50%;"></div>
+                                <div class="budget-bar-fill" style="width: {{ resumen['budgets']['vehicle_underbody']['budget_percentage'] }}%"></div>
                             </div>
-                            <div class="budget-percent-text">50 %</div>
+                            <div class="budget-percent-text">{{ resumen['budgets']['vehicle_underbody']['budget_percentage'] }} %</div>
                         </div>
-                        <div class="budget-row-amount">$ 1.000,00</div>
+                        <div class="budget-row-amount">{{ resumen['budgets']['vehicle_underbody']['budget_suggested'] }}</div>
                     </div>
                     <div class="budget-row">
                         <div class="budget-row-part">3. Interior del vehículo</div>
                         <div class="budget-row-percent">
                             <div class="budget-bar-container">
-                                <div class="budget-bar-fill" style="width: 85%;"></div>
+                                <div class="budget-bar-fill" style="width: {{ resumen['budgets']['vehicle_interior']['budget_percentage'] }}%"></div>
                             </div>
-                            <div class="budget-percent-text">85 %</div>
+                            <div class="budget-percent-text">{{ resumen['budgets']['vehicle_interior']['budget_percentage'] }} %</div>
                         </div>
-                        <div class="budget-row-amount">$ 3.200,00</div>
+                        <div class="budget-row-amount">{{ resumen['budgets']['vehicle_interior']['budget_suggested'] }}</div>
                     </div>
                     <div class="budget-row">
                         <div class="budget-row-part">4. Ventilación</div>
                         <div class="budget-row-percent">
                             <div class="budget-bar-container">
-                                <div class="budget-bar-fill" style="width: 30%;"></div>
+                                <div class="budget-bar-fill" style="width: {{ resumen['budgets']['ventilation']['budget_percentage'] }}%"></div>
                             </div>
-                            <div class="budget-percent-text">30 %</div>
+                            <div class="budget-percent-text">{{ resumen['budgets']['ventilation']['budget_percentage'] }} %</div>
                         </div>
-                        <div class="budget-row-amount">$ 300,00</div>
+                        <div class="budget-row-amount">{{ resumen['budgets']['ventilation']['budget_suggested'] }}</div>
                     </div>
                     <div class="budget-row">
                         <div class="budget-row-part">5. Motor</div>
                         <div class="budget-row-percent">
                             <div class="budget-bar-container">
-                                <div class="budget-bar-fill" style="width: 24%;"></div>
+                                <div class="budget-bar-fill" style="width: {{ resumen['budgets']['engine']['budget_percentage'] }}%"></div>
                             </div>
-                            <div class="budget-percent-text">24 %</div>
+                            <div class="budget-percent-text">{{ resumen['budgets']['engine']['budget_percentage'] }} %</div>
                         </div>
-                        <div class="budget-row-amount">$ 220,00</div>
+                        <div class="budget-row-amount">{{ resumen['budgets']['engine']['budget_suggested'] }}</div>
                     </div>
                     <div class="budget-row">
                         <div class="budget-row-part">6. Transmisión</div>
                         <div class="budget-row-percent">
                             <div class="budget-bar-container">
-                                <div class="budget-bar-fill" style="width: 32%;"></div>
+                                <div class="budget-bar-fill" style="width: {{ resumen['budgets']['transmision']['budget_percentage'] }}%"></div>
                             </div>
-                            <div class="budget-percent-text">32 %</div>
+                            <div class="budget-percent-text">{{ resumen['budgets']['transmision']['budget_percentage'] }} %</div>
                         </div>
-                        <div class="budget-row-amount">$ 310,00</div>
+                        <div class="budget-row-amount">{{ resumen['budgets']['transmision']['budget_suggested'] }}</div>
                     </div>
                     <div class="budget-row">
                         <div class="budget-row-part">7. Frenos</div>
                         <div class="budget-row-percent">
                             <div class="budget-bar-container">
-                                <div class="budget-bar-fill" style="width: 28%;"></div>
+                                <div class="budget-bar-fill" style="width: {{ resumen['budgets']['brakes']['budget_percentage'] }}%"></div>
                             </div>
-                            <div class="budget-percent-text">28 %</div>
+                            <div class="budget-percent-text">{{ resumen['budgets']['brakes']['budget_percentage'] }} %</div>
                         </div>
-                        <div class="budget-row-amount">$ 280,00</div>
+                        <div class="budget-row-amount">{{ resumen['budgets']['brakes']['budget_suggested'] }}</div>
                     </div>
                     <div class="budget-row">
                         <div class="budget-row-part">8. Dirección</div>
                         <div class="budget-row-percent">
                             <div class="budget-bar-container">
-                                <div class="budget-bar-fill" style="width: 16%;"></div>
+                                <div class="budget-bar-fill" style="width: {{ resumen['budgets']['direction']['budget_percentage'] }}%"></div>
                             </div>
-                            <div class="budget-percent-text">16 %</div>
+                            <div class="budget-percent-text">{{ resumen['budgets']['direction']['budget_percentage'] }} %</div>
                         </div>
-                        <div class="budget-row-amount">$ 150,00</div>
+                        <div class="budget-row-amount">{{ resumen['budgets']['direction']['budget_suggested'] }}</div>
                     </div>
                     <div class="budget-row">
                         <div class="budget-row-part">9. Suspensión</div>
                         <div class="budget-row-percent">
                             <div class="budget-bar-container">
-                                <div class="budget-bar-fill" style="width: 24%;"></div>
+                                <div class="budget-bar-fill" style="width: {{ resumen['budgets']['suspension']['budget_percentage'] }}%"></div>
                             </div>
-                            <div class="budget-percent-text">24 %</div>
+                            <div class="budget-percent-text">{{ resumen['budgets']['suspension']['budget_percentage'] }} %</div>
                         </div>
-                        <div class="budget-row-amount">$ 300,00</div>
+                        <div class="budget-row-amount">{{ resumen['budgets']['suspension']['budget_suggested'] }}</div>
                     </div>
                     <div class="budget-row">
                         <div class="budget-row-part">10. Llantas</div>
                         <div class="budget-row-percent">
                             <div class="budget-bar-container">
-                                <div class="budget-bar-fill" style="width: 46%;"></div>
+                                <div class="budget-bar-fill" style="width: {{ resumen['budgets']['tires']['budget_percentage'] }}%"></div>
                             </div>
-                            <div class="budget-percent-text">46 %</div>
+                            <div class="budget-percent-text">{{ resumen['budgets']['tires']['budget_percentage'] }} %</div>
                         </div>
-                        <div class="budget-row-amount">$ 800,00</div>
+                        <div class="budget-row-amount">{{ resumen['budgets']['tires']['budget_suggested'] }}</div>
                     </div>
                 </div>
                 <div class="budget-total">
@@ -250,11 +248,11 @@
                 <h2 class="observations-title">Observaciones del <span>funcionario</span></h2>
                 <div class="observations-box">
                     <div class="observations-text">
-                        Cliente manifiesta revisar testigo motor sonido en frío
+                        {{ resumen['observations']['price_observations'] }}
                     </div>
                     <div class="observations-price">
                         <div class="observations-price-label">Precio de compra <span>del vehículo</span></div>
-                        <div class="observations-price-value">$ 10.000.000,00</div>
+                        <div class="observations-price-value">{{ resumen['observations']['price_suggested'] }}</div>
                     </div>
                 </div>
             </div>
