@@ -12,12 +12,12 @@ RUN apt-get update && apt-get install -y \
     libgdk-pixbuf-2.0-0 \
     libffi-dev \
     shared-mime-info \
- && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/*
 
 # Instalar wkhtmltopdf desde .deb oficial (buster, compatible con bullseye)
 RUN wget https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox_0.12.6-1.buster_amd64.deb \
- && apt-get install -y ./wkhtmltox_0.12.6-1.buster_amd64.deb \
- && rm wkhtmltox_0.12.6-1.buster_amd64.deb
+    && apt-get install -y ./wkhtmltox_0.12.6-1.buster_amd64.deb \
+    && rm wkhtmltox_0.12.6-1.buster_amd64.deb
 
 # Establecer directorio de trabajo
 WORKDIR /
