@@ -11,6 +11,7 @@ class ActasMapper:
             "operation_date": self.data.get("operation_date"),
             "operation_hour": self.data.get("operation_hour"),
             "title": self._build_title(self.data.get("operation_type")),
+            "operation_text": self._build_operation_text(self.data.get("operation_type")),
             "client": self._build_client(self.data.get("client", {})),
             "vehicle": self._build_vehicle(self.data.get("vehicle", {})),
             "inventary": self._build_inventary(self.data.get("inventary", {})),
@@ -26,6 +27,11 @@ class ActasMapper:
         if operation_type == 1:
             return "recepcion"
         return "entrega"
+
+    def _build_operation_text(self, operation_type):
+        if operation_type == 1:
+            return "WCAR recibe este vehículo"
+        return "WCAR entrega este vehículo"
 
     def _build_vehicle(self, vehicle_data):
         return {
