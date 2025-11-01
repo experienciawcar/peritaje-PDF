@@ -1,294 +1,316 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Peritaje PDF</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Peritaje PDF</title>
 
-  <!-- CSS Global -->
-  <link rel="stylesheet" href="{% if is_pdf %}static/css/global.css{% else %}{{ url_for('static', filename='css/global.css') }}{% endif %}">
+    <!-- CSS Global -->
+    <link
+      rel="stylesheet"
+      href="{% if is_pdf %}static/css/global.css{% else %}{{ url_for('static', filename='css/global.css') }}{% endif %}"
+    />
 
-  <!-- CSS por página -->
-  <link rel="stylesheet" href="{% if is_pdf %}static/css/pages/resume.css{% else %}{{ url_for('static', filename='css/pages/resume.css') }}{% endif %}">
+    <!-- CSS por página -->
+    <link
+      rel="stylesheet"
+      href="{% if is_pdf %}static/css/pages/resume.css{% else %}{{ url_for('static', filename='css/pages/resume.css') }}{% endif %}"
+    />
 
-  <!-- Font Awesome para iconos -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-</head>
-<body>
+    <!-- Font Awesome para iconos -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+  </head>
+  <body>
     <!-- Resumen del peritaje -->
-     <div class="page page-extra-tall">
-        <!-- Header -->
-        <div class="header">
-            <div class="header-top">
-                <h2>Resumen general del <span>peritaje</span></h2>
-                <img src="https://wcar.co/assets/logos/horizontal.svg" alt="Logo WCAR" />
-            </div>
-            <div class="header-bottom">
-            <div class="header-bottom-left">
-                <div class="header-bottom-date-container">
-                    <p>Fecha de recepción: <span>2025 / 06 / 25</span> - Hora exacta: <span>16:01:00</span></p>
-                </div>
-                <div class="header-bottom-badge-container">
-                    <div class="header-bottom-badge">
-                        <p>Placa del vehículo: <span>ABC123</span></p>
-                    </div>
-                </div>
-            </div>
-            <div class="header-bottom-right">
-                <p style="font-weight: 700;">Acta No. <span>123456</span></p>
-                <p>contacto@wcar.co</p>
-                <p>www.wcar.co</p>
-            </div>
-            </div>
+    <div class="page page-extra-tall">
+      <!-- Header -->
+      <div class="header">
+        <div class="header-top">
+          <h2>Resumen general del <span>peritaje</span></h2>
+          <img
+            src="https://wcar.co/assets/logos/horizontal.svg"
+            alt="Logo WCAR"
+          />
         </div>
-        <!-- Resume content -->
-        <div class="content-container">
-            <div class="tables-container">
-                <!-- Tabla 1: Información del cliente -->
-                <div class="info-table">
-                    <div class="info-table-header">
-                        <h3>Información del <span>cliente</span></h3>
-                    </div>
-                    <div class="info-table-body">
-                        <div class="info-row">
-                            <div class="info-label">Nombre:</div>
-                            <div class="info-value">Ricardo Gonzales Olaya</div>
-                        </div>
-                        <div class="info-row">
-                            <div class="info-label">Documento:</div>
-                            <div class="info-value">1078349538</div>
-                        </div>
-                        <div class="info-row">
-                            <div class="info-label">Email:</div>
-                            <div class="info-value">ricardo.gonzales@outlook.com</div>
-                        </div>
-                        <div class="info-row">
-                            <div class="info-label">Dirección de entrega:</div>
-                            <div class="info-value">Cll 154 #91-51</div>
-                        </div>
-                        <div class="info-row">
-                            <div class="info-label">Teléfono</div>
-                            <div class="info-value">30232295351</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Tabla 2: Información del vehículo -->
-                <div class="info-table">
-                    <div class="info-table-header">
-                        <h3>Información del <span>vehículo</span></h3>
-                    </div>
-                    <div class="info-table-body">
-                        <div class="info-row-split">
-                            <div class="info-col">
-                                <div class="info-label">Placa:</div>
-                                <div class="info-value">GPS912</div>
-                            </div>
-                            <div class="info-col">
-                                <div class="info-label">Año modelo:</div>
-                                <div class="info-value">2024</div>
-                            </div>
-                        </div>
-                        <div class="info-row-split">
-                            <div class="info-col">
-                                <div class="info-label">Marca:</div>
-                                <div class="info-value">KIA</div>
-                            </div>
-                            <div class="info-col">
-                                <div class="info-label">Referencia:</div>
-                                <div class="info-value">Picanto</div>
-                            </div>
-                        </div>
-                        <div class="info-row-split">
-                            <div class="info-col">
-                                <div class="info-label">Color:</div>
-                                <div class="info-value">Negro</div>
-                            </div>
-                            <div class="info-col">
-                                <div class="info-label">Kilometraje:</div>
-                                <div class="info-value">47957</div>
-                            </div>
-                        </div>
-                        <div class="info-row-split">
-                            <div class="info-col">
-                                <div class="info-label">V. SOAT:</div>
-                                <div class="info-value">2026/03/24</div>
-                            </div>
-                            <div class="info-col">
-                                <div class="info-label">V. RTM:</div>
-                                <div class="info-value">2026/01/11</div>
-                            </div>
-                        </div>
-                        <div class="info-row">
-                            <div class="info-label">Tipo de carrocería:</div>
-                            <div class="info-value">Hatch back</div>
-                        </div>
-                    </div>
-                </div>
+        <div class="header-bottom">
+          <div class="header-bottom-left">
+            <div class="header-bottom-date-container">
+              <p>
+                Fecha de recepción: <span>2025 / 06 / 25</span> - Hora exacta:
+                <span>16:01:00</span>
+              </p>
             </div>
-
-            <!-- Tabla de presupuesto -->
-            <div class="budget-table">
-                <div class="budget-table-header">
-                    <h3>Presupuesto general <span>de peritaje</span></h3>
-                </div>
-                <div class="budget-table-subheader">
-                    <div class="budget-col">Parte del vehículo</div>
-                    <div class="budget-col">Porcentaje de presupuesto</div>
-                    <div class="budget-col">Presupuesto</div>
-                </div>
-                <div class="budget-table-body">
-                    <div class="budget-row">
-                        <div class="budget-row-part">1. Exterior del vehículo</div>
-                        <div class="budget-row-percent">
-                            <div class="budget-bar-container">
-                                <div class="budget-bar-fill" style="width: 70%;"></div>
-                            </div>
-                            <div class="budget-percent-text">70 %</div>
-                        </div>
-                        <div class="budget-row-amount">$ 1.200,00</div>
-                    </div>
-                    <div class="budget-row">
-                        <div class="budget-row-part">2. Inferior del vehículo</div>
-                        <div class="budget-row-percent">
-                            <div class="budget-bar-container">
-                                <div class="budget-bar-fill" style="width: 50%;"></div>
-                            </div>
-                            <div class="budget-percent-text">50 %</div>
-                        </div>
-                        <div class="budget-row-amount">$ 1.000,00</div>
-                    </div>
-                    <div class="budget-row">
-                        <div class="budget-row-part">3. Interior del vehículo</div>
-                        <div class="budget-row-percent">
-                            <div class="budget-bar-container">
-                                <div class="budget-bar-fill" style="width: 85%;"></div>
-                            </div>
-                            <div class="budget-percent-text">85 %</div>
-                        </div>
-                        <div class="budget-row-amount">$ 3.200,00</div>
-                    </div>
-                    <div class="budget-row">
-                        <div class="budget-row-part">4. Ventilación</div>
-                        <div class="budget-row-percent">
-                            <div class="budget-bar-container">
-                                <div class="budget-bar-fill" style="width: 30%;"></div>
-                            </div>
-                            <div class="budget-percent-text">30 %</div>
-                        </div>
-                        <div class="budget-row-amount">$ 300,00</div>
-                    </div>
-                    <div class="budget-row">
-                        <div class="budget-row-part">5. Motor</div>
-                        <div class="budget-row-percent">
-                            <div class="budget-bar-container">
-                                <div class="budget-bar-fill" style="width: 24%;"></div>
-                            </div>
-                            <div class="budget-percent-text">24 %</div>
-                        </div>
-                        <div class="budget-row-amount">$ 220,00</div>
-                    </div>
-                    <div class="budget-row">
-                        <div class="budget-row-part">6. Transmisión</div>
-                        <div class="budget-row-percent">
-                            <div class="budget-bar-container">
-                                <div class="budget-bar-fill" style="width: 32%;"></div>
-                            </div>
-                            <div class="budget-percent-text">32 %</div>
-                        </div>
-                        <div class="budget-row-amount">$ 310,00</div>
-                    </div>
-                    <div class="budget-row">
-                        <div class="budget-row-part">7. Frenos</div>
-                        <div class="budget-row-percent">
-                            <div class="budget-bar-container">
-                                <div class="budget-bar-fill" style="width: 28%;"></div>
-                            </div>
-                            <div class="budget-percent-text">28 %</div>
-                        </div>
-                        <div class="budget-row-amount">$ 280,00</div>
-                    </div>
-                    <div class="budget-row">
-                        <div class="budget-row-part">8. Dirección</div>
-                        <div class="budget-row-percent">
-                            <div class="budget-bar-container">
-                                <div class="budget-bar-fill" style="width: 16%;"></div>
-                            </div>
-                            <div class="budget-percent-text">16 %</div>
-                        </div>
-                        <div class="budget-row-amount">$ 150,00</div>
-                    </div>
-                    <div class="budget-row">
-                        <div class="budget-row-part">9. Suspensión</div>
-                        <div class="budget-row-percent">
-                            <div class="budget-bar-container">
-                                <div class="budget-bar-fill" style="width: 24%;"></div>
-                            </div>
-                            <div class="budget-percent-text">24 %</div>
-                        </div>
-                        <div class="budget-row-amount">$ 300,00</div>
-                    </div>
-                    <div class="budget-row">
-                        <div class="budget-row-part">10. Llantas</div>
-                        <div class="budget-row-percent">
-                            <div class="budget-bar-container">
-                                <div class="budget-bar-fill" style="width: 46%;"></div>
-                            </div>
-                            <div class="budget-percent-text">46 %</div>
-                        </div>
-                        <div class="budget-row-amount">$ 800,00</div>
-                    </div>
-                </div>
-                <div class="budget-total">
-                    <div class="budget-total-label">Total</div>
-                    <div class="budget-total-amount">$ 7.760,00</div>
-                </div>
+            <div class="header-bottom-badge-container">
+              <div class="header-bottom-badge">
+                <p>Placa del vehículo: <span>ABC123</span></p>
+              </div>
             </div>
-
-            <!-- Observaciones del funcionario -->
-            <div class="observations-section">
-                <h2 class="observations-title">Observaciones del <span>funcionario</span></h2>
-                <div class="observations-box">
-                    <div class="observations-text">
-                        Cliente manifiesta revisar testigo motor sonido en frío
-                    </div>
-                    <div class="observations-price">
-                        <div class="observations-price-label">Precio de compra <span>del vehículo</span></div>
-                        <div class="observations-price-value">$ 10.000.000,00</div>
-                    </div>
-                </div>
-            </div>
+          </div>
+          <div class="header-bottom-right">
+            <p style="font-weight: 700">Acta No. <span>123456</span></p>
+            <p>contacto@wcar.co</p>
+            <p>www.wcar.co</p>
+          </div>
         </div>
-     </div>
+      </div>
+      <!-- Resume content -->
+      <div class="content-container">
+        <div class="tables-container">
+          <!-- Tabla 1: Información del cliente -->
+          <div class="info-table">
+            <div class="info-table-header">
+              <h3>Información del <span>cliente</span></h3>
+            </div>
+            <div class="info-table-body">
+              <div class="info-row">
+                <div class="info-label">Nombre:</div>
+                <div class="info-value">Ricardo Gonzales Olaya</div>
+              </div>
+              <div class="info-row">
+                <div class="info-label">Documento:</div>
+                <div class="info-value">1078349538</div>
+              </div>
+              <div class="info-row">
+                <div class="info-label">Email:</div>
+                <div class="info-value">ricardo.gonzales@outlook.com</div>
+              </div>
+              <div class="info-row">
+                <div class="info-label">Dirección de entrega:</div>
+                <div class="info-value">Cll 154 #91-51</div>
+              </div>
+              <div class="info-row">
+                <div class="info-label">Teléfono</div>
+                <div class="info-value">30232295351</div>
+              </div>
+            </div>
+          </div>
 
-     <!-- Página 2: Inspección General -->
-     {% include 'pages/InspeccionGeneralPage.html' %}
+          <!-- Tabla 2: Información del vehículo -->
+          <div class="info-table">
+            <div class="info-table-header">
+              <h3>Información del <span>vehículo</span></h3>
+            </div>
+            <div class="info-table-body">
+              <div class="info-row-split">
+                <div class="info-col">
+                  <div class="info-label">Placa:</div>
+                  <div class="info-value">GPS912</div>
+                </div>
+                <div class="info-col">
+                  <div class="info-label">Año modelo:</div>
+                  <div class="info-value">2024</div>
+                </div>
+              </div>
+              <div class="info-row-split">
+                <div class="info-col">
+                  <div class="info-label">Marca:</div>
+                  <div class="info-value">KIA</div>
+                </div>
+                <div class="info-col">
+                  <div class="info-label">Referencia:</div>
+                  <div class="info-value">Picanto</div>
+                </div>
+              </div>
+              <div class="info-row-split">
+                <div class="info-col">
+                  <div class="info-label">Color:</div>
+                  <div class="info-value">Negro</div>
+                </div>
+                <div class="info-col">
+                  <div class="info-label">Kilometraje:</div>
+                  <div class="info-value">47957</div>
+                </div>
+              </div>
+              <div class="info-row-split">
+                <div class="info-col">
+                  <div class="info-label">V. SOAT:</div>
+                  <div class="info-value">2026/03/24</div>
+                </div>
+                <div class="info-col">
+                  <div class="info-label">V. RTM:</div>
+                  <div class="info-value">2026/01/11</div>
+                </div>
+              </div>
+              <div class="info-row">
+                <div class="info-label">Tipo de carrocería:</div>
+                <div class="info-value">Hatch back</div>
+              </div>
+            </div>
+          </div>
+        </div>
 
-     <!-- Página 3: Exterior del Vehículo -->
-     {% include 'pages/ExteriorVehiculoPage.html' %}
+        <!-- Tabla de presupuesto -->
+        <div class="budget-table">
+          <div class="budget-table-header">
+            <h3>Presupuesto general <span>de peritaje</span></h3>
+          </div>
+          <div class="budget-table-subheader">
+            <div class="budget-col">Parte del vehículo</div>
+            <div class="budget-col">Porcentaje de presupuesto</div>
+            <div class="budget-col">Presupuesto</div>
+          </div>
+          <div class="budget-table-body">
+            <div class="budget-row">
+              <div class="budget-row-part">2. Exterior del vehículo</div>
+              <div class="budget-row-percent">
+                <div class="budget-bar-container">
+                  <div class="budget-bar-fill" style="width: 70%"></div>
+                </div>
+                <div class="budget-percent-text">70 %</div>
+              </div>
+              <div class="budget-row-amount">$ 1.200,00</div>
+            </div>
+            <div class="budget-row">
+              <div class="budget-row-part">3. Inferior del vehículo</div>
+              <div class="budget-row-percent">
+                <div class="budget-bar-container">
+                  <div class="budget-bar-fill" style="width: 50%"></div>
+                </div>
+                <div class="budget-percent-text">50 %</div>
+              </div>
+              <div class="budget-row-amount">$ 1.000,00</div>
+            </div>
+            <div class="budget-row">
+              <div class="budget-row-part">4. Interior del vehículo</div>
+              <div class="budget-row-percent">
+                <div class="budget-bar-container">
+                  <div class="budget-bar-fill" style="width: 85%"></div>
+                </div>
+                <div class="budget-percent-text">85 %</div>
+              </div>
+              <div class="budget-row-amount">$ 3.200,00</div>
+            </div>
+            <div class="budget-row">
+              <div class="budget-row-part">5. Ventilación</div>
+              <div class="budget-row-percent">
+                <div class="budget-bar-container">
+                  <div class="budget-bar-fill" style="width: 30%"></div>
+                </div>
+                <div class="budget-percent-text">30 %</div>
+              </div>
+              <div class="budget-row-amount">$ 300,00</div>
+            </div>
+            <div class="budget-row">
+              <div class="budget-row-part">6. Motor</div>
+              <div class="budget-row-percent">
+                <div class="budget-bar-container">
+                  <div class="budget-bar-fill" style="width: 24%"></div>
+                </div>
+                <div class="budget-percent-text">24 %</div>
+              </div>
+              <div class="budget-row-amount">$ 220,00</div>
+            </div>
+            <div class="budget-row">
+              <div class="budget-row-part">7. Transmisión</div>
+              <div class="budget-row-percent">
+                <div class="budget-bar-container">
+                  <div class="budget-bar-fill" style="width: 32%"></div>
+                </div>
+                <div class="budget-percent-text">32 %</div>
+              </div>
+              <div class="budget-row-amount">$ 310,00</div>
+            </div>
+            <div class="budget-row">
+              <div class="budget-row-part">8. Frenos</div>
+              <div class="budget-row-percent">
+                <div class="budget-bar-container">
+                  <div class="budget-bar-fill" style="width: 28%"></div>
+                </div>
+                <div class="budget-percent-text">28 %</div>
+              </div>
+              <div class="budget-row-amount">$ 280,00</div>
+            </div>
+            <div class="budget-row">
+              <div class="budget-row-part">9. Dirección</div>
+              <div class="budget-row-percent">
+                <div class="budget-bar-container">
+                  <div class="budget-bar-fill" style="width: 16%"></div>
+                </div>
+                <div class="budget-percent-text">16 %</div>
+              </div>
+              <div class="budget-row-amount">$ 150,00</div>
+            </div>
+            <div class="budget-row">
+              <div class="budget-row-part">10. Suspensión</div>
+              <div class="budget-row-percent">
+                <div class="budget-bar-container">
+                  <div class="budget-bar-fill" style="width: 24%"></div>
+                </div>
+                <div class="budget-percent-text">24 %</div>
+              </div>
+              <div class="budget-row-amount">$ 300,00</div>
+            </div>
+            <div class="budget-row">
+              <div class="budget-row-part">11. Llantas</div>
+              <div class="budget-row-percent">
+                <div class="budget-bar-container">
+                  <div class="budget-bar-fill" style="width: 46%"></div>
+                </div>
+                <div class="budget-percent-text">46 %</div>
+              </div>
+              <div class="budget-row-amount">$ 800,00</div>
+            </div>
+          </div>
+          <div class="budget-total">
+            <div class="budget-total-label">Total</div>
+            <div class="budget-total-amount">$ 7.760,00</div>
+          </div>
+        </div>
 
-     <!-- Página 4: Exterior del Vehículo 2 -->
-     {% include 'pages/ExteriorVehiculoPage2.html' %}
+        <!-- Observaciones del funcionario -->
+        <div class="observations-section">
+          <h2 class="observations-title">
+            Observaciones del <span>funcionario</span>
+          </h2>
+          <div class="observations-box">
+            <div class="observations-text">
+              Cliente manifiesta revisar testigo motor sonido en frío
+            </div>
+            <div class="observations-price">
+              <div class="observations-price-label">
+                Precio de compra <span>del vehículo</span>
+              </div>
+              <div class="observations-price-value">$ 10.000.000,00</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-     <!-- Página 5: Inferior del Vehículo -->
-     {% include 'pages/InferiorVehiculoPage.html' %}
+    <!-- Página 2: Fotografías del Vehículo -->
+    {% include 'pages/FotografiasVehiculoPage.html' %}
 
-     <!-- Página 6: Interior del Vehículo -->
-     {% include 'pages/InteriorVehiculoPage.html' %}
+    <!-- Página 3: Inspección General -->
+    {% include 'pages/InspeccionGeneralPage.html' %}
 
-     <!-- Página 7: Sistema Eléctrico y Transmisión -->
-     {% include 'pages/SistemaElectricoTransmisionPage.html' %}
+    <!-- Página 4: Exterior del Vehículo -->
+    {% include 'pages/ExteriorVehiculoPage.html' %}
 
-     <!-- Página 8: Ventilación y Motor -->
-     {% include 'pages/VentilacionMotorPage.html' %}
+    <!-- Página 5: Exterior del Vehículo 2 -->
+    {% include 'pages/ExteriorVehiculoPage2.html' %}
 
-     <!-- Página 9: Frenos y Dirección -->
-     {% include 'pages/FrenosDireccionPage.html' %}
+    <!-- Página 6: Inferior del Vehículo -->
+    {% include 'pages/InferiorVehiculoPage.html' %}
 
-     <!-- Página 10: Suspensión, Llantas y Rines -->
-     {% include 'pages/SuspensionLlantasRinesPage.html' %}
+    <!-- Página 7: Interior del Vehículo -->
+    {% include 'pages/InteriorVehiculoPage.html' %}
 
-     <!-- Página 11: Datos Finales y Firmas -->
-     {% include 'pages/DatosFinalesFirmasPage.html' %}
-</body>
+    <!-- Página 8: Sistema Eléctrico y Transmisión -->
+    {% include 'pages/SistemaElectricoTransmisionPage.html' %}
+
+    <!-- Página 9: Ventilación y Motor -->
+    {% include 'pages/VentilacionMotorPage.html' %}
+
+    <!-- Página 10: Frenos y Dirección -->
+    {% include 'pages/FrenosDireccionPage.html' %}
+
+    <!-- Página 11: Suspensión, Llantas y Rines -->
+    {% include 'pages/SuspensionLlantasRinesPage.html' %}
+
+    <!-- Página 12: Datos Finales y Firmas -->
+    {% include 'pages/DatosFinalesFirmasPage.html' %}
+  </body>
 </html>
